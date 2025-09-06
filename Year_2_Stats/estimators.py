@@ -2,8 +2,7 @@
 import numpy as np
 from scipy.optimize import minimize
 import numdifftools as nd
-from . import helpers
-from . import pdfs
+from Year_2_Stats import helpers, pdfs
 
 def guess_initial_params(data, pdf):
     """Automatic initial guesses for different PDFs."""

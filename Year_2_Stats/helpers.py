@@ -2,7 +2,7 @@
 import numpy as np
 import glob, os
 import pandas as pd
-from . import estimators, outputer
+from Year_2_Stats import estimators, outputer
 
 def load_data(folder):
     # current_dir points to StatsToolBox/Year_2_Stats
@@ -28,9 +28,6 @@ def profile_scan(param_idx, params, data, pdf, step=0.05, n_steps=40):
     Profile likelihood scan for 1 parameter.
     Returns (low, high) bounds for ~68% CL.
     """
-    from .helpers import neg_log_likelihood
-    import numpy as np
-
     ll0 = -neg_log_likelihood(params, data, pdf)
     scan_vals = []
 
@@ -62,4 +59,4 @@ def run_tests(data_frames, chosen_pdf, param_names):
         # Output results + plot
         outputer.print_results(f"Dataset {i}", result, param_names)
         outputer.show_fit(data, chosen_pdf, result["params"],
-                          title=f"Dataset {i} fit")
+                          title=f"{i}")

@@ -1,5 +1,5 @@
 #Main method where all the setups are performed.
-from . import helpers, pdfs
+from Year_2_Stats import helpers, pdfs
 
 # User settings
 data_folder = "Data_1"        # <--- change this to switch datasets
