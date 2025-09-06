@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/StatsToolBox.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Year_2_Stats/Lab_Stats.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Year_2_Stats/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Year_2_Stats/l_estimators.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Year_2_Stats/l_helpers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Year_2_Stats/pdfs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/estimators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/lab_stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/lab_stats.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/outputer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,9 +28,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="32CebeOQKuhJymLTCJ1yRVPIMeI" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -40,6 +40,7 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main"
   }

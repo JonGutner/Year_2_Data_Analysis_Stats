@@ -1,16 +1,33 @@
 #Main method where all the setups are performed.
-from . import helpers, estimators, outputer
+from . import helpers, pdfs
 
-import pandas as pd
-import numpy as np
-import glob, os
+# User settings
+data_folder = "Data_1"        # <--- change this to switch datasets
+chosen_pdf = pdfs.gaussian    # <--- change to exponential, poisson_pmf, etc.
 
-#Reads the data in a folder, and stores it as a list of dataframes
-data_folder = "Data_1" #<------Change here to read different data
+# Parameter names for all PDFs (comment/uncomment as needed)
+# For Gaussian
+param_names = ["mu", "sigma"]
 
-current_dir = os.path.dirname(os.path.realpath(__file__))
-folder_path = os.path.join(current_dir, "..", data_folder)
-folder_path = os.path.abspath(folder_path)
+# For Exponential
+# param_names = ["lambda"]
 
-csv_files = glob.glob(os.path.join(folder_path, "*.csv"))
-data_frames = [pd.read_csv(file) for file in csv_files]
+# For Poisson
+# param_names = ["mu"]
+
+# For Binomial (note: n must usually be fixed, not fitted)
+# param_names = ["p"]
+
+# For Lorentzian
+# param_names = ["x0", "gamma"]
+
+# For Uniform
+# param_names = ["a", "b"]
+
+# -----------------------------
+# Load data
+data_frames = helpers.load_data(data_folder)
+
+# -----------------------------
+# Run tests
+helpers.run_tests(data_frames, chosen_pdf, param_names)
