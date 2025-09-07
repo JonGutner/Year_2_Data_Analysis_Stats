@@ -14,7 +14,7 @@ def print_results(name, result, param_names=None):
     print("  -logL:", result["neg_logL"])
     print("  Converged:", result["success"])
 
-def show_fit(data, pdf, params, bins=50, title="MLE Fit", save=True, show=False):
+def show_fit(data, pdf, params, folder, bins=50, title="MLE Fit", save=True, show=False):
     """Histogram + fitted PDF overlay. Optionally save to Desktop/StatsPlots."""
     fig, ax = plt.subplots()
 
@@ -32,7 +32,7 @@ def show_fit(data, pdf, params, bins=50, title="MLE Fit", save=True, show=False)
     # Save
     if save:
         desktop = os.path.join(os.path.expanduser("~"), "Desktop")
-        out_dir = os.path.join(desktop, "StatsPlots")
+        out_dir = os.path.join(desktop, f"StatsPlots_{folder}")
         os.makedirs(out_dir, exist_ok=True)
 
         safe_title = title.replace(" ", "_").replace("/", "_")

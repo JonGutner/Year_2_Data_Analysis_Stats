@@ -2,7 +2,7 @@
 import numpy as np
 import glob, os
 import pandas as pd
-from Year_2_Stats import estimators, outputer
+from Year_2_Stats import estimators, outputer, pdfs
 
 def load_data(folder):
     # current_dir points to StatsToolBox/Year_2_Stats
@@ -15,7 +15,6 @@ def load_data(folder):
     csv_files = glob.glob(os.path.join(folder_path, "*.csv"))
     data_frames = [pd.read_csv(file) for file in csv_files]
     return data_frames
-
 
 def neg_log_likelihood(params, data, pdf):
     """Generic negative log likelihood for MLE."""
@@ -43,7 +42,7 @@ def profile_scan(param_idx, params, data, pdf, step=0.05, n_steps=40):
         return min(ci), max(ci)
     return np.nan, np.nan
 
-def run_tests(data_frames, chosen_pdf, param_names):
+def run_tests(data_frames, chosen_pdf, param_names, folder):
     # Loop over datasets
     for i in range(len(data_frames)):
         df = data_frames[i]
@@ -58,5 +57,23 @@ def run_tests(data_frames, chosen_pdf, param_names):
 
         # Output results + plot
         outputer.print_results(f"Dataset {i}", result, param_names)
-        outputer.show_fit(data, chosen_pdf, result["params"],
+        outputer.show_fit(data, chosen_pdf, result["params"], folder,
                           title=f"{i}")
+
+def guess_initial_params(data, pdf):
+    mean = np.mean(data)
+    std = np.std(data)
+
+    if pdf == pdfs.gaussian:
+        return [mean, std]
+    elif pdf == pdfs.exponential:
+        return [1/mean] if mean > 0 else [1.0]
+    elif pdf == pdfs.poisson_pmf:
+        return [mean]
+    elif pdf == pdfs.lorentzian:
+        q25, q75 = np.percentile(data, [25, 75])
+        return [np.median(data), q75 - q25]
+    elif pdf == pdfs.uniform_pdf:
+        return [np.min(data), np.max(data)]
+    else:
+        raise ValueError("No guess implemented for this PDF")

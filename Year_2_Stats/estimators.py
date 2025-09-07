@@ -2,32 +2,14 @@
 import numpy as np
 from scipy.optimize import minimize
 import numdifftools as nd
-from Year_2_Stats import helpers, pdfs
-
-def guess_initial_params(data, pdf):
-    mean = np.mean(data)
-    std = np.std(data)
-
-    if pdf == pdfs.gaussian:
-        return [mean, std]
-    elif pdf == pdfs.exponential:
-        return [1/mean] if mean > 0 else [1.0]
-    elif pdf == pdfs.poisson_pmf:
-        return [mean]
-    elif pdf == pdfs.lorentzian:
-        q25, q75 = np.percentile(data, [25, 75])
-        return [np.median(data), q75 - q25]
-    elif pdf == pdfs.uniform_pdf:
-        return [np.min(data), np.max(data)]
-    else:
-        raise ValueError("No guess implemented for this PDF")
+from Year_2_Stats import helpers
 
 def mle_fit(data, pdf, init_params=None, method="Nelder-Mead"):
     """
     General-purpose MLE with auto parameter guessing and uncertainties.
     """
     if init_params is None:
-        init_params = guess_initial_params(data, pdf)
+        init_params = helpers.guess_initial_params(data, pdf)
 
     result = minimize(helpers.neg_log_likelihood, init_params,
                       args=(data, pdf),

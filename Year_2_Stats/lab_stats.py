@@ -30,4 +30,4 @@ data_frames = helpers.load_data(data_folder)
 
 # -----------------------------
 # Run tests
-helpers.run_tests(data_frames, chosen_pdf, param_names)
+helpers.run_tests(data_frames, chosen_pdf, param_names, data_folder)
