@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="ChatGPT version of the whole code.">
-      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/test_stats.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Year_2_Stats/estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/estimators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Year_2_Stats/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/helpers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Year_2_Stats/lab_stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/lab_stats.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Year_2_Stats/outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/outputer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/pdfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/pdfs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_stats.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +37,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for test_stats.TestMLE.executor": "Run",
+    "Python tests.Python tests for test_stats.TestMLE.test_binomial.executor": "Run",
+    "Python tests.Python tests for test_stats.TestMLE.test_exponential.executor": "Run",
     "Python tests.Python tests for test_stats.TestMLE.test_gaussian.executor": "Run",
+    "Python tests.Python tests for test_stats.TestMLE.test_lorentzian.executor": "Run",
+    "Python tests.Python tests for test_stats.TestMLE.test_poisson.executor": "Run",
     "Python.estimators.executor": "Debug",
     "Python.lab_stats.executor": "Run",
     "Python.outputer.executor": "Run",
@@ -50,8 +52,8 @@
     "git-widget-placeholder": "main"
   }
 }]]></component>
-  <component name="RunManager">
-    <configuration name="Python tests for test_stats.TestMLE.test_gaussian" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python tests.Python tests for test_stats.TestMLE">
+    <configuration name="Python tests for test_stats.TestMLE" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="StatsToolBox" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -62,13 +64,77 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_stats.TestMLE.test_gaussian&quot;" />
+      <option name="_new_target" value="&quot;test_stats.TestMLE&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_stats.TestMLE.test_binomial" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="StatsToolBox" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_stats.TestMLE.test_binomial&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_stats.TestMLE.test_exponential" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="StatsToolBox" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_stats.TestMLE.test_exponential&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_stats.TestMLE.test_lorentzian" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="StatsToolBox" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_stats.TestMLE.test_lorentzian&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for test_stats.TestMLE.test_poisson" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="StatsToolBox" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_stats.TestMLE.test_poisson&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for test_stats.TestMLE.test_gaussian" />
+        <item itemvalue="Python tests.Python tests for test_stats.TestMLE" />
+        <item itemvalue="Python tests.Python tests for test_stats.TestMLE.test_lorentzian" />
+        <item itemvalue="Python tests.Python tests for test_stats.TestMLE.test_binomial" />
+        <item itemvalue="Python tests.Python tests for test_stats.TestMLE.test_poisson" />
+        <item itemvalue="Python tests.Python tests for test_stats.TestMLE.test_exponential" />
       </list>
     </recent_temporary>
   </component>

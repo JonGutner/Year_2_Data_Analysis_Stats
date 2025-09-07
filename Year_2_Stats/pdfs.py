@@ -15,8 +15,11 @@ def poisson_pmf(k, mu):
     return poisson.pmf(k, mu)
 
 # Binomial (success/failure counts)
-def binomial(k, n, p):
-    return binom.pmf(k, n, p)
+def binomial_fixed_n(n):
+    """Return a binomial PMF with fixed n, fitting only p."""
+    def pdf(k, p):
+        return binom.pmf(k, n, p)
+    return pdf
 
 # Uniform (flat background, quantization error)
 def uniform_pdf(x, a, b):

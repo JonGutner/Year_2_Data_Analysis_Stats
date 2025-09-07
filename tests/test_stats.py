@@ -44,10 +44,10 @@ class TestMLE(unittest.TestCase):
         n = 1000
         data = np.random.binomial(n_trials, true_p, size=n)
 
-        # If your mle implementation expects raw counts and binomial(pdf) uses known n:
-        # you may need to wrap pdfs.binomial with fixed n; ensure guess function matches.
-        # Here we call mle with pdfs.binomial and assume estimators.guess_initial_params handles binomial.
-        result = estimators.mle_fit(data, pdfs.binomial)
+        # Fix n, only fit p
+        pdf = pdfs.binomial_fixed_n(n_trials)
+
+        result = estimators.mle_fit(data, pdf, init_params=[0.5])
         p_est = result["params"][0]
 
         self.assertAlmostEqual(p_est, true_p, delta=0.03)
