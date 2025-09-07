@@ -56,9 +56,11 @@ def run_tests(data_frames, chosen_pdf, param_names, folder):
         result = estimators.mle_fit(data, chosen_pdf)
 
         # Output results + plot
-        outputer.print_results(f"Dataset {i}", result, param_names)
+        outputer.print_results(f"Dataset {i}", result, param_names, data=data, pdf=chosen_pdf)
         outputer.show_fit(data, chosen_pdf, result["params"], folder,
                           title=f"{i}")
+
+        # HERE
 
 def guess_initial_params(data, pdf):
     mean = np.mean(data)

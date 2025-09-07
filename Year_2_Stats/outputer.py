@@ -2,9 +2,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from Year_2_Stats import pdfs
+from Year_2_Stats import pdfs, estimators
 
-def print_results(name, result, param_names=None):
+def print_results(name, result, param_names=None, data=None, pdf=None):
     print(f"\nResults for {name}:")
     for i, val in enumerate(result["params"]):
         name_str = param_names[i] if param_names else f"param{i}"
@@ -14,6 +14,12 @@ def print_results(name, result, param_names=None):
               f"(68% CL: {low:.4f} – {high:.4f})")
     print("  -logL:", result["neg_logL"])
     print("  Converged:", result["success"])
+
+    # Goodness-of-fit section
+    if data is not None and pdf is not None:
+        gof = estimators.goodness_of_fit(data, pdf, result["params"])
+        print(f"  Chi2/dof = {gof['chi2']:.2f}/{gof['dof']} "
+              f"(p = {gof['p_value']:.3f})")
 
 def show_fit(data, pdf, params, folder_suffix="", bins=50, title="MLE Fit", save=True, show=False):
     """

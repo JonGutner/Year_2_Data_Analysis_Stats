@@ -12,7 +12,8 @@ class TestMLE(unittest.TestCase):
         result = estimators.mle_fit(data, pdfs.gaussian)
         mu_est, sigma_est = result["params"]
 
-        outputer.print_results(f"Dataset - Gaussian", result, ["mu", "sigma"])
+        outputer.print_results(f"Dataset - Gaussian", result, ["mu", "sigma"],
+                               data=data, pdf=pdfs.gaussian)
         outputer.show_fit(data, pdfs.gaussian, result["params"],
                           folder_suffix="Test_Runs", title="Gaussian")
 
@@ -28,7 +29,8 @@ class TestMLE(unittest.TestCase):
         result = estimators.mle_fit(data, pdfs.exponential)
         lambda_est = result["params"][0]
 
-        outputer.print_results(f"Dataset - Exponential", result, ["lambda"])
+        outputer.print_results(f"Dataset - Exponential", result, ["lambda"],
+                               data=data, pdf=pdfs.exponential)
         outputer.show_fit(data, pdfs.exponential, result["params"],
                           folder_suffix="Test_Runs", title="Exponential")
 
@@ -43,7 +45,8 @@ class TestMLE(unittest.TestCase):
         result = estimators.mle_fit(data, pdfs.poisson_pmf)
         mu_est = result["params"][0]
 
-        outputer.print_results(f"Dataset - Poisson", result, ["mu"])
+        outputer.print_results(f"Dataset - Poisson", result, ["mu"],
+                               data=data, pdf=pdfs.poisson_pmf)
         outputer.show_fit(data, pdfs.poisson_pmf, result["params"],
                           folder_suffix="Test_Runs", title="Poisson")
 
@@ -62,7 +65,8 @@ class TestMLE(unittest.TestCase):
         result = estimators.mle_fit(data, pdf, init_params=[0.5])
         p_est = result["params"][0]
 
-        outputer.print_results(f"Dataset - Binomial", result, ["p"])
+        outputer.print_results(f"Dataset - Binomial", result, ["p"],
+                               data=data, pdf=pdf)
         outputer.show_fit(data, pdf, result["params"],
                           folder_suffix="Test_Runs", title="Binomial")
 
@@ -78,7 +82,8 @@ class TestMLE(unittest.TestCase):
         result = estimators.mle_fit(data, pdfs.lorentzian)
         x0_est, gamma_est = result["params"]
 
-        outputer.print_results(f"Dataset - Lorentzian", result, ["x0", "gamma"])
+        outputer.print_results(f"Dataset - Lorentzian", result, ["x0", "gamma"],
+                               data=data, pdf=pdfs.lorentzian)
         outputer.show_fit(data, pdfs.lorentzian, result["params"],
                           folder_suffix="Test_Runs", title="Lorentzian")
 
