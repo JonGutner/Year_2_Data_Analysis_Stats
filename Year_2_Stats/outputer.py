@@ -2,6 +2,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+from Year_2_Stats import pdfs
 
 def print_results(name, result, param_names=None):
     print(f"\nResults for {name}:")
@@ -14,25 +15,61 @@ def print_results(name, result, param_names=None):
     print("  -logL:", result["neg_logL"])
     print("  Converged:", result["success"])
 
-def show_fit(data, pdf, params, folder, bins=50, title="MLE Fit", save=True, show=False):
-    """Histogram + fitted PDF overlay. Optionally save to Desktop/StatsPlots."""
+def show_fit(data, pdf, params, folder_suffix="", bins=50, title="MLE Fit", save=True, show=False):
+    """
+    Histogram + fitted PDF/PMF overlay.
+    - Detects discrete PDFs (Poisson and binomial closures) automatically.
+    - For discrete PDFs: plot integer bins and PMF stems.
+    - For continuous PDFs: plot histogram + smooth curve.
+    """
     fig, ax = plt.subplots()
 
-    # Histogram of the data
-    ax.hist(data, bins=bins, density=True, alpha=0.5, label="Data")
+    # --- Detect discrete PDFs ---
+    is_poisson = pdf is pdfs.poisson_pmf
+    is_binomial = pdf.__name__ == "pdf" and pdf.__closure__ is not None
+    is_discrete = is_poisson or is_binomial
 
-    # Fitted PDF
-    x = np.linspace(min(data), max(data), 200)
-    y = pdf(x, *params)
-    ax.plot(x, y, "r-", label="Fitted PDF")
+    if is_discrete:
+        # Integer data range
+        kmin = int(np.floor(np.min(data)))
+        kmax = int(np.ceil(np.max(data)))
+        k_vals = np.arange(kmin, kmax + 1, 1)
+
+        # Histogram: bin edges centered on integers
+        bin_edges = np.arange(kmin - 0.5, kmax + 1.5, 1.0)
+        ax.hist(data, bins=bin_edges, density=True, alpha=0.5, label="Data")
+
+        # Fitted PMF
+        y = pdf(k_vals, *params)
+        markerline, stemlines, baseline = ax.stem(k_vals, y, linefmt="r-", markerfmt="ro", basefmt=" ")
+        plt.setp(stemlines, linewidth=1.5)
+        plt.setp(markerline, markersize=5)
+
+        ax.set_xlim(kmin - 0.5, kmax + 0.5)
+
+    else:
+        # Continuous: clip to 1st–99th percentile for better view
+        lo, hi = np.percentile(data, [1.0, 99.0])
+        if lo == hi:
+            lo, hi = np.min(data), np.max(data)
+            if lo == hi:  # constant dataset
+                lo -= 1.0
+                hi += 1.0
+
+        x = np.linspace(lo, hi, 500)
+        y = pdf(x, *params)
+
+        ax.hist(data, bins=bins, range=(lo, hi), density=True, alpha=0.5, label="Data")
+        ax.plot(x, y, "r-", label="Fitted PDF")
 
     ax.set_title(title)
     ax.legend()
 
-    # Save
+    # Save to Desktop/StatsPlots_<suffix>
     if save:
         desktop = os.path.join(os.path.expanduser("~"), "Desktop")
-        out_dir = os.path.join(desktop, f"StatsPlots_{folder}")
+        base_dir = "StatsPlots" + (f"_{folder_suffix}" if folder_suffix else "")
+        out_dir = os.path.join(desktop, base_dir)
         os.makedirs(out_dir, exist_ok=True)
 
         safe_title = title.replace(" ", "_").replace("/", "_")
