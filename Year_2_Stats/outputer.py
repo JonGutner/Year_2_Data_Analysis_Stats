@@ -14,24 +14,33 @@ def print_results(name, result, param_names=None):
     print("  -logL:", result["neg_logL"])
     print("  Converged:", result["success"])
 
-def show_fit(data, pdf, params, bins=50, title="MLE Fit", save=True):
-    """Histogram + fitted PDF overlay, saved to Desktop/StatsPlots."""
-    plt.hist(data, bins=bins, density=True, alpha=0.5, label="Data")
+def show_fit(data, pdf, params, bins=50, title="MLE Fit", save=True, show=False):
+    """Histogram + fitted PDF overlay. Optionally save to Desktop/StatsPlots."""
+    fig, ax = plt.subplots()
 
+    # Histogram of the data
+    ax.hist(data, bins=bins, density=True, alpha=0.5, label="Data")
+
+    # Fitted PDF
     x = np.linspace(min(data), max(data), 200)
     y = pdf(x, *params)
-    plt.plot(x, y, "r-", label="Fitted PDF")
+    ax.plot(x, y, "r-", label="Fitted PDF")
 
-    plt.title(title)
-    plt.legend()
+    ax.set_title(title)
+    ax.legend()
 
-    # --- Save to Desktop/StatsPlots ---
+    # Save
     if save:
         desktop = os.path.join(os.path.expanduser("~"), "Desktop")
         out_dir = os.path.join(desktop, "StatsPlots")
         os.makedirs(out_dir, exist_ok=True)
 
-        safe_title = title.replace(" ", "_")
+        safe_title = title.replace(" ", "_").replace("/", "_")
         out_path = os.path.join(out_dir, f"{safe_title}.png")
-        plt.savefig(out_path, dpi=150, bbox_inches="tight")
-        print(f"Plot saved to: {out_path}")
+        fig.savefig(out_path, dpi=150, bbox_inches="tight")
+        print(f"[plot saved] {out_path}")
+
+    if show:
+        plt.show()
+
+    plt.close(fig)

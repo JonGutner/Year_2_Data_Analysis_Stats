@@ -16,7 +16,6 @@ def poisson_pmf(k, mu):
 
 # Binomial (success/failure counts)
 def binomial_fixed_n(n):
-    """Return a binomial PMF with fixed n, fitting only p."""
     def pdf(k, p):
         return binom.pmf(k, n, p)
     return pdf

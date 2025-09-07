@@ -5,7 +5,6 @@ import numdifftools as nd
 from Year_2_Stats import helpers, pdfs
 
 def guess_initial_params(data, pdf):
-    """Automatic initial guesses for different PDFs."""
     mean = np.mean(data)
     std = np.std(data)
 
@@ -15,11 +14,6 @@ def guess_initial_params(data, pdf):
         return [1/mean] if mean > 0 else [1.0]
     elif pdf == pdfs.poisson_pmf:
         return [mean]
-    elif hasattr(pdfs, "binomial_fixed_n") and pdf.__name__ == "binomial_fixed_n":
-        # If someone is directly calling the base function (unlikely)
-        n_guess = np.max(data)
-        p_guess = mean / n_guess if n_guess > 0 else 0.5
-        return [p_guess]
     elif pdf == pdfs.lorentzian:
         q25, q75 = np.percentile(data, [25, 75])
         return [np.median(data), q75 - q25]

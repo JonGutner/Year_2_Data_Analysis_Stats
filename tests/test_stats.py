@@ -1,6 +1,8 @@
 import unittest
+from unittest import result
+
 import numpy as np
-from Year_2_Stats import estimators, pdfs
+from Year_2_Stats import estimators, pdfs, outputer
 
 class TestMLE(unittest.TestCase):
     def test_gaussian(self):
@@ -11,6 +13,10 @@ class TestMLE(unittest.TestCase):
 
         result = estimators.mle_fit(data, pdfs.gaussian)
         mu_est, sigma_est = result["params"]
+
+        outputer.print_results(f"Dataset - Gaussian", result, ["mu", "sigma"])
+        outputer.show_fit(data, pdfs.gaussian, result["params"],
+                          title="Gaussian")
 
         self.assertAlmostEqual(mu_est, true_mu, delta=0.10)   # tighter because n large
         self.assertAlmostEqual(sigma_est, true_sigma, delta=0.10)
@@ -24,6 +30,10 @@ class TestMLE(unittest.TestCase):
         result = estimators.mle_fit(data, pdfs.exponential)
         lambda_est = result["params"][0]
 
+        outputer.print_results(f"Dataset - Exponential", result, ["lambda"])
+        outputer.show_fit(data, pdfs.exponential, result["params"],
+                          title="Exponential")
+
         self.assertAlmostEqual(lambda_est, true_lambda, delta=0.03)
 
     def test_poisson(self):
@@ -34,6 +44,10 @@ class TestMLE(unittest.TestCase):
 
         result = estimators.mle_fit(data, pdfs.poisson_pmf)
         mu_est = result["params"][0]
+
+        outputer.print_results(f"Dataset - Poisson", result, ["mu"])
+        outputer.show_fit(data, pdfs.poisson_pmf, result["params"],
+                          title="Poisson")
 
         self.assertAlmostEqual(mu_est, true_mu, delta=0.12)
 
@@ -50,6 +64,9 @@ class TestMLE(unittest.TestCase):
         result = estimators.mle_fit(data, pdf, init_params=[0.5])
         p_est = result["params"][0]
 
+        outputer.print_results(f"Dataset - Binomial", result, ["p"])
+        outputer.show_fit(data, pdf, result["params"], title="Binomial", save=True)
+
         self.assertAlmostEqual(p_est, true_p, delta=0.03)
 
     def test_lorentzian(self):
@@ -61,6 +78,10 @@ class TestMLE(unittest.TestCase):
 
         result = estimators.mle_fit(data, pdfs.lorentzian)
         x0_est, gamma_est = result["params"]
+
+        outputer.print_results(f"Dataset - Lorentzian", result, ["x0", "gamma"])
+        outputer.show_fit(data, pdfs.lorentzian, result["params"],
+                          title="Lorentzian")
 
         # Lorentzian MLEs can be noisier — allow a larger tolerance on gamma
         self.assertAlmostEqual(x0_est, true_x0, delta=0.12)
