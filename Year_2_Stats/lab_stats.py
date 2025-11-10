@@ -33,7 +33,7 @@ param_names = ["amplitude", "phase", "c"]
 # data_frames = helpers.load_data(data_folder)
 
 # Load data for Waves Experiment
-df_0, df_3 = data_management.send_data()
+df_0, df_1, df_2, df_3 = data_management.send_data()
 print(df_0)
 
 # -----------------------------
@@ -42,4 +42,6 @@ print(df_0)
 
 # Run tests for Waves Experiment
 helpers.run_tests_waves(df_0, chosen_pdf, param_names)
+helpers.run_tests_waves(df_1, chosen_pdf, param_names)
+helpers.run_tests_waves(df_2, chosen_pdf, param_names)
 helpers.run_tests_waves(df_3, chosen_pdf, param_names)

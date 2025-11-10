@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Delete unnecessary class.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Bux fixes and transportation of the data analysis to Year_2_stats runner.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_Lab/load_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/load_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_Lab/plot_vals.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/plot_vals.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Year_2_Stats/estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/estimators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Year_2_Stats/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_Lab/data_management.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/data_management.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Year_2_Stats/lab_stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/lab_stats.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Year_2_Stats/outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/outputer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Year_2_Stats/pdfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/pdfs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -304,7 +299,23 @@
       <option name="project" value="LOCAL" />
       <updated>1762794694940</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Bux fixes and transportation of the data analysis to Year_2_stats runner.">
+      <option name="closed" value="true" />
+      <created>1762812598570</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1762812598570</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Bux fixes and transportation of the data analysis to Year_2_stats runner.">
+      <option name="closed" value="true" />
+      <created>1762812650284</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1762812650284</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -330,6 +341,7 @@
     <MESSAGE value="Creation of general case of DFT for Year_2_Stats, and updated plot_vals to run a DFT to get phase difference (BUG PRESENT)." />
     <MESSAGE value="Bug fixed and improved usability." />
     <MESSAGE value="Delete unnecessary class." />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete unnecessary class." />
+    <MESSAGE value="Bux fixes and transportation of the data analysis to Year_2_stats runner." />
+    <option name="LAST_COMMIT_MESSAGE" value="Bux fixes and transportation of the data analysis to Year_2_stats runner." />
   </component>
 </project>

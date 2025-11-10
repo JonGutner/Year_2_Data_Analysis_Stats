@@ -23,14 +23,22 @@ def send_data():
     print(thermistor_temperatures[:, 0])
 
     plt.plot(timestamp, thermistor_temperatures[:, 0], c='r')
+    plt.plot(timestamp, thermistor_temperatures[:, 1], c='green')
+    plt.plot(timestamp, thermistor_temperatures[:, 2], c='orange')
     plt.plot(timestamp, thermistor_temperatures[:, 3], c='b')
     plt.show()
 
     df_0 = pd.DataFrame({
         't': timestamp,
         'T': thermistor_temperatures[:, 0]})
+    df_1 = pd.DataFrame({
+        't': timestamp,
+        'T': thermistor_temperatures[:, 1]})
+    df_2 = pd.DataFrame({
+        't': timestamp,
+        'T': thermistor_temperatures[:, 2]})
     df_3 = pd.DataFrame({
         't': timestamp,
         'T': thermistor_temperatures[:, 3]})
 
-    return df_0, df_3
+    return df_0, df_1, df_2, df_3
