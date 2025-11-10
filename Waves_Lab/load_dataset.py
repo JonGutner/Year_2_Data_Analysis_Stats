@@ -1,8 +1,7 @@
-from pathlib import Path
 import pandas as pd
 import re
 
-def load_dataset(path):
+def load(path):
     data = pd.read_csv(path, header=3)
     timestamp = data.iloc[:, 0].to_numpy()
     output_voltage = data.iloc[:, 1].to_numpy()
@@ -12,9 +11,3 @@ def load_dataset(path):
     comments = re.search(r"Comments: (.*)$", open(path).read(), re.MULTILINE)[1]
 
     return timestamp, output_voltage, output_current, thermistor_temperatures, comments
-
-
-data_path = Path(__file__).resolve().parent.parent / "Waves_Lab_Data" / "Test_1.csv"
-
-timestamp, output_voltage, output_current, thermistor_temperatures, comments = load_dataset(data_path)
-print(comments)
