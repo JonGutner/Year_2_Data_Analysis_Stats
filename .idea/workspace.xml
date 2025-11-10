@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="ChatGPT version of the whole code.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Goodness of fit is added.">
+      <change afterPath="$PROJECT_DIR$/Waves_Lab/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Waves_Lab/load_dataset.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Waves_Lab_Data/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Year_2_Stats/estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/estimators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Year_2_Stats/pdfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/pdfs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_stats.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,13 +18,14 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Python Unit Test" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -37,14 +38,23 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for test_MLE.TestMLE.executor": "Run",
     "Python tests.Python tests for test_stats.TestMLE.executor": "Run",
     "Python tests.Python tests for test_stats.TestMLE.test_binomial.executor": "Run",
     "Python tests.Python tests for test_stats.TestMLE.test_exponential.executor": "Run",
     "Python tests.Python tests for test_stats.TestMLE.test_gaussian.executor": "Run",
     "Python tests.Python tests for test_stats.TestMLE.test_lorentzian.executor": "Run",
     "Python tests.Python tests for test_stats.TestMLE.test_poisson.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.test_binomial.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.test_exponential.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.test_gaussian.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.test_lorentzian.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.test_poisson.executor": "Run",
+    "Python tests.Python tests in tests.py.executor": "Run",
     "Python.estimators.executor": "Debug",
     "Python.lab_stats.executor": "Run",
+    "Python.load_dataset.executor": "Run",
     "Python.outputer.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
@@ -52,8 +62,13 @@
     "git-widget-placeholder": "main"
   }
 }]]></component>
-  <component name="RunManager" selected="Python tests.Python tests for test_stats.TestMLE">
-    <configuration name="Python tests for test_stats.TestMLE" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Python tests for tests.TestMLE" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="StatsToolBox" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -64,11 +79,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_stats.TestMLE&quot;" />
+      <option name="_new_target" value="&quot;tests.TestMLE&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_stats.TestMLE.test_binomial" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for tests.TestMLE.test_binomial" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="StatsToolBox" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -79,11 +94,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_stats.TestMLE.test_binomial&quot;" />
+      <option name="_new_target" value="&quot;tests.TestMLE.test_binomial&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_stats.TestMLE.test_exponential" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for tests.TestMLE.test_exponential" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="StatsToolBox" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -94,11 +109,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_stats.TestMLE.test_exponential&quot;" />
+      <option name="_new_target" value="&quot;tests.TestMLE.test_exponential&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_stats.TestMLE.test_lorentzian" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for tests.TestMLE.test_lorentzian" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="StatsToolBox" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -109,11 +124,11 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_stats.TestMLE.test_lorentzian&quot;" />
+      <option name="_new_target" value="&quot;tests.TestMLE.test_lorentzian&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests for test_stats.TestMLE.test_poisson" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+    <configuration name="Python tests for tests.TestMLE.test_poisson" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="StatsToolBox" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -124,17 +139,32 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_stats.TestMLE.test_poisson&quot;" />
+      <option name="_new_target" value="&quot;tests.TestMLE.test_poisson&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Python tests for tests.tests.TestMLE" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="StatsToolBox" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;tests.tests.TestMLE&quot;" />
       <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for test_stats.TestMLE" />
-        <item itemvalue="Python tests.Python tests for test_stats.TestMLE.test_lorentzian" />
-        <item itemvalue="Python tests.Python tests for test_stats.TestMLE.test_binomial" />
-        <item itemvalue="Python tests.Python tests for test_stats.TestMLE.test_poisson" />
-        <item itemvalue="Python tests.Python tests for test_stats.TestMLE.test_exponential" />
+        <item itemvalue="Python tests.Python tests for tests.TestMLE" />
+        <item itemvalue="Python tests.Python tests for tests.TestMLE.test_lorentzian" />
+        <item itemvalue="Python tests.Python tests for tests.TestMLE.test_binomial" />
+        <item itemvalue="Python tests.Python tests for tests.TestMLE.test_poisson" />
+        <item itemvalue="Python tests.Python tests for tests.TestMLE.test_exponential" />
       </list>
     </recent_temporary>
   </component>
@@ -161,7 +191,71 @@
       <option name="project" value="LOCAL" />
       <updated>1757195863360</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Fixed bugs. All unittests running.">
+      <option name="closed" value="true" />
+      <created>1757207146171</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1757207146171</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Unittests outputs added.">
+      <option name="closed" value="true" />
+      <created>1757262638979</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1757262638979</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Improvement of the saving figures in folders on the desktop.">
+      <option name="closed" value="true" />
+      <created>1757263036454</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1757263036454</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Improvement of the saving figures in folders on the desktop.">
+      <option name="closed" value="true" />
+      <created>1757264662713</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1757264662713</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Improvement of the saving figures in folders on the desktop.">
+      <option name="closed" value="true" />
+      <created>1757264688424</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1757264688424</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Fixing the plotting of PMFs (discrete functions)">
+      <option name="closed" value="true" />
+      <created>1757268473744</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1757268473744</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Goodness of fit is added.">
+      <option name="closed" value="true" />
+      <created>1757271377381</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1757271377382</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Goodness of fit is added.">
+      <option name="closed" value="true" />
+      <created>1757272699206</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1757272699206</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -177,6 +271,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ChatGPT version of the whole code." />
-    <option name="LAST_COMMIT_MESSAGE" value="ChatGPT version of the whole code." />
+    <MESSAGE value="Fixed bugs. All unittests running." />
+    <MESSAGE value="Unittests outputs added." />
+    <MESSAGE value="Improvement of the saving figures in folders on the desktop." />
+    <MESSAGE value="Fixing the plotting of PMFs (discrete functions)" />
+    <MESSAGE value="Goodness of fit is added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Goodness of fit is added." />
   </component>
 </project>
