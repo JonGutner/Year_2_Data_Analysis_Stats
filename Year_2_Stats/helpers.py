@@ -42,7 +42,7 @@ def profile_scan(param_idx, params, data, pdf, step=0.05, n_steps=40):
         return min(ci), max(ci)
     return np.nan, np.nan
 
-def run_tests(data_frames, chosen_pdf, param_names, folder):
+def run_tests_df(data_frames, chosen_pdf, param_names, folder):
     # Loop over datasets
     for i in range(len(data_frames)):
         df = data_frames[i]
@@ -60,7 +60,52 @@ def run_tests(data_frames, chosen_pdf, param_names, folder):
         outputer.show_fit(data, chosen_pdf, result["params"], folder,
                           title=f"{i}")
 
-        # HERE
+# ----------------------------
+# Updated run_tests_waves with DC offset
+# ----------------------------
+def run_tests_waves(df, chosen_pdf, param_names):
+    """
+    Perform MLE fit for a single dataset (df) and print/plot results.
+    Handles standard PDFs and sine_with_phase with DC offset.
+    """
+    # Extract time (t) and measured values (y)
+    t = df.iloc[:, 0].dropna().to_numpy()
+    y = df.iloc[:, 1].dropna().to_numpy()
+
+    # --- Sine-wave with DC offset ---
+    if chosen_pdf == pdfs.sine_with_phase:
+        # Residual-based negative log-likelihood including DC offset
+        def sine_nll(params):
+            amplitude, phase, offset = params
+            model = pdfs.sine_with_phase(t, amplitude, phase, offset)
+            residuals = y - model
+            sigma = 1.0  # assumed measurement error
+            return 0.5 * np.sum((residuals / sigma) ** 2)
+
+        # Initial guess: amplitude ~ max-min, phase ~0, offset ~ mean(y)
+        init_params = [0.5*(np.max(y)-np.min(y)), 0.0, np.mean(y)]
+
+        # Perform MLE
+        result = estimators.mle_fit(y, sine_nll, init_params=init_params, method="BFGS", is_pdf=False)
+
+        # Plot function including DC offset
+        plot_pdf = lambda x, amplitude, phase, offset: pdfs.sine_with_phase(x, amplitude, phase, offset)
+
+        # Print results
+        outputer.print_results_waves(t, y, result, param_names, pdf=chosen_pdf)
+
+        # Show fit using original time array
+        outputer.show_fit(y, plot_pdf, result["params"], t=t, title="Sine Fit with DC Offset")
+
+    else:
+        # --- Standard PDFs ---
+        data = df.iloc[:, 1].dropna().to_numpy()
+        nll = lambda params: -np.sum(np.log(np.clip(chosen_pdf(data, *params), 1e-12, None)))
+        init_params = None
+        result = estimators.mle_fit(data, nll, init_params=init_params)
+
+        outputer.print_results("Data", result, param_names, data=data, pdf=chosen_pdf)
+        outputer.show_fit(data, chosen_pdf, result["params"], title="PDF Fit")
 
 def guess_initial_params(data, pdf):
     mean = np.mean(data)
@@ -77,5 +122,7 @@ def guess_initial_params(data, pdf):
         return [np.median(data), q75 - q25]
     elif pdf == pdfs.uniform_pdf:
         return [np.min(data), np.max(data)]
+    elif pdf == pdfs.sine_with_phase:
+        return [10, 0.1, 30]
     else:
         raise ValueError("No guess implemented for this PDF")

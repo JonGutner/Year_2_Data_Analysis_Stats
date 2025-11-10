@@ -4,10 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Init of waves lab class, downloaded py file, and workspace.">
-      <change afterPath="$PROJECT_DIR$/Waves_Lab/plot_vals.py" afterDir="false" />
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Delete unnecessary class.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Waves_Lab/load_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/load_dataset.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_Lab/plot_vals.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/plot_vals.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/estimators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/lab_stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/lab_stats.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/outputer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/pdfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/pdfs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,10 +56,12 @@
     "Python tests.Python tests for tests.TestMLE.test_lorentzian.executor": "Run",
     "Python tests.Python tests for tests.TestMLE.test_poisson.executor": "Run",
     "Python tests.Python tests in tests.py.executor": "Run",
-    "Python.estimators.executor": "Debug",
+    "Python.estimators.executor": "Run",
+    "Python.fourier_transform.executor": "Run",
     "Python.lab_stats.executor": "Run",
     "Python.load_dataset.executor": "Run",
     "Python.outputer.executor": "Run",
+    "Python.pdfs.executor": "Run",
     "Python.plot_vals.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
@@ -64,6 +71,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Waves_Stat_Folder" />
+      <recent name="$PROJECT_DIR$/Waves_Lab_Data" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -263,7 +272,39 @@
       <option name="project" value="LOCAL" />
       <updated>1762773348097</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Modification of load_dataset.py and addition of plot_vals.py, which graphs thermistors 0 &amp; 3.">
+      <option name="closed" value="true" />
+      <created>1762774280227</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1762774280227</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Creation of general case of DFT for Year_2_Stats, and updated plot_vals to run a DFT to get phase difference (BUG PRESENT).">
+      <option name="closed" value="true" />
+      <created>1762793726128</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1762793726128</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Bug fixed and improved usability.">
+      <option name="closed" value="true" />
+      <created>1762794671165</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1762794671165</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Delete unnecessary class.">
+      <option name="closed" value="true" />
+      <created>1762794694940</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1762794694940</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -285,6 +326,10 @@
     <MESSAGE value="Fixing the plotting of PMFs (discrete functions)" />
     <MESSAGE value="Goodness of fit is added." />
     <MESSAGE value="Init of waves lab class, downloaded py file, and workspace." />
-    <option name="LAST_COMMIT_MESSAGE" value="Init of waves lab class, downloaded py file, and workspace." />
+    <MESSAGE value="Modification of load_dataset.py and addition of plot_vals.py, which graphs thermistors 0 &amp; 3." />
+    <MESSAGE value="Creation of general case of DFT for Year_2_Stats, and updated plot_vals to run a DFT to get phase difference (BUG PRESENT)." />
+    <MESSAGE value="Bug fixed and improved usability." />
+    <MESSAGE value="Delete unnecessary class." />
+    <option name="LAST_COMMIT_MESSAGE" value="Delete unnecessary class." />
   </component>
 </project>

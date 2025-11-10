@@ -1,13 +1,14 @@
 #Main method where all the setups are performed.
 from Year_2_Stats import helpers, pdfs
+from Waves_Lab import data_management
 
 # User settings
-data_folder = "Data_1"        # <--- change this to switch datasets
-chosen_pdf = pdfs.gaussian    # <--- change to exponential, poisson_pmf, etc.
+data_folder = "Waves_Stat_Folder"        # <--- change this to switch datasets
+chosen_pdf = pdfs.sine_with_phase    # <--- change to exponential, poisson_pmf, etc.
 
 # Parameter names for all PDFs (comment/uncomment as needed)
 # For Gaussian
-param_names = ["mu", "sigma"]
+# param_names = ["mu", "sigma"]
 
 # For Exponential
 # param_names = ["lambda"]
@@ -24,10 +25,21 @@ param_names = ["mu", "sigma"]
 # For Uniform
 # param_names = ["a", "b"]
 
+# For Waves Experiment
+param_names = ["amplitude", "phase", "c"]
+
 # -----------------------------
 # Load data
-data_frames = helpers.load_data(data_folder)
+# data_frames = helpers.load_data(data_folder)
+
+# Load data for Waves Experiment
+df_0, df_3 = data_management.send_data()
+print(df_0)
 
 # -----------------------------
 # Run tests
-helpers.run_tests(data_frames, chosen_pdf, param_names, data_folder)
+# helpers.run_tests_df(data_frames, chosen_pdf, param_names, data_folder)
+
+# Run tests for Waves Experiment
+helpers.run_tests_waves(df_0, chosen_pdf, param_names)
+helpers.run_tests_waves(df_3, chosen_pdf, param_names)

@@ -5,37 +5,71 @@ from scipy.stats import chi2
 import numdifftools as nd
 from Year_2_Stats import helpers, pdfs
 
-def mle_fit(data, pdf, init_params=None, method="Nelder-Mead"):
-    """
-    General-purpose MLE with auto parameter guessing and uncertainties.
-    """
+from scipy.linalg import pinvh
+
+
+def mle_fit(data, nll_func, init_params=None, method="BFGS", is_pdf=True):
     if init_params is None:
-        init_params = helpers.guess_initial_params(data, pdf)
+        raise ValueError("Please provide init_params for the fit.")
 
-    result = minimize(helpers.neg_log_likelihood, init_params,
-                      args=(data, pdf),
-                      method=method)
-
+    # --- Minimize negative log-likelihood ---
+    result = minimize(nll_func, init_params, method=method)
     best_params = result.x
 
-    # Errors via Hessian
-    hessian = nd.Hessian(lambda p: helpers.neg_log_likelihood(p, data, pdf))(best_params)
-    cov = np.linalg.inv(hessian)
-    fisher_errors = np.sqrt(np.diag(cov))
+    # --- Compute Hessian at best fit ---
+    try:
+        hessian = nd.Hessian(lambda p: nll_func(p))(best_params)
+        hessian = 0.5 * (hessian + hessian.T)  # symmetrize
+        try:
+            cov = np.linalg.inv(hessian)
+            fisher_errors = np.sqrt(np.abs(np.diag(cov)))
+            method_used = "inv"
+        except np.linalg.LinAlgError:
+            cov = pinvh(hessian)
+            fisher_errors = np.sqrt(np.abs(np.diag(cov)))
+            method_used = "pinvh"
+    except Exception as e:
+        print("Warning: Hessian calculation failed:", e)
+        fisher_errors = [np.nan] * len(best_params)
+        method_used = "none"
 
-    # Profile scans for each parameter
-    profile_errors = []
-    for i in range(len(best_params)):
-        low, high = helpers.profile_scan(i, best_params, data, pdf)
-        profile_errors.append((low, high))
+    # --- Profile likelihood intervals (optional, requires helpers.profile_scan) ---
+    try:
+        from Year_2_Stats import helpers
+        profile_errors = []
+        for i in range(len(best_params)):
+            low, high = helpers.profile_scan(i, best_params, data, nll_func if is_pdf else lambda d, *p: nll_func(p))
+            profile_errors.append((low, high))
+    except Exception:
+        profile_errors = [(np.nan, np.nan)] * len(best_params)
 
     return {
         "params": best_params,
         "neg_logL": result.fun,
         "success": result.success,
+        "method_used": method_used,
         "fisher_errors": fisher_errors,
         "profile_intervals": profile_errors
     }
+
+def auto_goodness_of_fit(x, y, model, params, is_pdf=False):
+    if is_pdf:
+        return goodness_of_fit(y, model, params)
+    else:
+        return goodness_of_fit_regression(x, y, model, params)
+
+def goodness_of_fit_regression(x, y, model, params, sigma=None):
+    y_pred = model(x, *params)
+    residuals = y - y_pred
+
+    if sigma is None:
+        sigma = np.std(residuals)
+
+    chi2_val = np.sum((residuals / sigma) ** 2)
+    dof = len(y) - len(params)
+    p_value = 1 - chi2.cdf(chi2_val, dof)
+
+    return {"chi2": chi2_val, "dof": dof, "p_value": p_value, "sigma": sigma}
 
 def goodness_of_fit(data, pdf, params, bins=50):
     """

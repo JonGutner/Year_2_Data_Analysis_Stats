@@ -29,3 +29,7 @@ def binomial_fixed_n(n):
     def pdf(k, p):
         return binom.pmf(k, n, p)
     return pdf
+
+# ==Thermal Waves Experiment==
+def sine_with_phase(t, amplitude, phase, c):
+    return amplitude * np.sin(2*np.pi/10 * t - phase) + c
