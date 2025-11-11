@@ -38,7 +38,7 @@ print(df_0)
 
 # -----------------------------
 # Run tests
-# helpers.run_tests_df(data_frames, chosen_pdf, param_names, data_folder)
+# helpers.run_tests_pdf(data_frames, chosen_pdf, param_names, data_folder)
 
 # Run tests for Waves Experiment
 helpers.run_tests_waves(df_0, 0, chosen_pdf, param_names)

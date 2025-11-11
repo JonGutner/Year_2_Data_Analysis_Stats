@@ -3,11 +3,42 @@ import numpy as np
 from scipy.optimize import minimize
 from scipy.stats import chi2
 import numdifftools as nd
-
 from scipy.linalg import pinvh
+from Year_2_Stats import helpers
 
+def mle_fit_pdf(data, pdf, init_params=None, method="Nelder-Mead"):
+    """
+    General-purpose MLE with auto parameter guessing and uncertainties.
+    """
+    if init_params is None:
+        init_params = helpers.guess_initial_params(data, pdf)
 
-def mle_fit(data, nll_func, init_params=None, method="BFGS", is_pdf=True):
+    result = minimize(helpers.neg_log_likelihood, init_params,
+                      args=(data, pdf),
+                      method=method)
+
+    best_params = result.x
+
+    # Errors via Hessian
+    hessian = nd.Hessian(lambda p: helpers.neg_log_likelihood(p, data, pdf))(best_params)
+    cov = np.linalg.inv(hessian)
+    fisher_errors = np.sqrt(np.diag(cov))
+
+    # Profile scans for each parameter
+    profile_errors = []
+    for i in range(len(best_params)):
+        low, high = helpers.profile_scan(i, best_params, data, pdf)
+        profile_errors.append((low, high))
+
+    return {
+        "params": best_params,
+        "neg_logL": result.fun,
+        "success": result.success,
+        "fisher_errors": fisher_errors,
+        "profile_intervals": profile_errors
+    }
+
+def mle_fit_waves(data, nll_func, init_params=None, method="BFGS", is_pdf=True):
     if init_params is None:
         raise ValueError("Please provide init_params for the fit.")
 

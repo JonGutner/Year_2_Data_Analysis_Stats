@@ -42,7 +42,7 @@ def profile_scan(param_idx, params, data, pdf, step=0.05, n_steps=40):
         return min(ci), max(ci)
     return np.nan, np.nan
 
-def run_tests_df(data_frames, chosen_pdf, param_names, folder):
+def run_tests_pdf(data_frames, chosen_pdf, param_names, folder):
     # Loop over datasets
     for i in range(len(data_frames)):
         df = data_frames[i]
@@ -53,11 +53,11 @@ def run_tests_df(data_frames, chosen_pdf, param_names, folder):
             data = df.iloc[:, 1].dropna().to_numpy()
 
         # Perform MLE
-        result = estimators.mle_fit(data, chosen_pdf)
+        result = estimators.mle_fit_pdf(data, chosen_pdf)
 
         # Output results + plot
         outputer.print_results(f"Dataset {i}", result, param_names, data=data, pdf=chosen_pdf)
-        outputer.show_fit(data, chosen_pdf, result["params"], folder,
+        outputer.show_fit_pdf(data, chosen_pdf, result["params"], folder,
                           title=f"{i}")
 
 # ----------------------------
@@ -86,7 +86,7 @@ def run_tests_waves(df, i, chosen_pdf, param_names):
         init_params = [0.5*(np.max(y)-np.min(y)), 0.0, np.mean(y)]
 
         # Perform MLE
-        result = estimators.mle_fit(y, sine_nll, init_params=init_params, method="BFGS", is_pdf=False)
+        result = estimators.mle_fit_waves(y, sine_nll, init_params=init_params, method="BFGS", is_pdf=False)
 
         # Plot function including DC offset
         plot_pdf = lambda x, amplitude, phase, offset: pdfs.sine_with_phase(x, amplitude, phase, offset)
@@ -95,17 +95,17 @@ def run_tests_waves(df, i, chosen_pdf, param_names):
         outputer.print_results_waves(t, y, result, param_names, pdf=chosen_pdf)
 
         # Show fit using original time array
-        outputer.show_fit(y, plot_pdf, result["params"], t=t, title=f"Sine Fit - Thermistor {i}")
+        outputer.show_fit_waves(y, plot_pdf, result["params"], t=t, title=f"Sine Fit - Thermistor {i}")
 
     else:
         # --- Standard PDFs ---
         data = df.iloc[:, 1].dropna().to_numpy()
         nll = lambda params: -np.sum(np.log(np.clip(chosen_pdf(data, *params), 1e-12, None)))
         init_params = None
-        result = estimators.mle_fit(data, nll, init_params=init_params)
+        result = estimators.mle_fit_waves(data, nll, init_params=init_params)
 
         outputer.print_results("Data", result, param_names, data=data, pdf=chosen_pdf)
-        outputer.show_fit(data, chosen_pdf, result["params"], title="PDF Fit")
+        outputer.show_fit_waves(data, chosen_pdf, result["params"], title="PDF Fit")
 
 def guess_initial_params(data, pdf):
     mean = np.mean(data)
