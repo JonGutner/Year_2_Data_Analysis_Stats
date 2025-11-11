@@ -42,3 +42,13 @@ Usage
 1. Change 'data_folder' variable to the name of the folder containing the data (can contain multiple .csv files at a time, and while cycle through them while doing analysis).
 2. Run by pressing green run button (control F5) while having open the 'main.py' class (found inside the 'Year_2_Stats' package).
    
+### What it does
+
+* Uses MLE and goodness of fit to make the analysis of those PDFs.
+* Produces graphs that are saved onto the desktop.
+
+### Unittests
+
+* There is a class called tests.py in the tests package.
+* tests.py tests whether the code is running properly for PDF analysis.
+* To test if it is running properly, press the green run button (control F5) while having open the 'tests.py' class open.
