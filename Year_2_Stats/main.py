@@ -3,7 +3,7 @@ from Year_2_Stats import helpers, pdfs
 from Waves_Lab import data_management
 
 # User settings
-data_folder = "Waves_Analysed_Data"        # <--- change this to switch datasets
+data_folder = "Waves_Stat_Folder"        # <--- change this to switch datasets
 chosen_pdf = pdfs.sine_with_phase    # <--- change to exponential, poisson_pmf, etc.
 
 # Parameter names for all PDFs (comment/uncomment as needed)
