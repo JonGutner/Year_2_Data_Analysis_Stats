@@ -41,7 +41,7 @@ print(df_0)
 # helpers.run_tests_df(data_frames, chosen_pdf, param_names, data_folder)
 
 # Run tests for Waves Experiment
-helpers.run_tests_waves(df_0, chosen_pdf, param_names)
-helpers.run_tests_waves(df_1, chosen_pdf, param_names)
-helpers.run_tests_waves(df_2, chosen_pdf, param_names)
-helpers.run_tests_waves(df_3, chosen_pdf, param_names)
+helpers.run_tests_waves(df_0, 0, chosen_pdf, param_names)
+helpers.run_tests_waves(df_1, 1, chosen_pdf, param_names)
+helpers.run_tests_waves(df_2, 2, chosen_pdf, param_names)
+helpers.run_tests_waves(df_3, 3, chosen_pdf, param_names)

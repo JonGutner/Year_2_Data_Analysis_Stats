@@ -63,7 +63,7 @@ def run_tests_df(data_frames, chosen_pdf, param_names, folder):
 # ----------------------------
 # Updated run_tests_waves with DC offset
 # ----------------------------
-def run_tests_waves(df, chosen_pdf, param_names):
+def run_tests_waves(df, i, chosen_pdf, param_names):
     """
     Perform MLE fit for a single dataset (df) and print/plot results.
     Handles standard PDFs and sine_with_phase with DC offset.
@@ -95,7 +95,7 @@ def run_tests_waves(df, chosen_pdf, param_names):
         outputer.print_results_waves(t, y, result, param_names, pdf=chosen_pdf)
 
         # Show fit using original time array
-        outputer.show_fit(y, plot_pdf, result["params"], t=t, title="Sine Fit with DC Offset")
+        outputer.show_fit(y, plot_pdf, result["params"], t=t, title=f"Sine Fit - Thermistor {i}")
 
     else:
         # --- Standard PDFs ---

@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Bux fixes and transportation of the data analysis to Year_2_stats runner.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Added data analysis for first four thermistors.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_Lab/data_management.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/data_management.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/estimators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/helpers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Year_2_Stats/lab_stats.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/lab_stats.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/outputer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,11 +53,12 @@
     "Python tests.Python tests for tests.TestMLE.test_lorentzian.executor": "Run",
     "Python tests.Python tests for tests.TestMLE.test_poisson.executor": "Run",
     "Python tests.Python tests in tests.py.executor": "Run",
+    "Python.data_management.executor": "Run",
     "Python.estimators.executor": "Run",
     "Python.fourier_transform.executor": "Run",
     "Python.lab_stats.executor": "Run",
     "Python.load_dataset.executor": "Run",
-    "Python.outputer.executor": "Run",
+    "Python.outputer.executor": "Debug",
     "Python.pdfs.executor": "Run",
     "Python.plot_vals.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -315,7 +318,15 @@
       <option name="project" value="LOCAL" />
       <updated>1762812650284</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Added data analysis for first four thermistors.">
+      <option name="closed" value="true" />
+      <created>1762813714923</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1762813714923</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -342,6 +353,7 @@
     <MESSAGE value="Bug fixed and improved usability." />
     <MESSAGE value="Delete unnecessary class." />
     <MESSAGE value="Bux fixes and transportation of the data analysis to Year_2_stats runner." />
-    <option name="LAST_COMMIT_MESSAGE" value="Bux fixes and transportation of the data analysis to Year_2_stats runner." />
+    <MESSAGE value="Added data analysis for first four thermistors." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added data analysis for first four thermistors." />
   </component>
 </project>

@@ -2,7 +2,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
-from Year_2_Stats import pdfs, estimators
+from Year_2_Stats import estimators
 
 def print_results(name, result, param_names=None, data=None, pdf=None):
     print(f"\nResults for {name}:")
@@ -44,9 +44,6 @@ def show_fit(data, pdf, params, t=None, bins=50, title="MLE Fit", save=True, sho
     Plot histogram + fitted PDF/model.
     For sine waves with DC offset, uses provided t array.
     """
-    import matplotlib.pyplot as plt
-    import numpy as np
-    import os
 
     fig, ax = plt.subplots()
 
