@@ -15,12 +15,9 @@ def load_data(path):
     return timestamp, output_voltage, output_current, thermistor_temperatures, comments
 
 def send_data():
-    data_path = Path(__file__).resolve().parent.parent / "Waves_Stat_Folder" / "Final_test.csv"
+    data_path = Path(__file__).resolve().parent.parent / "Waves_Stat_Folder" / "steady_state_2.csv"
 
     timestamp, output_voltage, output_current, thermistor_temperatures, comments = load_data(data_path)
-
-    print(timestamp)
-    print(thermistor_temperatures[:, 0])
 
     plt.title("Plot of Thermistors 0-3")
     plt.plot(timestamp, thermistor_temperatures[:, 0], c='r', label="Therm. 0")

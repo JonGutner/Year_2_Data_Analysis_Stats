@@ -1,4 +1,5 @@
 #Main method where all the setups are performed.
+import numpy as np
 from Year_2_Stats import helpers, pdfs
 from Waves_Lab import data_management
 
@@ -34,7 +35,6 @@ param_names = ["amplitude", "phase", "c"]
 
 # Load data for Waves Experiment
 df_0, df_1, df_2, df_3 = data_management.send_data()
-# print(df_0)
 
 # -----------------------------
 # Run tests
@@ -47,22 +47,22 @@ err_a = []
 err_p = []
 
 results, errs = helpers.run_tests_waves(df_0, 0, chosen_pdf, param_names)
-amplitudes.append(results[0])
+amplitudes.append(np.abs(results[0]))
 phases.append(results[1])
 err_a.append(errs[0])
 err_p.append(errs[1])
 results, errs = helpers.run_tests_waves(df_1, 1, chosen_pdf, param_names)
-amplitudes.append(results[0])
+amplitudes.append(np.abs(results[0]))
 phases.append(results[1])
 err_a.append(errs[0])
 err_p.append(errs[1])
 results, errs = helpers.run_tests_waves(df_2, 2, chosen_pdf, param_names)
-amplitudes.append(results[0])
+amplitudes.append(np.abs(results[0]))
 phases.append(results[1])
 err_a.append(errs[0])
 err_p.append(errs[1])
 results, errs = helpers.run_tests_waves(df_3, 3, chosen_pdf, param_names)
-amplitudes.append(results[0])
+amplitudes.append(np.abs(results[0]))
 phases.append(results[1])
 err_a.append(errs[0])
 err_p.append(errs[1])

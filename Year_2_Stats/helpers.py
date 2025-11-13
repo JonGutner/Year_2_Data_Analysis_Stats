@@ -87,7 +87,6 @@ def run_tests_waves(df, i, chosen_pdf, param_names):
 
         # Perform MLE
         result = estimators.mle_fit_waves(y, sine_nll, init_params=init_params, method="BFGS", is_pdf=False)
-        print("=====>", result)
 
         # Plot function including DC offset
         plot_pdf = lambda x, amplitude, phase, offset: pdfs.sine_with_phase(x, amplitude, phase, offset)
@@ -104,7 +103,7 @@ def run_waves_plots(amplitude, phase, err_a, err_p):
     d = 0.005
     spacing = [0, d, 2 * d, 3 * d]
 
-    params_a = [.5, -1, 0]
+    params_a = [amplitude[0], -1, 0]
     popt_a, pcov_a = estimators.amplitude_fit_waves(spacing, amplitude, params_a)
     y_model = pdfs.amplitude_waves(spacing, *popt_a)
     outputer.show_thermistor_param(spacing, amplitude, y_model, err_a, who="Amplitudes", title="Amplitude Graph of Thermistors")
