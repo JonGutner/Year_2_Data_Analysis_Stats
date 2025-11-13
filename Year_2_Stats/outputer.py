@@ -21,8 +21,8 @@ def print_results(name, result, param_names=None, data=None, pdf=None):
         print(f"  Chi2/dof = {gof['chi2']:.2f}/{gof['dof']} "
               f"(p = {gof['p_value']:.3f})")
 
-def print_results_waves(x, y, result, param_names=None, pdf=None):
-    print(f"\nResults for {y}:")
+def print_results_waves(x, y, result, i, param_names=None, pdf=None):
+    print(f"\nResults for Thermistor {i}:")
     for i, val in enumerate(result["params"]):
         name_str = param_names[i] if param_names else f"param{i}"
         fisher_err = result["fisher_errors"][i]

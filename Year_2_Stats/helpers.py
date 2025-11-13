@@ -92,7 +92,7 @@ def run_tests_waves(df, i, chosen_pdf, param_names):
         plot_pdf = lambda x, amplitude, phase, offset: pdfs.sine_with_phase(x, amplitude, phase, offset)
 
         # Print results
-        outputer.print_results_waves(t, y, result, param_names, pdf=chosen_pdf)
+        outputer.print_results_waves(t, y, result, i, param_names, pdf=chosen_pdf)
 
         # Show fit using original time array
         outputer.show_fit_waves(y, plot_pdf, result["params"], t=t, title=f"Sine Fit - Thermistor {i}")

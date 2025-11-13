@@ -34,7 +34,7 @@ param_names = ["amplitude", "phase", "c"]
 
 # Load data for Waves Experiment
 df_0, df_1, df_2, df_3 = data_management.send_data()
-print(df_0)
+# print(df_0)
 
 # -----------------------------
 # Run tests
