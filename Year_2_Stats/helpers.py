@@ -1,7 +1,6 @@
 #Contains helper methods
 import numpy as np
 import glob, os
-import matplotlib as plt
 import pandas as pd
 from Year_2_Stats import estimators, outputer, pdfs
 
@@ -74,31 +73,29 @@ def run_tests_waves(df, i, chosen_pdf, param_names, j):
     y = df.iloc[:, 1].dropna().to_numpy()
 
     # --- Sine-wave with DC offset ---
-    if chosen_pdf == pdfs.sine_with_phase:
-        # Residual-based negative log-likelihood including DC offset
-        def sine_nll(params):
-            amplitude, phase, offset = params
-            model = pdfs.sine_with_phase(t, amplitude, phase, offset)
-            residuals = y - model
-            sigma = 1.0  # assumed measurement error
-            return 0.5 * np.sum((residuals / sigma) ** 2)
+    def sine_nll(params):
+        amplitude, phase, offset = params
+        model = chosen_pdf(t, amplitude, phase, offset)
+        residuals = y - model
+        sigma = 1.0  # assumed measurement error
+        return 0.5 * np.sum((residuals / sigma) ** 2)
 
-        # Initial guess: amplitude ~ max-min, phase ~0, offset ~ mean(y)
-        init_params = [0.5*(np.max(y)-np.min(y)), np.pi/2, np.mean(y)]
+    # Initial guess: amplitude ~ max-min, phase ~0, offset ~ mean(y)
+    init_params = [0.5*(np.max(y)-np.min(y)), np.pi/2, np.mean(y)]
 
-        # Perform MLE
-        result = estimators.mle_fit_waves(y, sine_nll, init_params=init_params, method="BFGS", is_pdf=False)
+    # Perform MLE
+    result = estimators.mle_fit_waves(y, sine_nll, init_params=init_params, method="BFGS", is_pdf=False)
 
-        # Plot function including DC offset
-        plot_pdf = lambda x, amplitude, phase, offset: pdfs.sine_with_phase(x, amplitude, phase, offset)
+    # Plot function including DC offset
+    plot_pdf = lambda x, amplitude, phase, offset: chosen_pdf(x, amplitude, phase, offset)
 
-        # Print results
-        outputer.print_results_waves(t, y, result, i, param_names, pdf=chosen_pdf)
+    # Print results
+    outputer.print_results_waves(t, y, result, i, param_names, pdf=chosen_pdf)
 
-        # Show fit using original time array
-        outputer.show_fit_waves(y, plot_pdf, result["params"], j, t=t, title=f"Therm_{i}")
+    # Show fit using original time array
+    outputer.show_fit_waves(y, plot_pdf, result["params"], j, t=t, title=f"Therm_{i}")
 
-        return result["params"], result["fisher_errors"]
+    return result["params"], result["fisher_errors"]
 
 def run_waves_plots(packages):
     y_models_a = []
@@ -167,7 +164,5 @@ def guess_initial_params(data, pdf):
         return [np.median(data), q75 - q25]
     elif pdf == pdfs.uniform_pdf:
         return [np.min(data), np.max(data)]
-    elif pdf == pdfs.sine_with_phase:
-        return [10, 0.1, 30]
     else:
         raise ValueError("No guess implemented for this PDF")

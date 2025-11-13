@@ -166,8 +166,7 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
         err_a = package[2]
         y_model_a = y_models_a[i]
 
-        # ax.scatter(spacing, amplitude, c=colors[i])
-        ax.errorbar(spacing, amplitude, yerr=err_a, c=colors[i],
+        ax.errorbar(spacing, amplitude, yerr=err_a, c=colors[i], linestyle=None,
                     capsize=4, label=f"Frequencies {frequencies[i]}s")
 
         # Plot fitted model
@@ -200,8 +199,7 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
         err_p = package[3]
         y_model_p = y_models_p[i]
 
-        # ax.scatter(spacing, phase, c=colors[i])
-        ax.errorbar(spacing, phase, yerr=err_p, c=colors[i], capsize=4,
+        ax.errorbar(spacing, phase, yerr=err_p, c=colors[i], capsize=4,linestyle=None,
                     label=f"Frequencies {frequencies[i]}s")
 
         # Plot fitted model
