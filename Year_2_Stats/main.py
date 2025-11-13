@@ -41,7 +41,30 @@ df_0, df_1, df_2, df_3 = data_management.send_data()
 # helpers.run_tests_pdf(data_frames, chosen_pdf, param_names, data_folder)
 
 # Run tests for Waves Experiment
-helpers.run_tests_waves(df_0, 0, chosen_pdf, param_names)
-helpers.run_tests_waves(df_1, 1, chosen_pdf, param_names)
-helpers.run_tests_waves(df_2, 2, chosen_pdf, param_names)
-helpers.run_tests_waves(df_3, 3, chosen_pdf, param_names)
+amplitudes = []
+phases = []
+err_a = []
+err_p = []
+
+results, errs = helpers.run_tests_waves(df_0, 0, chosen_pdf, param_names)
+amplitudes.append(results[0])
+phases.append(results[1])
+err_a.append(errs[0])
+err_p.append(errs[1])
+results, errs = helpers.run_tests_waves(df_1, 1, chosen_pdf, param_names)
+amplitudes.append(results[0])
+phases.append(results[1])
+err_a.append(errs[0])
+err_p.append(errs[1])
+results, errs = helpers.run_tests_waves(df_2, 2, chosen_pdf, param_names)
+amplitudes.append(results[0])
+phases.append(results[1])
+err_a.append(errs[0])
+err_p.append(errs[1])
+results, errs = helpers.run_tests_waves(df_3, 3, chosen_pdf, param_names)
+amplitudes.append(results[0])
+phases.append(results[1])
+err_a.append(errs[0])
+err_p.append(errs[1])
+
+helpers.run_waves_plots(amplitudes, phases, err_a, err_p)

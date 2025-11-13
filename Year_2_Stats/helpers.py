@@ -87,6 +87,7 @@ def run_tests_waves(df, i, chosen_pdf, param_names):
 
         # Perform MLE
         result = estimators.mle_fit_waves(y, sine_nll, init_params=init_params, method="BFGS", is_pdf=False)
+        print("=====>", result)
 
         # Plot function including DC offset
         plot_pdf = lambda x, amplitude, phase, offset: pdfs.sine_with_phase(x, amplitude, phase, offset)
@@ -97,15 +98,21 @@ def run_tests_waves(df, i, chosen_pdf, param_names):
         # Show fit using original time array
         outputer.show_fit_waves(y, plot_pdf, result["params"], t=t, title=f"Sine Fit - Thermistor {i}")
 
-    else:
-        # --- Standard PDFs ---
-        data = df.iloc[:, 1].dropna().to_numpy()
-        nll = lambda params: -np.sum(np.log(np.clip(chosen_pdf(data, *params), 1e-12, None)))
-        init_params = None
-        result = estimators.mle_fit_waves(data, nll, init_params=init_params)
+        return result["params"], result["fisher_errors"]
 
-        outputer.print_results("Data", result, param_names, data=data, pdf=chosen_pdf)
-        outputer.show_fit_waves(data, chosen_pdf, result["params"], title="PDF Fit")
+def run_waves_plots(amplitude, phase, err_a, err_p):
+    d = 0.005
+    spacing = [0, d, 2 * d, 3 * d]
+
+    params_a = [.5, -1, 0]
+    popt_a, pcov_a = estimators.amplitude_fit_waves(spacing, amplitude, params_a)
+    y_model = pdfs.amplitude_waves(spacing, *popt_a)
+    outputer.show_thermistor_param(spacing, amplitude, y_model, err_a, who="Amplitudes", title="Amplitude Graph of Thermistors")
+
+    params_p = [1.5, 0]
+    popt_p, pcov_p = estimators.phase_fit_waves(spacing, phase, params_p)
+    y_model = pdfs.phase_waves(spacing, *popt_p)
+    outputer.show_thermistor_param(spacing, phase, y_model, err_p, who="Phases", title="Phase Graph of Thermistors")
 
 def guess_initial_params(data, pdf):
     mean = np.mean(data)

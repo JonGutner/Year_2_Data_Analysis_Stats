@@ -1,10 +1,10 @@
 #Contains the different methods that perform estimation operations
 import numpy as np
-from scipy.optimize import minimize
+from scipy.optimize import minimize, curve_fit
 from scipy.stats import chi2
 import numdifftools as nd
 from scipy.linalg import pinvh
-from Year_2_Stats import helpers
+from Year_2_Stats import helpers, pdfs
 
 def mle_fit_pdf(data, pdf, init_params=None, method="Nelder-Mead"):
     """
@@ -146,3 +146,9 @@ def goodness_of_fit(data, pdf, params, bins=50):
     p_val = 1 - chi2.cdf(chi2_val, dof)
 
     return {"chi2": chi2_val, "dof": dof, "p_value": p_val}
+
+def amplitude_fit_waves(spread, amplitude, guess_vals):
+    return curve_fit(pdfs.amplitude_waves, spread, amplitude, guess_vals)
+
+def phase_fit_waves(spread, phase, guess_vals):
+    return curve_fit(pdfs.phase_waves, spread, phase, guess_vals)

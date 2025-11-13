@@ -152,3 +152,31 @@ def show_fit_waves(data, pdf, params, t=None, bins=50, title="MLE Fit", save=Tru
         plt.show()
 
     plt.close(fig)
+
+def show_thermistor_param(spacing, y, y_model, err, who="Amplitudes", title="Amplitude Graph of Thermistors", save=True, show=False):
+    fig, ax = plt.subplots()
+
+    ax.scatter(spacing, y, c="r", label=who)
+    ax.errorbar(spacing, y, yerr=err, fmt='o', ecolor='black', capsize=4)
+
+
+    # Plot fitted model
+    ax.plot(spacing, y_model, "b", label="Fitted Model")
+
+    ax.set_title(title)
+    ax.legend()
+
+    # Save plot
+    if save:
+        desktop = os.path.join(os.path.expanduser("~"), "Desktop")
+        out_dir = os.path.join(desktop, "StatsPlots")
+        os.makedirs(out_dir, exist_ok=True)
+        safe_title = title.replace(" ", "_").replace("/", "_")
+        out_path = os.path.join(out_dir, f"{safe_title}.png")
+        fig.savefig(out_path, dpi=150, bbox_inches="tight")
+        print(f"[plot saved] {out_path}")
+
+    if show:
+        plt.show()
+
+    plt.close(fig)
