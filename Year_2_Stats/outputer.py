@@ -106,7 +106,7 @@ def show_fit_pdf(data, pdf, params, folder_suffix="", bins=50, title="MLE Fit", 
 # ----------------------------
 # Updated show_fit supporting DC offset
 # ----------------------------
-def show_fit_waves(data, pdf, params, t=None, bins=50, title="MLE Fit", save=True, show=False):
+def show_fit_waves(data, pdf, params, j, t=None, bins=50, title="MLE Fit", save=True, show=False):
     """
     Plot histogram + fitted PDF/model.
     For sine waves with DC offset, uses provided t array.
@@ -144,7 +144,7 @@ def show_fit_waves(data, pdf, params, t=None, bins=50, title="MLE Fit", save=Tru
         out_dir = os.path.join(desktop, "StatsPlots")
         os.makedirs(out_dir, exist_ok=True)
         safe_title = title.replace(" ", "_").replace("/", "_")
-        out_path = os.path.join(out_dir, f"{safe_title}.png")
+        out_path = os.path.join(out_dir, f"{safe_title}_num_{j}.png")
         fig.savefig(out_path, dpi=150, bbox_inches="tight")
         print(f"[plot saved] {out_path}")
 

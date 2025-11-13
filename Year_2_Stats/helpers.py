@@ -64,7 +64,7 @@ def run_tests_pdf(data_frames, chosen_pdf, param_names, folder):
 # ----------------------------
 # Updated run_tests_waves with DC offset
 # ----------------------------
-def run_tests_waves(df, i, chosen_pdf, param_names):
+def run_tests_waves(df, i, chosen_pdf, param_names, j):
     """
     Perform MLE fit for a single dataset (df) and print/plot results.
     Handles standard PDFs and sine_with_phase with DC offset.
@@ -96,7 +96,7 @@ def run_tests_waves(df, i, chosen_pdf, param_names):
         outputer.print_results_waves(t, y, result, i, param_names, pdf=chosen_pdf)
 
         # Show fit using original time array
-        outputer.show_fit_waves(y, plot_pdf, result["params"], t=t, title=f"Sine Fit - Thermistor {i}")
+        outputer.show_fit_waves(y, plot_pdf, result["params"], j, t=t, title=f"Therm_{i}")
 
         return result["params"], result["fisher_errors"]
 
@@ -123,28 +123,28 @@ def run_waves_plots(packages):
 
     outputer.show_thermistor_param(spacing, packages, y_models_a, y_models_p)
 
-def get_ampli_phase_err_waves(df_0, df_1, df_2, df_3, chosen_pdf, param_names):
+def get_ampli_phase_err_waves(df_0, df_1, df_2, df_3, chosen_pdf, param_names, j):
     amplitudes = []
     phases = []
     err_a = []
     err_p = []
 
-    results, errs = run_tests_waves(df_0, 0, chosen_pdf, param_names)
+    results, errs = run_tests_waves(df_0, 0, chosen_pdf, param_names, j)
     amplitudes.append(np.abs(results[0]))
     phases.append(results[1])
     err_a.append(errs[0])
     err_p.append(errs[1])
-    results, errs = run_tests_waves(df_1, 1, chosen_pdf, param_names)
+    results, errs = run_tests_waves(df_1, 1, chosen_pdf, param_names, j)
     amplitudes.append(np.abs(results[0]))
     phases.append(results[1])
     err_a.append(errs[0])
     err_p.append(errs[1])
-    results, errs = run_tests_waves(df_2, 2, chosen_pdf, param_names)
+    results, errs = run_tests_waves(df_2, 2, chosen_pdf, param_names, j)
     amplitudes.append(np.abs(results[0]))
     phases.append(results[1])
     err_a.append(errs[0])
     err_p.append(errs[1])
-    results, errs = run_tests_waves(df_3, 3, chosen_pdf, param_names)
+    results, errs = run_tests_waves(df_3, 3, chosen_pdf, param_names, j)
     amplitudes.append(np.abs(results[0]))
     phases.append(results[1])
     err_a.append(errs[0])
