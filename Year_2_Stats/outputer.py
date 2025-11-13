@@ -23,7 +23,7 @@ def print_results(name, result, param_names=None, data=None, pdf=None):
 
 def print_results_waves(x, y, result, i, j, param_names=None, pdf=None):
     periods = [15, 20, 30, 60]
-    print(f"\nResults for Thermistor {i} & Period {periods[j]}s:")
+    print(f"\nResults for Thermistor {i} & Period {periods[j]} s:")
     for i, val in enumerate(result["params"]):
         name_str = param_names[i] if param_names else f"param{i}"
         fisher_err = result["fisher_errors"][i]
