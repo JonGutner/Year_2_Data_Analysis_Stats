@@ -22,10 +22,12 @@ def send_data():
     print(timestamp)
     print(thermistor_temperatures[:, 0])
 
-    plt.plot(timestamp, thermistor_temperatures[:, 0], c='r')
-    plt.plot(timestamp, thermistor_temperatures[:, 1], c='green')
-    plt.plot(timestamp, thermistor_temperatures[:, 2], c='orange')
-    plt.plot(timestamp, thermistor_temperatures[:, 3], c='b')
+    plt.title("Plot of Thermistors 0-3")
+    plt.plot(timestamp, thermistor_temperatures[:, 0], c='r', label="Therm. 0")
+    plt.plot(timestamp, thermistor_temperatures[:, 1], c='green', label="Therm. 1")
+    plt.plot(timestamp, thermistor_temperatures[:, 2], c='orange', label="Therm. 2")
+    plt.plot(timestamp, thermistor_temperatures[:, 3], c='b', label="Therm. 3")
+    plt.legend()
     plt.show()
 
     df_0 = pd.DataFrame({

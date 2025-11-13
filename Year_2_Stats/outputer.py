@@ -122,7 +122,7 @@ def show_fit_waves(data, pdf, params, t=None, bins=50, title="MLE Fit", save=Tru
             if lo == hi:
                 lo -= 1.0
                 hi += 1.0
-        x = np.linspace(lo, hi, 500)
+        x = np.linspace(lo, hi, 5000)
     else:
         x = t
 
@@ -130,7 +130,7 @@ def show_fit_waves(data, pdf, params, t=None, bins=50, title="MLE Fit", save=Tru
     y_model = pdf(x, *params)
 
     # Plot data
-    ax.scatter(t if t is not None else x, data, color='blue', s=10, alpha=0.5, label="Data")
+    ax.scatter(t if t is not None else x, data, s = 3, color='blue', alpha=0.5, label="Data")
 
     # Plot fitted model
     ax.plot(x, y_model, "r-", label="Fitted Model")
