@@ -21,8 +21,9 @@ def print_results(name, result, param_names=None, data=None, pdf=None):
         print(f"  Chi2/dof = {gof['chi2']:.2f}/{gof['dof']} "
               f"(p = {gof['p_value']:.3f})")
 
-def print_results_waves(x, y, result, i, param_names=None, pdf=None):
-    print(f"\nResults for Thermistor {i}:")
+def print_results_waves(x, y, result, i, j, param_names=None, pdf=None):
+    periods = [15, 20, 30, 60]
+    print(f"\nResults for Thermistor {i} & Period {periods[j]}s:")
     for i, val in enumerate(result["params"]):
         name_str = param_names[i] if param_names else f"param{i}"
         fisher_err = result["fisher_errors"][i]
@@ -140,11 +141,12 @@ def show_fit_waves(data, pdf, params, j, t=None, bins=50, title="MLE Fit", save=
 
     # Save plot
     if save:
+        periods = [15, 20, 30, 60]
         desktop = os.path.join(os.path.expanduser("~"), "Desktop")
         out_dir = os.path.join(desktop, "StatsPlots")
         os.makedirs(out_dir, exist_ok=True)
         safe_title = title.replace(" ", "_").replace("/", "_")
-        out_path = os.path.join(out_dir, f"{safe_title}_num_{j}.png")
+        out_path = os.path.join(out_dir, f"{safe_title}_num_{periods[j]}.png")
         fig.savefig(out_path, dpi=150, bbox_inches="tight")
         print(f"[plot saved] {out_path}")
 

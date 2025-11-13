@@ -90,7 +90,7 @@ def run_tests_waves(df, i, chosen_pdf, param_names, j):
     plot_pdf = lambda x, amplitude, phase, offset: chosen_pdf(x, amplitude, phase, offset)
 
     # Print results
-    outputer.print_results_waves(t, y, result, i, param_names, pdf=chosen_pdf)
+    outputer.print_results_waves(t, y, result, i, j, param_names, pdf=chosen_pdf)
 
     # Show fit using original time array
     outputer.show_fit_waves(y, plot_pdf, result["params"], j, t=t, title=f"Therm_{i}")
