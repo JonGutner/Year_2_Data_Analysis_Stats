@@ -5,7 +5,7 @@ from Waves_Lab import data_management
 
 # User settings
 data_folder = "Waves_Stat_Folder"        # <--- change this to switch datasets
-chosen_pdf = pdfs.sine_with_phase    # <--- change to exponential, poisson_pmf, etc.
+# chosen_pdf = pdfs.sine_with_phase    # <--- change to exponential, poisson_pmf, etc.
 
 # Parameter names for all PDFs (comment/uncomment as needed)
 # For Gaussian
@@ -49,13 +49,13 @@ df_0_4, df_1_4, df_2_4, df_3_4 = data_management.send_data(data_name_4)
 
 # Run tests for Waves Experiment
 amplitudes_1, phases_1, err_a_1, err_p_1 = (helpers.get_ampli_phase_err_waves
-                                    (df_0_1, df_1_1, df_2_1, df_3_1, chosen_pdf, param_names, 0))
+                                    (df_0_1, df_1_1, df_2_1, df_3_1, pdfs.sine_with_phase_15, param_names, 0))
 amplitudes_2, phases_2, err_a_2, err_p_2 = (helpers.get_ampli_phase_err_waves
-                                    (df_0_2, df_1_2, df_2_2, df_3_2, chosen_pdf, param_names, 1))
+                                    (df_0_2, df_1_2, df_2_2, df_3_2, pdfs.sine_with_phase_20, param_names, 1))
 amplitudes_3, phases_3, err_a_3, err_p_3 = (helpers.get_ampli_phase_err_waves
-                                    (df_0_3, df_1_3, df_2_3, df_3_3, chosen_pdf, param_names, 2))
+                                    (df_0_3, df_1_3, df_2_3, df_3_3, pdfs.sine_with_phase_30, param_names, 2))
 amplitudes_4, phases_4, err_a_4, err_p_4 = (helpers.get_ampli_phase_err_waves
-                                    (df_0_4, df_1_4, df_2_4, df_3_4, chosen_pdf, param_names, 3))
+                                    (df_0_4, df_1_4, df_2_4, df_3_4, pdfs.sine_with_phase_60, param_names, 3))
 
 package_0 = [amplitudes_1, phases_1, err_a_1, err_p_1]
 package_1 = [amplitudes_2, phases_2, err_a_2, err_p_2]
