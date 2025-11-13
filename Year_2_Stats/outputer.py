@@ -152,17 +152,63 @@ def show_fit_waves(data, pdf, params, t=None, bins=50, title="MLE Fit", save=Tru
         plt.show()
 
     plt.close(fig)
+#spacing, packages, y_models_a, y_models_p
+def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, show=False):
+    #Amplitude
+    fig, ax = plt.subplots()
+    colors = ['red', 'green', 'blue', 'orange']
+    frequencies = [15, 20, 30, 60]
+    title = "Amplitude Graphs for Thermistors 0-3"
 
-def show_thermistor_param(spacing, y, y_model, err, who="Amplitudes", title="Amplitude Graph of Thermistors", save=True, show=False):
+    for i in range(4):
+        package = packages[f"package_{i}"]
+        amplitude = package[0]
+        err_a = package[2]
+        y_model_a = y_models_a[i]
+
+        # ax.scatter(spacing, amplitude, c=colors[i])
+        ax.errorbar(spacing, amplitude, yerr=err_a, c=colors[i],
+                    capsize=4, label=f"Frequencies {frequencies[i]}s")
+
+        # Plot fitted model
+        ax.plot(spacing, y_model_a, c=colors[i])
+
+        ax.set_title(title)
+        ax.legend()
+
+    # Save plot
+    if save:
+        desktop = os.path.join(os.path.expanduser("~"), "Desktop")
+        out_dir = os.path.join(desktop, "StatsPlots")
+        os.makedirs(out_dir, exist_ok=True)
+        safe_title = title.replace(" ", "_").replace("/", "_")
+        out_path = os.path.join(out_dir, f"{safe_title}.png")
+        fig.savefig(out_path, dpi=150, bbox_inches="tight")
+        print(f"[plot saved] {out_path}")
+
+    if show:
+        plt.show()
+
+    plt.close(fig)
+
+    title = "Phase Graphs for Thermistors 0-3"
     fig, ax = plt.subplots()
 
-    ax.errorbar(spacing, y, yerr=err, fmt='o', ecolor='black', capsize=4, label=who)
+    for i in range(4):
+        package = packages[f"package_{i}"]
+        phase = package[1]
+        err_p = package[3]
+        y_model_p = y_models_p[i]
 
-    # Plot fitted model
-    ax.plot(spacing, y_model, "b", label="Fitted Model")
+        # ax.scatter(spacing, phase, c=colors[i])
+        ax.errorbar(spacing, phase, yerr=err_p, c=colors[i], capsize=4,
+                    label=f"Frequencies {frequencies[i]}s")
 
-    ax.set_title(title)
-    ax.legend()
+        # Plot fitted model
+        ax.plot(spacing, y_model_p, c=colors[i])
+
+        ax.set_title(title)
+        ax.legend()
 
     # Save plot
     if save:
