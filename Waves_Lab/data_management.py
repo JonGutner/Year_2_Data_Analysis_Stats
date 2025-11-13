@@ -14,8 +14,8 @@ def load_data(path):
 
     return timestamp, output_voltage, output_current, thermistor_temperatures, comments
 
-def send_data():
-    data_path = Path(__file__).resolve().parent.parent / "Waves_Stat_Folder" / "steady_state_2.csv"
+def send_data(data_name):
+    data_path = Path(__file__).resolve().parent.parent / "Waves_Stat_Folder" / data_name
 
     timestamp, output_voltage, output_current, thermistor_temperatures, comments = load_data(data_path)
 

@@ -32,7 +32,7 @@ def binomial_fixed_n(n):
 
 # ==Thermal Waves Experiment==
 def sine_with_phase(t, amplitude, phase, c):
-    return amplitude * np.sin(2*np.pi/10 * t - phase) + c
+    return amplitude * np.sin(2*np.pi/30 * t - phase) + c
 
 def phase_waves(x, m ,c):
     x = np.array(x, dtype=float)
@@ -40,4 +40,6 @@ def phase_waves(x, m ,c):
 
 def amplitude_waves(x, a, m ,c):
     x = np.array(x, dtype=float)
+    if a < 0:
+        return np.inf * np.ones_like(x)
     return a*np.exp(m*x) + c

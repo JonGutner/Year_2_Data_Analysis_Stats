@@ -1,6 +1,7 @@
 #Contains helper methods
 import numpy as np
 import glob, os
+import matplotlib as plt
 import pandas as pd
 from Year_2_Stats import estimators, outputer, pdfs
 
@@ -83,7 +84,7 @@ def run_tests_waves(df, i, chosen_pdf, param_names):
             return 0.5 * np.sum((residuals / sigma) ** 2)
 
         # Initial guess: amplitude ~ max-min, phase ~0, offset ~ mean(y)
-        init_params = [0.5*(np.max(y)-np.min(y)), 0.0, np.mean(y)]
+        init_params = [0.5*(np.max(y)-np.min(y)), np.pi/2, np.mean(y)]
 
         # Perform MLE
         result = estimators.mle_fit_waves(y, sine_nll, init_params=init_params, method="BFGS", is_pdf=False)
@@ -99,19 +100,55 @@ def run_tests_waves(df, i, chosen_pdf, param_names):
 
         return result["params"], result["fisher_errors"]
 
-def run_waves_plots(amplitude, phase, err_a, err_p):
-    d = 0.005
-    spacing = [0, d, 2 * d, 3 * d]
+def run_waves_plots(packages):
+    for i in range(4):
+        package = packages[f"package_{i}"]
+        amplitude = package[0]
+        phase = package[1]
+        err_a = package[2]
+        err_p = package[3]
 
-    params_a = [amplitude[0], -1, 0]
-    popt_a, pcov_a = estimators.amplitude_fit_waves(spacing, amplitude, params_a)
-    y_model = pdfs.amplitude_waves(spacing, *popt_a)
-    outputer.show_thermistor_param(spacing, amplitude, y_model, err_a, who="Amplitudes", title="Amplitude Graph of Thermistors")
+        d = 0.005
+        spacing = [0, d, 2 * d, 3 * d]
 
-    params_p = [1.5, 0]
-    popt_p, pcov_p = estimators.phase_fit_waves(spacing, phase, params_p)
-    y_model = pdfs.phase_waves(spacing, *popt_p)
-    outputer.show_thermistor_param(spacing, phase, y_model, err_p, who="Phases", title="Phase Graph of Thermistors")
+        params_a = [amplitude[0], -1, 0]
+        popt_a, pcov_a = estimators.amplitude_fit_waves(spacing, amplitude, params_a)
+        y_model = pdfs.amplitude_waves(spacing, *popt_a)
+        outputer.show_thermistor_param(spacing, amplitude, y_model, err_a, who="Amplitudes", title="Amplitude Graph of Thermistors")
+
+        # params_p = [1.5, 0]
+        # popt_p, pcov_p = estimators.phase_fit_waves(spacing, phase, params_p)
+        # y_model = pdfs.phase_waves(spacing, *popt_p)
+        # outputer.show_thermistor_param(spacing, phase, y_model, err_p, who="Phases", title="Phase Graph of Thermistors")
+
+def get_ampli_phase_err_waves(df_0, df_1, df_2, df_3, chosen_pdf, param_names):
+    amplitudes = []
+    phases = []
+    err_a = []
+    err_p = []
+
+    results, errs = run_tests_waves(df_0, 0, chosen_pdf, param_names)
+    amplitudes.append(np.abs(results[0]))
+    phases.append(results[1])
+    err_a.append(errs[0])
+    err_p.append(errs[1])
+    results, errs = run_tests_waves(df_1, 1, chosen_pdf, param_names)
+    amplitudes.append(np.abs(results[0]))
+    phases.append(results[1])
+    err_a.append(errs[0])
+    err_p.append(errs[1])
+    results, errs = run_tests_waves(df_2, 2, chosen_pdf, param_names)
+    amplitudes.append(np.abs(results[0]))
+    phases.append(results[1])
+    err_a.append(errs[0])
+    err_p.append(errs[1])
+    results, errs = run_tests_waves(df_3, 3, chosen_pdf, param_names)
+    amplitudes.append(np.abs(results[0]))
+    phases.append(results[1])
+    err_a.append(errs[0])
+    err_p.append(errs[1])
+
+    return amplitudes, phases, err_a, err_p
 
 def guess_initial_params(data, pdf):
     mean = np.mean(data)

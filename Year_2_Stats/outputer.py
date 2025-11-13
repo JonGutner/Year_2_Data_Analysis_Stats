@@ -156,9 +156,7 @@ def show_fit_waves(data, pdf, params, t=None, bins=50, title="MLE Fit", save=Tru
 def show_thermistor_param(spacing, y, y_model, err, who="Amplitudes", title="Amplitude Graph of Thermistors", save=True, show=False):
     fig, ax = plt.subplots()
 
-    ax.scatter(spacing, y, c="r", label=who)
-    ax.errorbar(spacing, y, yerr=err, fmt='o', ecolor='black', capsize=4)
-
+    ax.errorbar(spacing, y, yerr=err, fmt='o', ecolor='black', capsize=4, label=who)
 
     # Plot fitted model
     ax.plot(spacing, y_model, "b", label="Fitted Model")

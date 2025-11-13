@@ -34,37 +34,36 @@ param_names = ["amplitude", "phase", "c"]
 # data_frames = helpers.load_data(data_folder)
 
 # Load data for Waves Experiment
-df_0, df_1, df_2, df_3 = data_management.send_data()
+data_name_1 = "period_1.csv"
+df_0_1, df_1_1, df_2_1, df_3_1 = data_management.send_data(data_name_1)
+data_name_2 = "period_2.csv"
+df_0_2, df_1_2, df_2_2, df_3_2 = data_management.send_data(data_name_2)
+data_name_3 = "period_3.csv"
+df_0_3, df_1_3, df_2_3, df_3_3 = data_management.send_data(data_name_3)
+data_name_4 = "period_4.csv"
+df_0_4, df_1_4, df_2_4, df_3_4 = data_management.send_data(data_name_4)
 
 # -----------------------------
 # Run tests
 # helpers.run_tests_pdf(data_frames, chosen_pdf, param_names, data_folder)
 
 # Run tests for Waves Experiment
-amplitudes = []
-phases = []
-err_a = []
-err_p = []
+amplitudes_1, phases_1, err_a_1, err_p_1 = (helpers.get_ampli_phase_err_waves
+                                    (df_0_1, df_1_1, df_2_1, df_3_1, chosen_pdf, param_names))
+amplitudes_2, phases_2, err_a_2, err_p_2 = (helpers.get_ampli_phase_err_waves
+                                    (df_0_2, df_1_2, df_2_2, df_3_2, chosen_pdf, param_names))
+amplitudes_3, phases_3, err_a_3, err_p_3 = (helpers.get_ampli_phase_err_waves
+                                    (df_0_3, df_1_3, df_2_3, df_3_3, chosen_pdf, param_names))
+amplitudes_4, phases_4, err_a_4, err_p_4 = (helpers.get_ampli_phase_err_waves
+                                    (df_0_4, df_1_4, df_2_4, df_3_4, chosen_pdf, param_names))
 
-results, errs = helpers.run_tests_waves(df_0, 0, chosen_pdf, param_names)
-amplitudes.append(np.abs(results[0]))
-phases.append(results[1])
-err_a.append(errs[0])
-err_p.append(errs[1])
-results, errs = helpers.run_tests_waves(df_1, 1, chosen_pdf, param_names)
-amplitudes.append(np.abs(results[0]))
-phases.append(results[1])
-err_a.append(errs[0])
-err_p.append(errs[1])
-results, errs = helpers.run_tests_waves(df_2, 2, chosen_pdf, param_names)
-amplitudes.append(np.abs(results[0]))
-phases.append(results[1])
-err_a.append(errs[0])
-err_p.append(errs[1])
-results, errs = helpers.run_tests_waves(df_3, 3, chosen_pdf, param_names)
-amplitudes.append(np.abs(results[0]))
-phases.append(results[1])
-err_a.append(errs[0])
-err_p.append(errs[1])
+package_0 = [amplitudes_1, phases_1, err_a_1, err_p_1]
+package_1 = [amplitudes_2, phases_2, err_a_2, err_p_2]
+package_2 = [amplitudes_3, phases_3, err_a_3, err_p_3]
+package_3 = [amplitudes_4, phases_4, err_a_4, err_p_4]
+packages = {"package_0" : package_0,
+            "package_1" : package_1,
+            "package_2" : package_2,
+            "package_3" : package_3}
 
-helpers.run_waves_plots(amplitudes, phases, err_a, err_p)
+helpers.run_waves_plots(packages)
