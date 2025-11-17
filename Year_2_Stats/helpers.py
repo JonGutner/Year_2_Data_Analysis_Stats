@@ -100,27 +100,28 @@ def run_tests_waves(df, i, chosen_pdf, param_names, j):
 def run_waves_plots(packages):
     y_models_a = []
     y_models_p = []
-    d = 0.005
-    spacing = [0, d, 2 * d, 3 * d]
+    # d = 1
+    # spacing = [0, d, 2 * d, 3 * d]
+    spacing = [0, 1, 2, 3, 4, 5]
 
     for i in range(4):
         package = packages[f"package_{i}"]
         amplitude = package[0]
         phase = package[1]
-        err_a = package[2]
-        err_p = package[3]
+
+        # print ("======>", phase)
 
         params_a = [amplitude[0], -1, 0]
         popt_a, pcov_a = estimators.amplitude_fit_waves(spacing, amplitude, params_a)
         y_models_a.append(pdfs.amplitude_waves(spacing, *popt_a))
 
-        params_p = [1.5, 0]
+        params_p = [0.3, 0]
         popt_p, pcov_p = estimators.phase_fit_waves(spacing, phase, params_p)
         y_models_p.append(pdfs.phase_waves(spacing, *popt_p))
 
     outputer.show_thermistor_param(spacing, packages, y_models_a, y_models_p)
 
-def get_ampli_phase_err_waves(df_0, df_1, df_2, df_3, chosen_pdf, param_names, j):
+def get_ampli_phase_err_waves(df_0, df_1, df_2, df_3, df_4, df_5, chosen_pdf, param_names, j):
     amplitudes = []
     phases = []
     err_a = []
@@ -142,6 +143,19 @@ def get_ampli_phase_err_waves(df_0, df_1, df_2, df_3, chosen_pdf, param_names, j
     err_a.append(errs[0])
     err_p.append(errs[1])
     results, errs = run_tests_waves(df_3, 3, chosen_pdf, param_names, j)
+    amplitudes.append(np.abs(results[0]))
+    phases.append(results[1])
+    err_a.append(errs[0])
+    err_p.append(errs[1])
+
+    #EXTRA THERMISTORS:
+    results, errs = run_tests_waves(df_4, 4, chosen_pdf, param_names, j)
+    amplitudes.append(np.abs(results[0]))
+    phases.append(results[1])
+    err_a.append(errs[0])
+    err_p.append(errs[1])
+
+    results, errs = run_tests_waves(df_5, 5, chosen_pdf, param_names, j)
     amplitudes.append(np.abs(results[0]))
     phases.append(results[1])
     err_a.append(errs[0])

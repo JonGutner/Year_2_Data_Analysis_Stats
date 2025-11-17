@@ -22,7 +22,7 @@ def print_results(name, result, param_names=None, data=None, pdf=None):
               f"(p = {gof['p_value']:.3f})")
 
 def print_results_waves(x, y, result, i, j, param_names=None, pdf=None):
-    periods = [15, 20, 30, 60]
+    periods = np.array([15, 20, 30, 60])
     print(f"\nResults for Thermistor {i} & Period {periods[j]} s:")
     for i, val in enumerate(result["params"]):
         name_str = param_names[i] if param_names else f"param{i}"
@@ -141,7 +141,7 @@ def show_fit_waves(data, pdf, params, j, t=None, bins=50, title="MLE Fit", save=
 
     # Save plot
     if save:
-        periods = [15, 20, 30, 60]
+        periods = np.array([15, 20, 30, 60])
         desktop = os.path.join(os.path.expanduser("~"), "Desktop")
         out_dir = os.path.join(desktop, "StatsPlots")
         os.makedirs(out_dir, exist_ok=True)
@@ -159,7 +159,7 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
     #Amplitude
     fig, ax = plt.subplots()
     colors = ['red', 'green', 'blue', 'orange']
-    frequencies = [15, 20, 30, 60]
+    periods = np.array([15, 20, 30, 60])
     title = "Amplitude Graphs for Thermistors 0-3"
 
     for i in range(4):
@@ -168,8 +168,8 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
         err_a = package[2]
         y_model_a = y_models_a[i]
 
-        ax.errorbar(spacing, amplitude, yerr=err_a, c=colors[i], linestyle=None,
-                    capsize=4, label=f"Frequencies {frequencies[i]}s")
+        ax.errorbar(spacing, amplitude, yerr=err_a, c=colors[i], linestyle='None',
+                    fmt='none', capsize=4, label=f"Periods {periods[i]}s")
 
         # Plot fitted model
         ax.plot(spacing, y_model_a, c=colors[i])
@@ -201,8 +201,8 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
         err_p = package[3]
         y_model_p = y_models_p[i]
 
-        ax.errorbar(spacing, phase, yerr=err_p, c=colors[i], capsize=4,linestyle=None,
-                    label=f"Frequencies {frequencies[i]}s")
+        ax.errorbar(spacing, phase, yerr=err_p, c=colors[i], linestyle='None',
+                    fmt='none', capsize=4, label=f"Periods {periods[i]}s")
 
         # Plot fitted model
         ax.plot(spacing, y_model_p, c=colors[i])

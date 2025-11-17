@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Corrects saving mechanism for sine fits.">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Small adjustment (mostly a test).">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_Lab/data_management.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/data_management.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/outputer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,9 +25,27 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="new-fit" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="RESET_MODE" value="HARD" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;JonGutner&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/JonGutner/Year_2_Stats.git&quot;,
+    &quot;accountId&quot;: &quot;218c656b-0500-4d28-a794-1a5eb8300276&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -50,13 +71,14 @@
     &quot;Python tests.Python tests for tests.TestMLE.test_lorentzian.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests for tests.TestMLE.test_poisson.executor&quot;: &quot;Run&quot;,
     &quot;Python tests.Python tests in tests.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.data_management.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_management.executor&quot;: &quot;Debug&quot;,
     &quot;Python.estimators.executor&quot;: &quot;Run&quot;,
     &quot;Python.fourier_transform.executor&quot;: &quot;Run&quot;,
+    &quot;Python.helpers.executor&quot;: &quot;Debug&quot;,
     &quot;Python.lab_stats.executor&quot;: &quot;Run&quot;,
     &quot;Python.load_dataset.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.outputer.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.outputer.executor&quot;: &quot;Run&quot;,
     &quot;Python.pdfs.executor&quot;: &quot;Run&quot;,
     &quot;Python.plot_vals.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -67,27 +89,14 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/General_Waves_Data" />
       <recent name="$PROJECT_DIR$/Waves_Stat_Folder" />
-      <recent name="$PROJECT_DIR$/Waves_Lab_Data" />
+      <recent name="$PROJECT_DIR$/Waves_Stat_Folder/period_test" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/Waves_Lab_Data" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for tests.TestMLE">
-    <configuration name="Python tests for tests.TestMLE" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="StatsToolBox" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;tests.TestMLE&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager">
     <configuration name="Python tests for tests.TestMLE.test_binomial" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="StatsToolBox" />
       <option name="ENV_FILES" value="" />
@@ -165,11 +174,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for tests.TestMLE" />
-        <item itemvalue="Python tests.Python tests for tests.TestMLE.test_lorentzian" />
-        <item itemvalue="Python tests.Python tests for tests.TestMLE.test_binomial" />
+        <item itemvalue="Python tests.Python tests for tests.tests.TestMLE" />
         <item itemvalue="Python tests.Python tests for tests.TestMLE.test_poisson" />
+        <item itemvalue="Python tests.Python tests for tests.TestMLE.test_lorentzian" />
         <item itemvalue="Python tests.Python tests for tests.TestMLE.test_exponential" />
+        <item itemvalue="Python tests.Python tests for tests.TestMLE.test_binomial" />
       </list>
     </recent_temporary>
   </component>
@@ -332,7 +341,127 @@
       <option name="project" value="LOCAL" />
       <updated>1762865503033</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Updated Outputs for better readability.">
+      <option name="closed" value="true" />
+      <created>1763025689250</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1763025689250</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Updated Outputs for better readability.">
+      <option name="closed" value="true" />
+      <created>1763026534977</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1763026534977</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Added plots of the amplitudes and phases per spacing.">
+      <option name="closed" value="true" />
+      <created>1763031142590</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1763031142590</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Removed useless print statements.&#10;Made amplitude to always be positive.&#10;Changed positioning of data files.">
+      <option name="closed" value="true" />
+      <created>1763032277459</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1763032277459</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Temporary progress in creating plots that contain phase and amplitude relations for different frequencies.">
+      <option name="closed" value="true" />
+      <created>1763037787292</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1763037787292</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Temporary progress #2 in creating plots that contain phase and amplitude relations for different frequencies.">
+      <option name="closed" value="true" />
+      <created>1763042531772</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1763042531772</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Temporary Save (BUGS present)">
+      <option name="closed" value="true" />
+      <created>1763044764904</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1763044764904</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Added more readability in saving of the plots.">
+      <option name="closed" value="true" />
+      <created>1763045422807</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1763045422807</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Minor bux fixes.">
+      <option name="closed" value="true" />
+      <created>1763047571163</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1763047571163</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Fixed all bugs: Plots all 4 frequencies' phases and amplitudes together.">
+      <option name="closed" value="true" />
+      <created>1763050847772</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1763050847772</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Fixed all bugs: Plots all 4 frequencies' phases and amplitudes together.">
+      <option name="closed" value="true" />
+      <created>1763051125330</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1763051125330</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Better information provided on prints in console and saved plots.">
+      <option name="closed" value="true" />
+      <created>1763051943966</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1763051943966</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Better information provided on prints in console and saved plots.">
+      <option name="closed" value="true" />
+      <created>1763057639032</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1763057639032</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Better information provided on prints in console and saved plots.">
+      <option name="closed" value="true" />
+      <created>1763057739610</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1763057739610</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Small adjustment (mostly a test).">
+      <option name="closed" value="true" />
+      <created>1763058205501</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1763058205501</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -361,6 +490,17 @@
     <MESSAGE value="Bux fixes and transportation of the data analysis to Year_2_stats runner." />
     <MESSAGE value="Added data analysis for first four thermistors." />
     <MESSAGE value="Corrects saving mechanism for sine fits." />
-    <option name="LAST_COMMIT_MESSAGE" value="Corrects saving mechanism for sine fits." />
+    <MESSAGE value="Updated Outputs for better readability." />
+    <MESSAGE value="Added plots of the amplitudes and phases per spacing." />
+    <MESSAGE value="Removed useless print statements.&#10;Made amplitude to always be positive.&#10;Changed positioning of data files." />
+    <MESSAGE value="Temporary progress in creating plots that contain phase and amplitude relations for different frequencies." />
+    <MESSAGE value="Temporary progress #2 in creating plots that contain phase and amplitude relations for different frequencies." />
+    <MESSAGE value="Temporary Save (BUGS present)" />
+    <MESSAGE value="Added more readability in saving of the plots." />
+    <MESSAGE value="Minor bux fixes." />
+    <MESSAGE value="Fixed all bugs: Plots all 4 frequencies' phases and amplitudes together." />
+    <MESSAGE value="Better information provided on prints in console and saved plots." />
+    <MESSAGE value="Small adjustment (mostly a test)." />
+    <option name="LAST_COMMIT_MESSAGE" value="Small adjustment (mostly a test)." />
   </component>
 </project>

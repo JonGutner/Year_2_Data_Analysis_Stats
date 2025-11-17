@@ -24,6 +24,8 @@ def send_data(data_name):
     plt.plot(timestamp, thermistor_temperatures[:, 1], c='green', label="Therm. 1")
     plt.plot(timestamp, thermistor_temperatures[:, 2], c='orange', label="Therm. 2")
     plt.plot(timestamp, thermistor_temperatures[:, 3], c='b', label="Therm. 3")
+    plt.plot(timestamp, thermistor_temperatures[:, 4], c='cyan', label="Therm. 4")
+    plt.plot(timestamp, thermistor_temperatures[:, 5], c='purple', label="Therm. 4")
     plt.legend()
     plt.show()
 
@@ -39,5 +41,11 @@ def send_data(data_name):
     df_3 = pd.DataFrame({
         't': timestamp,
         'T': thermistor_temperatures[:, 3]})
+    df_4 = pd.DataFrame({
+        't': timestamp,
+        'T': thermistor_temperatures[:, 4]})
+    df_5 = pd.DataFrame({
+        't': timestamp,
+        'T': thermistor_temperatures[:, 5]})
 
-    return df_0, df_1, df_2, df_3
+    return df_0, df_1, df_2, df_3, df_4, df_5
