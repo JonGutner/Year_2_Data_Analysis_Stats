@@ -174,6 +174,7 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
         # Plot fitted model
         ax.plot(spacing, y_model_a, c=colors[i])
 
+        ax.set_yscale('log')
         ax.set_title(title)
         ax.legend()
 

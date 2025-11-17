@@ -100,9 +100,8 @@ def run_tests_waves(df, i, chosen_pdf, param_names, j):
 def run_waves_plots(packages):
     y_models_a = []
     y_models_p = []
-    # d = 1
-    # spacing = [0, d, 2 * d, 3 * d]
-    spacing = [0, 1, 2, 3, 4, 5]
+    d = 0.05
+    spacing = [0*d, 1*d, 2*d, 3*d, 4*d, 5*d]
 
     for i in range(4):
         package = packages[f"package_{i}"]
