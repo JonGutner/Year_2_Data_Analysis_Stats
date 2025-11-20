@@ -160,7 +160,7 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
     fig, ax = plt.subplots()
     colors = ['red', 'green', 'blue', 'orange']
     periods = np.array([15, 20, 30, 60])
-    title = "Amplitude Graphs for Thermistors 0-3"
+    title = "Amplitude Graphs for Thermistors 0-5"
 
     for i in range(4):
         package = packages[f"package_{i}"]
@@ -193,7 +193,7 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
 
     plt.close(fig)
 
-    title = "Phase Graphs for Thermistors 0-3"
+    title = "Phase Graphs for Thermistors 0-5"
     fig, ax = plt.subplots()
 
     for i in range(4):
@@ -225,3 +225,117 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
         plt.show()
 
     plt.close(fig)
+
+def find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages):
+    periods = np.array([15, 20, 30, 60])  # seconds
+    d = 0.005  # spacing increment (m)
+    spacing = np.array([0, d, 2*d, 3*d, 4*d, 5*d])  # distances (m)
+
+    for i in range(len(periods)):
+        # Unpack fit parameters and covariance matrices
+        popt_a = popts_a[i]
+        pcov_a = pcovs_a[i]
+        popt_p = popts_p[i]
+        pcov_p = pcovs_p[i]
+
+        perr_a = np.sqrt(np.diag(pcov_a))
+        perr_p = np.sqrt(np.diag(pcov_p))
+
+        a, m_a, c_a = popt_a
+        a_err, m_err_a, c_err_a = perr_a
+        m_p, c_p = popt_p
+        m_err_p, c_err_p = perr_p
+
+        # Print fits
+        print(f"\nFor thermistors of period {periods[i]} s, the fits are:")
+        print(f"Amplitude: ({a:.3f} ± {a_err:.3f}) * exp(({m_a:.3f} ± {m_err_a:.3f}) * x) + ({c_a:.3f} ± {c_err_a:.3f})")
+        print(f"Phase: ({m_p:.3f} ± {m_err_p:.3f}) * x + ({c_p:.3f} ± {c_err_p:.3f})")
+
+        package = packages[f"package_{i}"]
+        amplitude = package[0]
+        phase = package[1]
+        freq = 2*np.pi/periods[i]
+
+        diffusivity_a = []
+        diffusivity_p = []
+
+        for j in range(1, 6):
+            delta_a = np.log(amplitude[j] / amplitude[0])
+            delta_p = phase[j] - phase[0]
+
+            diffusivity_a.append((freq * (spacing[j]) ** 2) / (2 * (delta_a ** 2)))
+            diffusivity_p.append((freq * (spacing[j]) ** 2) / (2 * (delta_p ** 2)))
+
+        diffusivity_a = np.array(diffusivity_a)
+        diffusivity_p = np.array(diffusivity_p)
+
+        # Print diffusivity results
+        print("\nCalculated diffusivity values:")
+        print(f"From amplitude fits: {diffusivity_a}")
+        print(f"From phase fits: {diffusivity_p}")
+        print("----------------------")
+
+        find_diffusivity_pairwise(amplitude, phase, periods, spacing)
+
+def find_diffusivity_pairwise(amplitudes_list, phases_list, periods, spacing):
+    """
+    Calculate diffusivity from amplitude and phase data using all pairs of spacings.
+
+    Parameters:
+    -----------
+    amplitudes_list : list of np.array
+        Each element is an array of amplitudes [A0, A1, ...] for one period.
+    phases_list : list of np.array
+        Each element is an array of phases [phi0, phi1, ...] for one period.
+    periods : np.array
+        Array of periods (seconds) corresponding to each dataset.
+    spacing : np.array
+        Array of spacing values (meters), same length as amplitudes/phases.
+
+    Returns:
+    --------
+    D_amp_avg : np.array
+        Average diffusivity from amplitude for each period.
+    D_phase_avg : np.array
+        Average diffusivity from phase for each period.
+    """
+    D_amp_avg = []
+    D_phase_avg = []
+
+    for i in range(len(periods)):
+        freq = 2 * np.pi / periods[i]
+
+        D_amp_pairs = []
+        D_phase_pairs = []
+
+        n = len(spacing)
+        for j in range(n):
+            for k in range(j+1, n):
+                delta_x = spacing[k] - spacing[j]
+
+                # Amplitude-based diffusivity
+                delta_ln = np.log(amplitudes_list[k] / amplitudes_list[j])
+                if delta_ln != 0:
+                    D_amp_pairs.append(freq * delta_x**2 / (2 * delta_ln**2))
+
+                # Phase-based diffusivity
+                delta_phi = phases_list[k] - phases_list[j]
+                if delta_phi != 0:
+                    D_phase_pairs.append(freq * delta_x**2 / (2 * delta_phi**2))
+
+        # Convert to arrays
+        D_amp_pairs = np.array(D_amp_pairs)
+        D_phase_pairs = np.array(D_phase_pairs)
+
+        # Average over all pairs
+        D_amp_avg.append(np.mean(D_amp_pairs))
+        D_phase_avg.append(np.mean(D_phase_pairs))
+
+        # Print results
+        print(f"\nPeriod: {periods[i]} s")
+        print(f"Amplitude-based diffusivity (all pairs): {D_amp_pairs}")
+        print(f"Averaged D from amplitude: {np.mean(D_amp_pairs):.6e}")
+        print(f"Phase-based diffusivity (all pairs): {D_phase_pairs}")
+        print(f"Averaged D from phase: {np.mean(D_phase_pairs):.6e}")
+
+    return np.array(D_amp_avg), np.array(D_phase_avg)

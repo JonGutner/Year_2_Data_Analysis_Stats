@@ -100,6 +100,10 @@ def run_tests_waves(df, i, chosen_pdf, param_names, j):
 def run_waves_plots(packages):
     y_models_a = []
     y_models_p = []
+    popts_a = []
+    pcovs_a = []
+    popts_p = []
+    pcovs_p = []
     d = 0.05
     spacing = [0*d, 1*d, 2*d, 3*d, 4*d, 5*d]
 
@@ -112,13 +116,19 @@ def run_waves_plots(packages):
 
         params_a = [amplitude[0], -1, 0]
         popt_a, pcov_a = estimators.amplitude_fit_waves(spacing, amplitude, params_a)
+        popts_a.append(popt_a)
+        pcovs_a.append(pcov_a)
         y_models_a.append(pdfs.amplitude_waves(spacing, *popt_a))
 
         params_p = [0.3, 0]
         popt_p, pcov_p = estimators.phase_fit_waves(spacing, phase, params_p)
+        popts_p.append(popt_p)
+        pcovs_p.append(pcov_p)
         y_models_p.append(pdfs.phase_waves(spacing, *popt_p))
 
     outputer.show_thermistor_param(spacing, packages, y_models_a, y_models_p)
+
+    outputer.find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages)
 
 def get_ampli_phase_err_waves(df_0, df_1, df_2, df_3, df_4, df_5, chosen_pdf, param_names, j):
     amplitudes = []

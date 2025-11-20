@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Addition of more thermistors.&#10;Correction of phase graph, including normalisation.&#10;Correcting of frequency-&gt;period.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Log plot of the amplitudes.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Year_2_Stats/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/helpers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Year_2_Stats/outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/outputer.py" afterDir="false" />
@@ -467,7 +467,15 @@
       <option name="project" value="LOCAL" />
       <updated>1763374558176</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Log plot of the amplitudes.">
+      <option name="closed" value="true" />
+      <created>1763375703321</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1763375703321</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -482,7 +490,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed bugs. All unittests running." />
     <MESSAGE value="Unittests outputs added." />
     <MESSAGE value="Improvement of the saving figures in folders on the desktop." />
     <MESSAGE value="Fixing the plotting of PMFs (discrete functions)" />
@@ -507,6 +514,7 @@
     <MESSAGE value="Better information provided on prints in console and saved plots." />
     <MESSAGE value="Small adjustment (mostly a test)." />
     <MESSAGE value="Addition of more thermistors.&#10;Correction of phase graph, including normalisation.&#10;Correcting of frequency-&gt;period." />
-    <option name="LAST_COMMIT_MESSAGE" value="Addition of more thermistors.&#10;Correction of phase graph, including normalisation.&#10;Correcting of frequency-&gt;period." />
+    <MESSAGE value="Log plot of the amplitudes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Log plot of the amplitudes." />
   </component>
 </project>
