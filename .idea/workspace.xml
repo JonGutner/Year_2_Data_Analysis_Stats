@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Log plot of the amplitudes.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Diffusivity calc code added.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Year_2_Stats/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/helpers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Year_2_Stats/outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/outputer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +92,7 @@
       <recent name="$PROJECT_DIR$/Waves_Lab_Data" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python tests.Python tests for tests.TestMLE.test_binomial">
     <configuration name="Python tests for tests.TestMLE.test_binomial" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="StatsToolBox" />
       <option name="ENV_FILES" value="" />
