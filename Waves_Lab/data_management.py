@@ -104,9 +104,9 @@ def send_data_electrical(data_name):
         # Build combined DataFrame
         combined = pd.DataFrame({
             "time": channels[1]["in s"],
-            "ch1_voltage": channels[1]["c1 in v"],
-            "ch2_voltage": channels[2]["c2 in v"],
-            "ch3_voltage": channels[3]["c3 in v"],
+            "ch1": channels[1]["c1 in v"],
+            "ch2": channels[2]["c2 in v"],
+            "ch3": channels[3]["c3 in v"],
         })
 
         combined_outputs[group_id] = combined

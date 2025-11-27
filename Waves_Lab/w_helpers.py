@@ -161,3 +161,5 @@ def load_run_thermal_vs_electrical(param_names, is_thermal=False):
         in_phase_data = data_management.send_data_electrical("In_Phase")
         out_phase_data = data_management.send_data_electrical("Out_of_Phase")
 
+        w_outputer.plot_initial_electrical_plots(in_phase_data)
+        w_outputer.plot_initial_electrical_plots(out_phase_data)

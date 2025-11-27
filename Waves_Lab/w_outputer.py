@@ -254,3 +254,15 @@ def find_diffusivity_pairwise(amplitudes_list, phases_list, periods, spacing):
         print(f"Averaged D from phase: {np.mean(D_phase_pairs):.6e}")
 
     return np.array(D_amp_avg), np.array(D_phase_avg)
+
+def plot_initial_electrical_plots(data_frames):
+    for id, df in data_frames.items():
+        plt.scatter(df["time"], df["ch1"], label="Ch1", color="red", s=1)
+        plt.scatter(df["time"], df["ch2"], label="Ch2", color="green", s=1)
+        plt.scatter(df["time"], df["ch3"], label="Ch3", color="blue", s=1)
+
+        plt.legend()
+        plt.title(f"{float(id) / 100}kHz")
+        plt.xlabel("Time (s)")
+        plt.ylabel("Voltage (V)")
+        plt.show()
