@@ -4,7 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Updated directory." />
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Updated directory.">
+      <change afterPath="$PROJECT_DIR$/Waves_Lab/w_estimators.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Waves_Lab/w_helpers.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Waves_Lab/w_main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Waves_Lab/w_outputer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Waves_Lab/w_pdfs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/estimators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/helpers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/outputer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Year_2_Stats/pdfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Year_2_Stats/pdfs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/tests.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,14 +96,14 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Electrical_Waves_Sine_Data/Out_of_Phase" />
+      <recent name="$PROJECT_DIR$/Electrical_Waves_Sine_Data/In_Phase" />
       <recent name="$PROJECT_DIR$/Electrical_Waves_Data/Closed" />
       <recent name="$PROJECT_DIR$/Electrical_Waves_Data/Open" />
       <recent name="$PROJECT_DIR$/General_Waves_Data" />
-      <recent name="$PROJECT_DIR$/Waves_Stat_Folder" />
-      <recent name="$PROJECT_DIR$/Waves_Stat_Folder/period_test" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for tests.TestMLE.test_binomial">
+  <component name="RunManager">
     <configuration name="Python tests for tests.TestMLE.test_binomial" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="StatsToolBox" />
       <option name="ENV_FILES" value="" />
@@ -495,7 +508,23 @@
       <option name="project" value="LOCAL" />
       <updated>1764200305000</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Updated directory.">
+      <option name="closed" value="true" />
+      <created>1764201159603</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1764201159603</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Updated directory.">
+      <option name="closed" value="true" />
+      <created>1764201636021</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1764201636021</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
