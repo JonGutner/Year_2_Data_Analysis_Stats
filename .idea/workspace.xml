@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Modified data_management.py to read the electrical wave data.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Plot the in phase and out of phase plots for all saved data.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_Lab/data_management.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/data_management.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_Lab/w_estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_estimators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Waves_Lab/w_helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_helpers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Waves_Lab/w_outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_outputer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_Lab/w_pdfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_pdfs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -542,7 +543,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764208360201</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="Plot the in phase and out of phase plots for all saved data.">
+      <option name="closed" value="true" />
+      <created>1764210411218</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1764210411218</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -557,7 +566,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Modification of load_dataset.py and addition of plot_vals.py, which graphs thermistors 0 &amp; 3." />
     <MESSAGE value="Creation of general case of DFT for Year_2_Stats, and updated plot_vals to run a DFT to get phase difference (BUG PRESENT)." />
     <MESSAGE value="Bug fixed and improved usability." />
     <MESSAGE value="Delete unnecessary class." />
@@ -582,6 +590,7 @@
     <MESSAGE value="Separation of waves and pdf functionality into separate directories for generalisation and easier readability." />
     <MESSAGE value="Updated README.md." />
     <MESSAGE value="Modified data_management.py to read the electrical wave data." />
-    <option name="LAST_COMMIT_MESSAGE" value="Modified data_management.py to read the electrical wave data." />
+    <MESSAGE value="Plot the in phase and out of phase plots for all saved data." />
+    <option name="LAST_COMMIT_MESSAGE" value="Plot the in phase and out of phase plots for all saved data." />
   </component>
 </project>

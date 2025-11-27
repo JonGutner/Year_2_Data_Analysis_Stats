@@ -3,9 +3,12 @@ import numpy as np
 import os
 from Waves_Lab import w_estimators
 
-def print_results(x, y, result, i, j, param_names=None, pdf=None):
+def print_results(x, y, result, i, j, thermal = True, param_names=None, pdf=None):
     periods = np.array([15, 20, 30, 60])
-    print(f"\nResults for Thermistor {i} & Period {periods[j]} s:")
+    if thermal:
+        print(f"\nResults for Thermistor {i} & Period {periods[j]} s:")
+    else:
+        print(f"\nResults for Frequency {float(i) / 100}kHz & Ch{j + 1}")
     for i, val in enumerate(result["params"]):
         name_str = param_names[i] if param_names else f"param{i}"
         fisher_err = result["fisher_errors"][i]
@@ -18,11 +21,10 @@ def print_results(x, y, result, i, j, param_names=None, pdf=None):
     gof = w_estimators.goodness_of_fit_regression(x, y, pdf, result["params"])
     print(f"  Chi2/dof = {gof['chi2']:.2f}/{gof['dof']} "
         f"(p = {gof['p_value']:.3f})")
-
 # ----------------------------
 # Updated show_fit supporting DC offset
 # ----------------------------
-def show_fit(data, pdf, params, j, t=None, bins=50, title="MLE Fit", save=True, show=False):
+def show_fit(data, pdf, params, j, t=None, bins=50, title="MLE Fit", save=True):
     """
     Plot histogram + fitted PDF/model.
     For sine waves with DC offset, uses provided t array.
@@ -65,10 +67,7 @@ def show_fit(data, pdf, params, j, t=None, bins=50, title="MLE Fit", save=True, 
         fig.savefig(out_path, dpi=150, bbox_inches="tight")
         print(f"[plot saved] {out_path}")
 
-    if show:
-        plt.show()
-
-    plt.close(fig)
+    return fig
 #spacing, packages, y_models_a, y_models_p
 def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, show=False):
     #Amplitude

@@ -6,18 +6,31 @@ from scipy.linalg import pinvh
 from Waves_Lab import w_pdfs
 from Year_2_Stats import helpers
 
-def mle_fit(data, nll_func, init_params=None, method="BFGS", is_pdf=True):
+def mle_fit(data, nll_func, init_params=None, method="TNC", is_pdf=True):
     if init_params is None:
         raise ValueError("Please provide init_params for the fit.")
 
+    # --- PARAMETER BOUNDS ---
+    # amplitude >= 0
+    # phase in [-pi, pi]
+    # offset unbounded
+    bounds = [(0, None), (-np.pi, np.pi), (None, None)]
+
     # --- Minimize negative log-likelihood ---
-    result = minimize(nll_func, init_params, method=method)
+    result = minimize(
+        nll_func,
+        init_params,
+        method=method,
+        bounds=bounds,                # <<< ADDED
+        options={"maxiter": 10000}    # <<< optional but helpful
+    )
+
     best_params = result.x
 
-    # --- Compute Hessian at best fit ---
+    # --- Compute Hessian, Fisher errors (your code unchanged) ---
     try:
         hessian = nd.Hessian(lambda p: nll_func(p))(best_params)
-        hessian = 0.5 * (hessian + hessian.T)  # symmetrize
+        hessian = 0.5 * (hessian + hessian.T)
         try:
             cov = np.linalg.inv(hessian)
             fisher_errors = np.sqrt(np.abs(np.diag(cov)))
@@ -31,11 +44,12 @@ def mle_fit(data, nll_func, init_params=None, method="BFGS", is_pdf=True):
         fisher_errors = [np.nan] * len(best_params)
         method_used = "none"
 
-    # --- Profile likelihood intervals (optional, requires helpers.profile_scan) ---
+    # profile likelihood unchanged
     try:
         profile_errors = []
         for i in range(len(best_params)):
-            low, high = helpers.profile_scan(i, best_params, data, nll_func if is_pdf else lambda d, *p: nll_func(p))
+            low, high = helpers.profile_scan(i, best_params, data,
+                   nll_func if is_pdf else lambda d, *p: nll_func(p))
             profile_errors.append((low, high))
     except Exception:
         profile_errors = [(np.nan, np.nan)] * len(best_params)
