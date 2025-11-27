@@ -265,3 +265,20 @@ def plot_initial_electrical_plots(data_frames):
         plt.xlabel("Time (s)")
         plt.ylabel("Voltage (V)")
         plt.show()
+
+def plot_fitted_electrical_waves(df, chosen_pdf, results):
+    time = df['time']
+    plt.scatter(time, df['ch1'], s=1, color='red', label="Ch1")
+    plt.scatter(time, df['ch2'], s=1, color='green', label="Ch2")
+    plt.scatter(time, df['ch3'], s=1, color='orange', label="Ch3")
+
+    plot_pdf = lambda x, amplitude, phase, offset: chosen_pdf(x, amplitude, phase, offset)
+    plt.plot(time, plot_pdf(time, *results[0]), color="black", linestyle="--", )
+    plt.plot(time, plot_pdf(time, *results[1]), color="black", linestyle="--", )
+    plt.plot(time, plot_pdf(time, *results[2]), color="black", linestyle="--", )
+
+    plt.legend()
+    plt.title("Fitted Electrical Sines in Phase")
+    plt.xlabel("Time (s)")
+    plt.ylabel("Voltage (V)")
+    plt.show()

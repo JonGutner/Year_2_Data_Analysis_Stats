@@ -38,15 +38,12 @@ def run_tests(df, i, chosen_pdf, param_names, j, init_params, close_fig=False, t
         w_outputer.print_results(t, y, result, i, j, True, param_names, pdf=chosen_pdf)
 
         # Show fit using original time array
-        w_outputer.show_fit(y, plot_pdf, result["params"], j, t=t, title=f"Therm_{i}")
+        fig = w_outputer.show_fit(y, plot_pdf, result["params"], j, t=t, title=f"Therm_{i}")
     else:
         result = w_estimators.mle_fit(y, sine_nll, init_params=init_params, method="TNC", is_pdf=False)
 
         # Print results
         w_outputer.print_results(t, y, result, i, j, False, param_names, pdf=chosen_pdf)
-
-        plot_pdf = lambda x, amplitude, phase, offset: chosen_pdf(x, amplitude, phase, offset)
-        w_outputer.show_fit(y, plot_pdf, result["params"], j, t=t, title=f"Therm_{i}")
     if close_fig:
         plt.close(fig)
 
@@ -132,6 +129,7 @@ def get_ampli_phase_err_electrical(df, chosen_pdf, param_names, freq, is_in_phas
     phases = []
     err_a = []
     err_p = []
+    results_list = []
 
     df_1 = pd.DataFrame({
         'time' : df['time'],
@@ -155,18 +153,21 @@ def get_ampli_phase_err_electrical(df, chosen_pdf, param_names, freq, is_in_phas
     phases.append(results[1])
     err_a.append(errs[0])
     err_p.append(errs[1])
+    results_list.append(results)
     results, errs = run_tests(df_2, freq, chosen_pdf, param_names, 1, init_params, False, False)
     amplitudes.append(np.abs(results[0]))
     phases.append(results[1])
     err_a.append(errs[0])
     err_p.append(errs[1])
-    results, errs = run_tests(df_2, freq, chosen_pdf, param_names, 2, init_params, False, False)
+    results_list.append(results)
+    results, errs = run_tests(df_3, freq, chosen_pdf, param_names, 2, init_params, False, False)
     amplitudes.append(np.abs(results[0]))
     phases.append(results[1])
     err_a.append(errs[0])
     err_p.append(errs[1])
+    results_list.append(results)
 
-    return amplitudes, phases, err_a, err_p
+    return amplitudes, phases, err_a, err_p, results_list
 
 def load_run_thermal_vs_electrical(param_names, is_thermal=False):
     if is_thermal:
@@ -223,15 +224,9 @@ def load_run_thermal_vs_electrical(param_names, is_thermal=False):
             func_name = f"sine_with_phase_elec_{id}"  # build name dynamically
             chosen_pdf = getattr(w_pdfs, func_name)
 
-            amplitudes, phases, err_a, err_p = (get_ampli_phase_err_electrical
+            amplitudes, phases, err_a, err_p, results = (get_ampli_phase_err_electrical
                                                         (df, chosen_pdf,
                                                          param_names, id, True))
 
-            # print("CHECKPOINT")
-            # phases = phases - phases[0]
+            w_outputer.plot_fitted_electrical_waves(df, chosen_pdf, results)
 
-            # # Plot function including DC offset
-            # plot_pdf = lambda x, amplitude, phase, frequency: chosen_pdf(x, amplitude, phase, frequency)
-            #
-            # # Show fit using original time array
-            # fig = w_outputer.show_fit(y, plot_pdf, result["params"], j, t=t, title=f"Elec_{i}")

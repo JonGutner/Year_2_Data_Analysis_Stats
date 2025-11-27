@@ -6,10 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Plot the in phase and out of phase plots for all saved data.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_Lab/w_estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_estimators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Waves_Lab/w_helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_helpers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_Lab/w_outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_outputer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_Lab/w_pdfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_pdfs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,41 +51,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests for test_MLE.TestMLE.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.test_binomial.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.test_exponential.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.test_gaussian.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.test_lorentzian.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.test_poisson.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.test_binomial.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.test_exponential.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.test_gaussian.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.test_lorentzian.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.test_poisson.executor": "Run",
-    "Python tests.Python tests in tests.py.executor": "Run",
-    "Python.data_management.executor": "Debug",
-    "Python.estimators.executor": "Run",
-    "Python.fourier_transform.executor": "Run",
-    "Python.helpers.executor": "Debug",
-    "Python.lab_stats.executor": "Run",
-    "Python.load_dataset.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.outputer.executor": "Run",
-    "Python.pdfs.executor": "Run",
-    "Python.plot_vals.executor": "Run",
-    "Python.w_helpers.executor": "Run",
-    "Python.w_main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests for test_MLE.TestMLE.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.test_binomial.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.test_exponential.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.test_gaussian.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.test_lorentzian.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.test_poisson.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.test_binomial.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.test_exponential.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.test_gaussian.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.test_lorentzian.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.test_poisson.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in tests.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_management.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.estimators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fourier_transform.executor&quot;: &quot;Run&quot;,
+    &quot;Python.helpers.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.lab_stats.executor&quot;: &quot;Run&quot;,
+    &quot;Python.load_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.outputer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pdfs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plot_vals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.w_helpers.executor&quot;: &quot;Run&quot;,
+    &quot;Python.w_main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/Electrical_Waves_Sine_Data/Out_of_Phase" />
