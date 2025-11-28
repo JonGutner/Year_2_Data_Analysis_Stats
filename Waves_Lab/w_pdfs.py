@@ -56,3 +56,6 @@ def sine_with_phase_elec_4575(t, amplitude, phase, c):
 
 def sine_with_phase_elec_5149(t, amplitude, phase, c):
     return amplitude * np.sin(2*np.pi * 51490 * t - phase) + c
+
+def dispersion_model(k, A):
+    return A * np.sin(k / 2)

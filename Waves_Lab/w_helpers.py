@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from pathlib import Path
+from scipy.optimize import curve_fit
 from matplotlib import pyplot as plt
 from Waves_Lab import w_estimators, w_outputer, w_pdfs, data_management
 
@@ -29,7 +29,7 @@ def run_tests(df, i, chosen_pdf, param_names, j, init_params, close_fig=False, t
         init_params = [0.5*(np.max(y)-np.min(y)), np.pi/2, np.mean(y)]
 
         # Perform MLE
-        result = w_estimators.mle_fit(y, sine_nll, init_params=init_params, method="TNC", is_pdf=False)
+        result = w_estimators.mle_fit(y, sine_nll, init_params=init_params, method="BFGS", is_pdf=False)
 
         # Plot function including DC offset
         plot_pdf = lambda x, amplitude, phase, offset: chosen_pdf(x, amplitude, phase, offset)
@@ -40,7 +40,7 @@ def run_tests(df, i, chosen_pdf, param_names, j, init_params, close_fig=False, t
         # Show fit using original time array
         fig = w_outputer.show_fit(y, plot_pdf, result["params"], j, t=t, title=f"Therm_{i}")
     else:
-        result = w_estimators.mle_fit(y, sine_nll, init_params=init_params, method="TNC", is_pdf=False)
+        result = w_estimators.mle_fit(y, sine_nll, init_params=init_params, method="BFGS", is_pdf=False)
 
         # Print results
         w_outputer.print_results(t, y, result, i, j, False, param_names, pdf=chosen_pdf)
@@ -217,16 +217,105 @@ def load_run_thermal_vs_electrical(param_names, is_thermal=False):
         in_phase_data = data_management.send_data_electrical("In_Phase")
         out_phase_data = data_management.send_data_electrical("Out_of_Phase")
 
-        # w_outputer.plot_initial_electrical_plots(in_phase_data)
-        # w_outputer.plot_initial_electrical_plots(out_phase_data)
+        # Two separate dictionaries holding results per frequency
+        in_phase_results = {}
+        out_phase_results = {}
 
         for id, df in in_phase_data.items():
-            func_name = f"sine_with_phase_elec_{id}"  # build name dynamically
+            func_name = f"sine_with_phase_elec_{id}"
             chosen_pdf = getattr(w_pdfs, func_name)
 
-            amplitudes, phases, err_a, err_p, results = (get_ampli_phase_err_electrical
-                                                        (df, chosen_pdf,
-                                                         param_names, id, True))
+            amplitudes, phases, err_a, err_p, results = get_ampli_phase_err_electrical(
+                df, chosen_pdf, param_names, id, True
+            )
 
-            w_outputer.plot_fitted_electrical_waves(df, chosen_pdf, results)
+            # w_outputer.plot_fitted_electrical_waves(df, chosen_pdf, results, id, True)
 
+            in_phase_results[id] = {
+                "A_in": amplitudes[0],
+                "A_out": amplitudes[1],
+                "phi_in": phases[0],
+                "phi_out": phases[1],
+                "err_A_in": err_a[0],
+                "err_A_out": err_a[1],
+                "err_phi_in": err_p[0],
+                "err_phi_out": err_p[1],
+            }
+
+        for id, df in out_phase_data.items():
+            func_name = f"sine_with_phase_elec_{id}"
+            chosen_pdf = getattr(w_pdfs, func_name)
+
+            amplitudes, phases, err_a, err_p, results = get_ampli_phase_err_electrical(
+                df, chosen_pdf, param_names, id, False
+            )
+
+            # w_outputer.plot_fitted_electrical_waves(df, chosen_pdf, results, id, False)
+
+            out_phase_results[id] = {
+                "A_in": amplitudes[0],
+                "A_out": amplitudes[1],
+                "phi_in": phases[0],
+                "phi_out": phases[1],
+                "err_A_in": err_a[0],
+                "err_A_out": err_a[1],
+                "err_phi_in": err_p[0],
+                "err_phi_out": err_p[1],
+            }
+
+        plot_dispersion_relation(in_phase_results, out_phase_results)
+
+def plot_dispersion_relation(in_phase_results, out_phase_results):
+
+    in_freqs = np.array(sorted(int(fid) * 10 for fid in in_phase_results.keys()))
+    out_freqs = np.array(sorted(int(fid) * 10 for fid in out_phase_results.keys()))
+    w_in = 2 * np.pi * in_freqs
+    w_out = 2 * np.pi * out_freqs
+
+    out_freq_errors = np.array([0.042e3, 0.08e3, 0.08e3, 0.09e3, 0.10e3])
+    in_freq_errors  = np.array([0.06e3, 0.08e3, 0.08e3, 0.09e3])
+    err_w_in  = 2 * np.pi * in_freq_errors
+    err_w_out = 2 * np.pi * out_freq_errors
+
+    in_modes  = np.array([2*i + 1 for i in range(len(in_freqs))])   # odd
+    out_modes = np.array([2*i for i in range(len(out_freqs))])       # even
+
+    L = 40
+    k_in  = (in_modes  + 1) * np.pi / L
+    k_out = (out_modes + 1) * np.pi / L
+
+    k_all = np.concatenate([k_in, k_out])
+    w_all = np.concatenate([w_in, w_out])
+    slope, intercept = np.polyfit(k_all, w_all, 1)
+    k_fit = np.linspace(min(k_all), max(k_all), 200)
+    w_fit = slope * k_fit + intercept
+
+    print("\n---- Dispersion Fit (ω vs k) ----")
+    print(f"Fitted slope:     {slope:.4f} rad/s per (rad/segment)")
+    print(f"Fitted intercept: {intercept:.4f}")
+
+    residuals_in = w_in - (slope * k_in + intercept)
+    residuals_out = w_out - (slope * k_out + intercept)
+
+    fig, axs = plt.subplots(1, 2, figsize=(14, 6))
+    ax = axs[0]
+    ax.set_title("Dispersion Relation (Task 2.7a)")
+    ax.set_xlabel("Wavenumber k (rad/segment)")
+    ax.set_ylabel("Angular frequency ω (rad/s)")
+    ax.errorbar(k_out, w_out, yerr=err_w_out, fmt='o', ecolor='blue', label="Out-of-phase")
+    ax.errorbar(k_in,  w_in,  yerr=err_w_in,  fmt='o', ecolor='red',  label="In-phase")
+    ax.plot(k_fit, w_fit, 'k--', label="Linear fit")
+    ax.grid(True)
+    ax.legend()
+
+    ax_r = axs[1]
+    ax_r.set_title("Fit residuals")
+    ax_r.set_xlabel("Wavenumber k (rad/segment)")
+    ax_r.set_ylabel("Residual  Δω = ω_measured − ω_fit")
+    ax_r.errorbar(k_out, residuals_out, yerr=err_w_out, fmt='o', ecolor='blue', label="Out-of-phase")
+    ax_r.errorbar(k_in, residuals_in, yerr=err_w_in, fmt='o', ecolor='red', label="In-phase")
+    ax_r.axhline(0, color='gray', linestyle='--')
+    ax_r.grid(True)
+    ax.legend()
+    plt.tight_layout()
+    plt.show()

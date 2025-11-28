@@ -266,7 +266,7 @@ def plot_initial_electrical_plots(data_frames):
         plt.ylabel("Voltage (V)")
         plt.show()
 
-def plot_fitted_electrical_waves(df, chosen_pdf, results):
+def plot_fitted_electrical_waves(df, chosen_pdf, results, id, in_phase=True):
     time = df['time']
     plt.scatter(time, df['ch1'], s=1, color='red', label="Ch1")
     plt.scatter(time, df['ch2'], s=1, color='green', label="Ch2")
@@ -278,7 +278,10 @@ def plot_fitted_electrical_waves(df, chosen_pdf, results):
     plt.plot(time, plot_pdf(time, *results[2]), color="black", linestyle="--", )
 
     plt.legend()
-    plt.title("Fitted Electrical Sines in Phase")
+    if in_phase:
+        plt.title(f"Fitted Electrical Sines in Phase at Frequency {int(id)*10}Hz")
+    else:
+        plt.title(f"Fitted Electrical Sines out of Phase at Frequency {int(id)*10}Hz")
     plt.xlabel("Time (s)")
     plt.ylabel("Voltage (V)")
     plt.show()

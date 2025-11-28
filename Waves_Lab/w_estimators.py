@@ -14,7 +14,7 @@ def mle_fit(data, nll_func, init_params=None, method="TNC", is_pdf=True):
     # amplitude >= 0
     # phase in [-pi, pi]
     # offset unbounded
-    bounds = [(0, None), (-np.pi, np.pi), (None, None)]
+    bounds = [(0, None), (-2*np.pi, 2*np.pi), (None, None)]
 
     # --- Minimize negative log-likelihood ---
     result = minimize(
