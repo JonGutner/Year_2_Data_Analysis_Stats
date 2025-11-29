@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Plotting completed.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Task 2.7 a) completed.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_Lab/w_estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_estimators.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Waves_Lab/w_helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_helpers.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Waves_Lab/w_outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_outputer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_Lab/w_pdfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_pdfs.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -559,7 +557,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764278800350</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="Task 2.7 a) completed.">
+      <option name="closed" value="true" />
+      <created>1764344079983</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1764344079983</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -574,7 +580,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Bug fixed and improved usability." />
     <MESSAGE value="Delete unnecessary class." />
     <MESSAGE value="Bux fixes and transportation of the data analysis to Year_2_stats runner." />
     <MESSAGE value="Added data analysis for first four thermistors." />
@@ -599,6 +604,7 @@
     <MESSAGE value="Modified data_management.py to read the electrical wave data." />
     <MESSAGE value="Plot the in phase and out of phase plots for all saved data." />
     <MESSAGE value="Plotting completed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Plotting completed." />
+    <MESSAGE value="Task 2.7 a) completed." />
+    <option name="LAST_COMMIT_MESSAGE" value="Task 2.7 a) completed." />
   </component>
 </project>

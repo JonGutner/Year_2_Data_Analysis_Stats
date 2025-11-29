@@ -285,3 +285,28 @@ def plot_fitted_electrical_waves(df, chosen_pdf, results, id, in_phase=True):
     plt.xlabel("Time (s)")
     plt.ylabel("Voltage (V)")
     plt.show()
+
+def plot_dispersion_plot(k_out, k_in, w_out, w_in, err_w_out, err_w_in, k_fit, w_fit,
+                         residuals_out, residuals_in, err_k_out, err_k_in):
+    fig, axs = plt.subplots(1, 2, figsize=(14, 6))
+    ax = axs[0]
+    ax.set_title("Dispersion Relation (Task 2.7a)")
+    ax.set_xlabel("Wavenumber k (rad/segment)")
+    ax.set_ylabel("Angular frequency ω (rad/s)")
+    ax.errorbar(k_out, w_out, yerr=err_w_out, xerr=err_k_out, fmt='o', capsize=5, ecolor='blue', label="Out-of-phase")
+    ax.errorbar(k_in, w_in, yerr=err_w_in, xerr=err_k_in, fmt='o', capsize=5, ecolor='red', label="In-phase")
+    ax.plot(k_fit, w_fit, 'k--', label="Linear fit")
+    ax.grid(True)
+    ax.legend()
+
+    ax_r = axs[1]
+    ax_r.set_title("Fit residuals")
+    ax_r.set_xlabel("Wavenumber k (rad/segment)")
+    ax_r.set_ylabel("Residual  Δω = ω_measured − ω_fit")
+    ax_r.errorbar(k_out, residuals_out, yerr=err_w_out, xerr=err_k_out, fmt='o', capsize=5, ecolor='blue', label="Out-of-phase")
+    ax_r.errorbar(k_in, residuals_in, yerr=err_w_in, xerr=err_k_in, fmt='o', capsize=5, ecolor='red', label="In-phase")
+    ax_r.axhline(0, color='gray', linestyle='--')
+    ax_r.grid(True)
+    ax_r.legend()
+    plt.tight_layout()
+    plt.show()

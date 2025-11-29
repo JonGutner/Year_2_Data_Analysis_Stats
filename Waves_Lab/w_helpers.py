@@ -265,24 +265,62 @@ def load_run_thermal_vs_electrical(param_names, is_thermal=False):
 
         plot_dispersion_relation(in_phase_results, out_phase_results)
 
-def plot_dispersion_relation(in_phase_results, out_phase_results):
+def compute_k_err(phi_in, phi_out, err_phi_in, err_phi_out, L):
+    eps = np.sqrt(err_phi_in ** 2 + err_phi_out ** 2)
 
+    # Construct phase difference modulo 2π
+    dphi = (phi_out - phi_in) % (2 * np.pi)
+
+    # Check closeness to 0 or π (two resonance classifications)
+    dist_to_0 = abs(dphi - 0)
+    dist_to_pi = abs(dphi - np.pi)
+
+    ambiguous = (dist_to_0 < eps) or (dist_to_pi < eps)
+
+    if ambiguous:
+        return np.pi / L  # Δn = ±1
+    else:
+        return 0.0
+
+def plot_dispersion_relation(in_phase_results, out_phase_results):
     in_freqs = np.array(sorted(int(fid) * 10 for fid in in_phase_results.keys()))
     out_freqs = np.array(sorted(int(fid) * 10 for fid in out_phase_results.keys()))
+    in_modes = np.array([2 * i + 1 for i in range(len(in_freqs))])  # odd
+    out_modes = np.array([2 * i for i in range(len(out_freqs))])  # even
+    L = 40
     w_in = 2 * np.pi * in_freqs
     w_out = 2 * np.pi * out_freqs
+    k_in = (in_modes + 1) * np.pi / L
+    k_out = (out_modes + 1) * np.pi / L
 
     out_freq_errors = np.array([0.042e3, 0.08e3, 0.08e3, 0.09e3, 0.10e3])
     in_freq_errors  = np.array([0.06e3, 0.08e3, 0.08e3, 0.09e3])
     err_w_in  = 2 * np.pi * in_freq_errors
     err_w_out = 2 * np.pi * out_freq_errors
+    err_k_in = np.zeros_like(k_in)
+    err_k_out = np.zeros_like(k_out)
 
-    in_modes  = np.array([2*i + 1 for i in range(len(in_freqs))])   # odd
-    out_modes = np.array([2*i for i in range(len(out_freqs))])       # even
+    # The number of frequency entries must match the keys order
+    in_keys = sorted(in_phase_results.keys(), key=lambda x: int(x))
+    out_keys = sorted(out_phase_results.keys(), key=lambda x: int(x))
 
-    L = 40
-    k_in  = (in_modes  + 1) * np.pi / L
-    k_out = (out_modes + 1) * np.pi / L
+    # In-phase modes
+    for i, key in enumerate(in_keys):
+        phi_in = in_phase_results[key]["phi_in"]
+        phi_out = in_phase_results[key]["phi_out"]
+        err_phi_in = in_phase_results[key]["err_phi_in"]
+        err_phi_out = in_phase_results[key]["err_phi_out"]
+
+        err_k_in[i] = compute_k_err(phi_in, phi_out, err_phi_in, err_phi_out, L)
+
+    # Out-of-phase modes
+    for i, key in enumerate(out_keys):
+        phi_in = out_phase_results[key]["phi_in"]
+        phi_out = out_phase_results[key]["phi_out"]
+        err_phi_in = out_phase_results[key]["err_phi_in"]
+        err_phi_out = out_phase_results[key]["err_phi_out"]
+
+        err_k_out[i] = compute_k_err(phi_in, phi_out, err_phi_in, err_phi_out, L)
 
     k_all = np.concatenate([k_in, k_out])
     w_all = np.concatenate([w_in, w_out])
@@ -297,25 +335,5 @@ def plot_dispersion_relation(in_phase_results, out_phase_results):
     residuals_in = w_in - (slope * k_in + intercept)
     residuals_out = w_out - (slope * k_out + intercept)
 
-    fig, axs = plt.subplots(1, 2, figsize=(14, 6))
-    ax = axs[0]
-    ax.set_title("Dispersion Relation (Task 2.7a)")
-    ax.set_xlabel("Wavenumber k (rad/segment)")
-    ax.set_ylabel("Angular frequency ω (rad/s)")
-    ax.errorbar(k_out, w_out, yerr=err_w_out, fmt='o', ecolor='blue', label="Out-of-phase")
-    ax.errorbar(k_in,  w_in,  yerr=err_w_in,  fmt='o', ecolor='red',  label="In-phase")
-    ax.plot(k_fit, w_fit, 'k--', label="Linear fit")
-    ax.grid(True)
-    ax.legend()
-
-    ax_r = axs[1]
-    ax_r.set_title("Fit residuals")
-    ax_r.set_xlabel("Wavenumber k (rad/segment)")
-    ax_r.set_ylabel("Residual  Δω = ω_measured − ω_fit")
-    ax_r.errorbar(k_out, residuals_out, yerr=err_w_out, fmt='o', ecolor='blue', label="Out-of-phase")
-    ax_r.errorbar(k_in, residuals_in, yerr=err_w_in, fmt='o', ecolor='red', label="In-phase")
-    ax_r.axhline(0, color='gray', linestyle='--')
-    ax_r.grid(True)
-    ax.legend()
-    plt.tight_layout()
-    plt.show()
+    w_outputer.plot_dispersion_plot(k_out, k_in, w_out, w_in, err_w_out, err_w_in, k_fit, w_fit,
+                         residuals_out, residuals_in, err_k_out+0.001, err_k_in+0.001)
