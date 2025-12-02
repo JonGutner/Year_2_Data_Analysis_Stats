@@ -84,7 +84,7 @@ def run_thermal_plots(packages, periods):
         amplitude = package[0]
         phase = package[1]
 
-        params_a = [amplitude[0], -1, 0]
+        params_a = [amplitude[0], -1]
         popt_a, pcov_a = w_estimators.amplitude_fit(spacing, amplitude, params_a)
         popts_a.append(popt_a)
         pcovs_a.append(pcov_a)
@@ -183,12 +183,13 @@ def load_run_thermal_vs_electrical(param_names, periods, is_thermal=False):
                 df_0, df_1, df_2, df_3, df_4, df_5, df_6, df_7,
                 func_pdf, param_names, i, periods)
 
-            phases = phases - phases[0]
+            phase_diff = phases - phases[0]  # φ_i - φ_0
 
-            # for i in range(4, 8, 1):
-            #     phases[i] = phases[i] + np.pi
+            phase_diff_unwrapped = np.unwrap(phase_diff)
+            phase_diff_positive = unwrap_positive(phase_diff_unwrapped)
+            phase_diff_folded = fold_above_pi(phase_diff_positive)
 
-            package = [amplitudes, phases, err_a, err_p]
+            package = [amplitudes, phase_diff_folded, err_a, err_p]
             packages[f"package_{periods[i]}"] = package
 
         run_thermal_plots(packages, periods)
@@ -248,6 +249,60 @@ def load_run_thermal_vs_electrical(param_names, periods, is_thermal=False):
         # 2.7(c) & (d): velocities and cutoff (now built from 2.7a k, ω)
         results = run_all(in_phase_results, out_phase_results,
                           k_w_data, do_plots=True)
+
+def unwrap_positive(diff_phases, min_step=-np.pi, max_step=np.pi):
+    """
+    Make phase differences smooth and (for i>0) positive,
+    by adding/subtracting 2π as needed.
+
+    diff_phases: array-like of initial phase differences φ_i - φ_0 (rad)
+                 in thermistor order (x increasing).
+    """
+    diff_phases = np.asarray(diff_phases, dtype=float)
+    out = np.zeros_like(diff_phases)
+    out[0] = 0.0  # reference thermistor
+
+    for i in range(1, len(diff_phases)):
+        p = diff_phases[i]
+
+        # try shifting by k*2π and pick the one closest to previous out[i-1]
+        candidates = [p + 2*np.pi*k for k in range(-2, 3)]
+        # keep only positive candidates
+        candidates = [c for c in candidates if c >= 0.0]
+        if not candidates:
+            # if all candidates would be negative, just fall back to standard unwrap
+            c = p
+            while c - out[i-1] > max_step:
+                c -= 2*np.pi
+            while c - out[i-1] < min_step:
+                c += 2*np.pi
+            out[i] = c
+        else:
+            # choose candidate closest to previous
+            c = min(candidates, key=lambda x: abs(x - out[i-1]))
+            out[i] = c
+
+    return out
+
+def fold_above_pi(phases):
+    """
+    For each phase value > π, subtract π.
+
+    Parameters
+    ----------
+    phases : array-like
+        Phase differences in radians.
+
+    Returns
+    -------
+    folded : ndarray
+        Phase differences with values > π folded by subtracting π.
+    """
+    phases = np.asarray(phases, dtype=float)
+    folded = phases.copy()
+    mask = folded > np.pi
+    folded[mask] -= np.pi
+    return folded
 
 # ======================================================================
 #  ELECTRICAL: DISPERSION (2.7a)  — UNCHANGED, BUT RETURNS k & ω

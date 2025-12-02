@@ -73,7 +73,7 @@ def show_fit(data, pdf, params, t=None, bins=50, title="MLE Fit", save=True):
 def show_thermistor_param(spacing, packages, y_models_a, y_models_p, periods, save=True, show=False):
     #Amplitude
     fig, ax = plt.subplots()
-    colors = ["red", "blue", "green", "cyan", "orange", "purple", "gold", "teal", "olive", "lime", "crimson"]
+    colors = ["red", "blue", "green", "orange", "cyan", "purple", "gold", "teal", "olive", "lime", "crimson"]
     title = "Amplitude Graphs for Thermistors 0-7"
 
     for i in range(len(periods)):
@@ -90,7 +90,7 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, periods, sa
 
         ax.set_yscale('log')
         ax.set_title(title)
-        ax.set_xlabel("Spacing of Thermistors (mm)")
+        ax.set_xlabel("Spacing of Thermistors (m)")
         ax.set_ylabel("Amplitude Ratio (log)")
         ax.legend()
 
@@ -125,7 +125,7 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, periods, sa
         ax.plot(spacing, y_model_p, c=colors[i])
 
         ax.set_title(title)
-        ax.set_xlabel("Spacing of Thermistors (mm)")
+        ax.set_xlabel("Spacing of Thermistors (m)")
         ax.set_ylabel("Phase Difference (rad)")
         ax.legend()
 
@@ -158,14 +158,14 @@ def find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages, periods):
         perr_a = np.sqrt(np.diag(pcov_a))
         perr_p = np.sqrt(np.diag(pcov_p))
 
-        a, m_a, c_a = popt_a
-        a_err, m_err_a, c_err_a = perr_a
+        a, m_a = popt_a
+        a_err, m_err_a = perr_a
         m_p, c_p = popt_p
         m_err_p, c_err_p = perr_p
 
         # Print fits
         print(f"\nFor thermistors of period {periods[i]} s, the fits are:")
-        print(f"Amplitude: ({a:.3f} ± {a_err:.3f}) * exp(({m_a:.3f} ± {m_err_a:.3f}) * x) + ({c_a:.3f} ± {c_err_a:.3f})")
+        print(f"Amplitude: ({a:.3f} ± {a_err:.3f}) * exp(({m_a:.3f} ± {m_err_a:.3f}) * x)")
         print(f"Phase: ({m_p:.3f} ± {m_err_p:.3f}) * x + ({c_p:.3f} ± {c_err_p:.3f})")
 
         package = packages[f"package_{periods[i]}"]

@@ -11,13 +11,12 @@ def load_data(path):
     thermistor_temperatures = data.iloc[:, 3:].to_numpy()
 
     comments = re.search(r"Comments: (.*)$", open(path).read(), re.MULTILINE)[1]
-    print("COMMENTS: ", comments)
 
     return timestamp, output_voltage, output_current, thermistor_temperatures, comments
 
 def send_data_thermal(data_name):
     data_path = Path(__file__).resolve().parent.parent / "Waves_Stat_Folder" / data_name
-    print("DATA_NAME: ", data_name)
+
     timestamp, output_voltage, output_current, thermistor_temperatures, comments = load_data(data_path)
 
     plt.title("Plot of Thermistors 0-7")
