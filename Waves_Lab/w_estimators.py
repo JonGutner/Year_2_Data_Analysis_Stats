@@ -21,7 +21,7 @@ def mle_fit(data, nll_func, init_params=None, method="TNC", is_pdf=True):
         nll_func,
         init_params,
         method=method,
-        bounds=bounds,                # <<< ADDED
+        bounds=bounds,
         options={"maxiter": 10000}    # <<< optional but helpful
     )
 

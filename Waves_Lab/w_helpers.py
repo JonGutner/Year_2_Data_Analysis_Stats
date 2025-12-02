@@ -10,7 +10,7 @@ from Waves_Lab import w_estimators, w_outputer, w_pdfs, data_management
 # ======================================================================
 
 def run_tests(df, i, chosen_pdf, param_names, j, init_params,
-              close_fig=False, thermal=True):
+              periods = None, close_fig=False, thermal=True):
     """
     Perform MLE fit for a single dataset (df) and print/plot results.
     Handles standard PDFs and sine_with_phase with DC offset.
@@ -31,7 +31,7 @@ def run_tests(df, i, chosen_pdf, param_names, j, init_params,
 
     if thermal:
         # Thermal initial guess
-        init_params = [0.5 * (np.max(y) - np.min(y)), np.pi / 2, np.mean(y)]
+        init_params = [0.5 * (np.max(y) + np.min(y)), np.pi / 2, np.mean(y)]
 
         result = w_estimators.mle_fit(
             y, sine_nll, init_params=init_params,
@@ -42,12 +42,12 @@ def run_tests(df, i, chosen_pdf, param_names, j, init_params,
             x, amplitude, phase, offset)
 
         w_outputer.print_results(
-            t, y, result, i, j, True, param_names, pdf=chosen_pdf
+            t, y, result, i, j, periods,True, param_names, pdf=chosen_pdf
         )
 
         fig = w_outputer.show_fit(
-            y, plot_pdf, result["params"], j, t=t,
-            title=f"Therm_{i}"
+            y, plot_pdf, result["params"], t=t,
+            title=f"Therm_{i}_period_{periods[j]}"
         )
     else:
         # Electrical: use provided init_params
@@ -57,7 +57,7 @@ def run_tests(df, i, chosen_pdf, param_names, j, init_params,
         )
 
         w_outputer.print_results(
-            t, y, result, i, j, False, param_names, pdf=chosen_pdf
+            t, y, result, i, j, periods,False, param_names, pdf=chosen_pdf
         )
 
     if close_fig and fig is not None:
@@ -69,18 +69,18 @@ def run_tests(df, i, chosen_pdf, param_names, j, init_params,
 #  THERMAL PART (unchanged)
 # ======================================================================
 
-def run_thermal_plots(packages):
+def run_thermal_plots(packages, periods):
     y_models_a = []
     y_models_p = []
     popts_a = []
     pcovs_a = []
     popts_p = []
     pcovs_p = []
-    d = 0.05
-    spacing = [0 * d, 1 * d, 2 * d, 3 * d, 4 * d, 5 * d]
+    d = 0.005
+    spacing = [0*d, 1*d, 2*d, 3*d, 4*d, 5*d, 6*d, 7*d]
 
-    for i in range(4):
-        package = packages[f"package_{i}"]
+    for period in periods:
+        package = packages[f"package_{period}"]
         amplitude = package[0]
         phase = package[1]
 
@@ -96,25 +96,24 @@ def run_thermal_plots(packages):
         pcovs_p.append(pcov_p)
         y_models_p.append(w_pdfs.phase_waves(spacing, *popt_p))
 
-    w_outputer.show_thermistor_param(spacing, packages, y_models_a, y_models_p)
-    w_outputer.find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages)
+    w_outputer.show_thermistor_param(spacing, packages, y_models_a, y_models_p, periods)
+    w_outputer.find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages, periods)
 
-def get_ampli_phase_err_thermal(df_0, df_1, df_2, df_3, df_4, df_5,
-                                chosen_pdf, param_names, j):
+def get_ampli_phase_err_thermal(df_0, df_1, df_2, df_3, df_4, df_5, df_6, df_7,
+                                chosen_pdf, param_names, j, periods):
     amplitudes = []
     phases = []
     err_a = []
     err_p = []
 
-    for i, df in enumerate([df_0, df_1, df_2, df_3, df_4, df_5]):
-        results, errs = run_tests(df, i, chosen_pdf, param_names, j, None, True)
+    for i, df in enumerate([df_0, df_1, df_2, df_3, df_4, df_5, df_6, df_7]):
+        results, errs = run_tests(df, i, chosen_pdf, param_names, j, None, periods,True)
         amplitudes.append(np.abs(results[0]))
         phases.append(results[1])
         err_a.append(errs[0])
         err_p.append(errs[1])
 
     return amplitudes, phases, err_a, err_p
-
 
 # ======================================================================
 #  ELECTRICAL: GET AMPLITUDES/PHASES FOR EACH FREQUENCY
@@ -162,69 +161,37 @@ def get_ampli_phase_err_electrical(df, chosen_pdf, param_names, freq,
 
     return amplitudes, phases, err_a, err_p, results_list
 
-
 # ======================================================================
 #  TOP-LEVEL LOADER: THERMAL vs ELECTRICAL
 # ======================================================================
 
-def load_run_thermal_vs_electrical(param_names, is_thermal=False):
+def load_run_thermal_vs_electrical(param_names, periods, is_thermal=False):
     if is_thermal:
         # -----------------------------
-        # THERMAL experiment (unchanged)
+        # THERMAL experiment
         # -----------------------------
-        data_name_1 = "period_1.csv"
-        df_0_1, df_1_1, df_2_1, df_3_1, df_4_1, df_5_1 = \
-            data_management.send_data_thermal(data_name_1)
+        packages = {}
 
-        data_name_2 = "period_2.csv"
-        df_0_2, df_1_2, df_2_2, df_3_2, df_4_2, df_5_2 = \
-            data_management.send_data_thermal(data_name_2)
+        for i in range(len(periods)):
+            data_name = f"period_{periods[i]}.csv"
+            df_0, df_1, df_2, df_3, df_4, df_5, df_6, df_7 = \
+                data_management.send_data_thermal(data_name)
 
-        data_name_3 = "period_3.csv"
-        df_0_3, df_1_3, df_2_3, df_3_3, df_4_3, df_5_3 = \
-            data_management.send_data_thermal(data_name_3)
+            func_pdf = getattr(w_pdfs, f"sine_with_phase_{periods[i]}")
 
-        data_name_4 = "period_4.csv"
-        df_0_4, df_1_4, df_2_4, df_3_4, df_4_4, df_5_4 = \
-            data_management.send_data_thermal(data_name_4)
+            amplitudes, phases, err_a, err_p = get_ampli_phase_err_thermal(
+                df_0, df_1, df_2, df_3, df_4, df_5, df_6, df_7,
+                func_pdf, param_names, i, periods)
 
-        amplitudes_1, phases_1, err_a_1, err_p_1 = get_ampli_phase_err_thermal(
-            df_0_1, df_1_1, df_2_1, df_3_1, df_4_1, df_5_1,
-            w_pdfs.sine_with_phase_15, param_names, 0
-        )
-        amplitudes_2, phases_2, err_a_2, err_p_2 = get_ampli_phase_err_thermal(
-            df_0_2, df_1_2, df_2_2, df_3_2, df_4_2, df_5_2,
-            w_pdfs.sine_with_phase_20, param_names, 1
-        )
-        amplitudes_3, phases_3, err_a_3, err_p_3 = get_ampli_phase_err_thermal(
-            df_0_3, df_1_3, df_2_3, df_3_3, df_4_3, df_5_3,
-            w_pdfs.sine_with_phase_30, param_names, 2
-        )
-        amplitudes_4, phases_4, err_a_4, err_p_4 = get_ampli_phase_err_thermal(
-            df_0_4, df_1_4, df_2_4, df_3_4, df_4_4, df_5_4,
-            w_pdfs.sine_with_phase_60, param_names, 3
-        )
+            phases = phases - phases[0]
 
-        phases_1 = phases_1 - phases_1[0]
-        phases_1[4] += np.pi
-        phases_1[5] += np.pi
-        phases_2 = phases_2 - phases_2[0]
-        phases_3 = phases_3 - phases_3[0]
-        phases_4 = phases_4 - phases_4[0]
+            # for i in range(4, 8, 1):
+            #     phases[i] = phases[i] + np.pi
 
-        package_0 = [amplitudes_1, phases_1, err_a_1, err_p_1]
-        package_1 = [amplitudes_2, phases_2, err_a_2, err_p_2]
-        package_2 = [amplitudes_3, phases_3, err_a_3, err_p_3]
-        package_3 = [amplitudes_4, phases_4, err_a_4, err_p_4]
+            package = [amplitudes, phases, err_a, err_p]
+            packages[f"package_{periods[i]}"] = package
 
-        packages = {
-            "package_0": package_0,
-            "package_1": package_1,
-            "package_2": package_2,
-            "package_3": package_3,
-        }
-
-        run_thermal_plots(packages)
+        run_thermal_plots(packages, periods)
 
     else:
         # -----------------------------

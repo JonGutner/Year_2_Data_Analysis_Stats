@@ -1,10 +1,12 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+
+from matplotlib import ticker
+
 from Waves_Lab import w_estimators
 
-def print_results(x, y, result, i, j, thermal = True, param_names=None, pdf=None):
-    periods = np.array([15, 20, 30, 60])
+def print_results(x, y, result, i, j, periods, thermal = True, param_names=None, pdf=None):
     if thermal:
         print(f"\nResults for Thermistor {i} & Period {periods[j]} s:")
     else:
@@ -24,7 +26,7 @@ def print_results(x, y, result, i, j, thermal = True, param_names=None, pdf=None
 # ----------------------------
 # Updated show_fit supporting DC offset
 # ----------------------------
-def show_fit(data, pdf, params, j, t=None, bins=50, title="MLE Fit", save=True):
+def show_fit(data, pdf, params, t=None, bins=50, title="MLE Fit", save=True):
     """
     Plot histogram + fitted PDF/model.
     For sine waves with DC offset, uses provided t array.
@@ -58,26 +60,24 @@ def show_fit(data, pdf, params, j, t=None, bins=50, title="MLE Fit", save=True):
 
     # Save plot
     if save:
-        periods = np.array([15, 20, 30, 60])
         desktop = os.path.join(os.path.expanduser("~"), "Desktop")
         out_dir = os.path.join(desktop, "StatsPlots")
         os.makedirs(out_dir, exist_ok=True)
         safe_title = title.replace(" ", "_").replace("/", "_")
-        out_path = os.path.join(out_dir, f"{safe_title}_num_{periods[j]}.png")
+        out_path = os.path.join(out_dir, f"{safe_title}.png")
         fig.savefig(out_path, dpi=150, bbox_inches="tight")
         print(f"[plot saved] {out_path}")
 
     return fig
 #spacing, packages, y_models_a, y_models_p
-def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, show=False):
+def show_thermistor_param(spacing, packages, y_models_a, y_models_p, periods, save=True, show=False):
     #Amplitude
     fig, ax = plt.subplots()
-    colors = ['red', 'green', 'blue', 'orange']
-    periods = np.array([15, 20, 30, 60])
-    title = "Amplitude Graphs for Thermistors 0-5"
+    colors = ["red", "blue", "green", "cyan", "orange", "purple", "gold", "teal", "olive", "lime", "crimson"]
+    title = "Amplitude Graphs for Thermistors 0-7"
 
-    for i in range(4):
-        package = packages[f"package_{i}"]
+    for i in range(len(periods)):
+        package = packages[f"package_{periods[i]}"]
         amplitude = package[0]
         err_a = package[2]
         y_model_a = y_models_a[i]
@@ -90,6 +90,8 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
 
         ax.set_yscale('log')
         ax.set_title(title)
+        ax.set_xlabel("Spacing of Thermistors (mm)")
+        ax.set_ylabel("Amplitude Ratio (log)")
         ax.legend()
 
     # Save plot
@@ -107,11 +109,11 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
 
     plt.close(fig)
 
-    title = "Phase Graphs for Thermistors 0-5"
+    title = "Phase Graphs for Thermistors 0-7"
     fig, ax = plt.subplots()
 
-    for i in range(4):
-        package = packages[f"package_{i}"]
+    for i in range(len(periods)):
+        package = packages[f"package_{periods[i]}"]
         phase = package[1]
         err_p = package[3]
         y_model_p = y_models_p[i]
@@ -123,6 +125,8 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
         ax.plot(spacing, y_model_p, c=colors[i])
 
         ax.set_title(title)
+        ax.set_xlabel("Spacing of Thermistors (mm)")
+        ax.set_ylabel("Phase Difference (rad)")
         ax.legend()
 
     # Save plot
@@ -140,10 +144,9 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, save=True, 
 
     plt.close(fig)
 
-def find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages):
-    periods = np.array([15, 20, 30, 60])  # seconds
-    d = 0.005  # spacing increment (m)
-    spacing = np.array([0, d, 2*d, 3*d, 4*d, 5*d])  # distances (m)
+def find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages, periods):
+    d = 0.005
+    spacing = np.array([0*d, 1*d, 2*d, 3*d, 4*d, 5*d, 6*d, 7*d])  # distances (m)
 
     for i in range(len(periods)):
         # Unpack fit parameters and covariance matrices
@@ -165,7 +168,7 @@ def find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages):
         print(f"Amplitude: ({a:.3f} ± {a_err:.3f}) * exp(({m_a:.3f} ± {m_err_a:.3f}) * x) + ({c_a:.3f} ± {c_err_a:.3f})")
         print(f"Phase: ({m_p:.3f} ± {m_err_p:.3f}) * x + ({c_p:.3f} ± {c_err_p:.3f})")
 
-        package = packages[f"package_{i}"]
+        package = packages[f"package_{periods[i]}"]
         amplitude = package[0]
         phase = package[1]
         freq = 2*np.pi/periods[i]

@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Task 2.7 a) modified.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Task 2.7 b-d) finished. Gives decent results of analysis.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Electrical_Waves_Sine_Data/Out_of_Phase/O_5149_1.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/frequency_dependence_test/O_5149_1.CSV" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Electrical_Waves_Sine_Data/Out_of_Phase/O_5149_2.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/frequency_dependence_test/O_5149_2.CSV" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Electrical_Waves_Sine_Data/Out_of_Phase/O_5149_3.CSV" beforeDir="false" afterPath="$PROJECT_DIR$/frequency_dependence_test/O_5149_3.CSV" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_Lab/w_helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_helpers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -575,7 +571,15 @@
       <option name="project" value="LOCAL" />
       <updated>1764451877878</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="Task 2.7 b-d) finished. Gives decent results of analysis.">
+      <option name="closed" value="true" />
+      <created>1764542507917</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1764542507917</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -590,7 +594,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Bux fixes and transportation of the data analysis to Year_2_stats runner." />
     <MESSAGE value="Added data analysis for first four thermistors." />
     <MESSAGE value="Corrects saving mechanism for sine fits." />
     <MESSAGE value="Updated Outputs for better readability." />
@@ -615,6 +618,7 @@
     <MESSAGE value="Plotting completed." />
     <MESSAGE value="Task 2.7 a) completed." />
     <MESSAGE value="Task 2.7 a) modified." />
-    <option name="LAST_COMMIT_MESSAGE" value="Task 2.7 a) modified." />
+    <MESSAGE value="Task 2.7 b-d) finished. Gives decent results of analysis." />
+    <option name="LAST_COMMIT_MESSAGE" value="Task 2.7 b-d) finished. Gives decent results of analysis." />
   </component>
 </project>

@@ -11,21 +11,24 @@ def load_data(path):
     thermistor_temperatures = data.iloc[:, 3:].to_numpy()
 
     comments = re.search(r"Comments: (.*)$", open(path).read(), re.MULTILINE)[1]
+    print("COMMENTS: ", comments)
 
     return timestamp, output_voltage, output_current, thermistor_temperatures, comments
 
 def send_data_thermal(data_name):
     data_path = Path(__file__).resolve().parent.parent / "Waves_Stat_Folder" / data_name
-
+    print("DATA_NAME: ", data_name)
     timestamp, output_voltage, output_current, thermistor_temperatures, comments = load_data(data_path)
 
-    plt.title("Plot of Thermistors 0-3")
-    plt.plot(timestamp, thermistor_temperatures[:, 0], c='r', label="Therm. 0")
-    plt.plot(timestamp, thermistor_temperatures[:, 1], c='green', label="Therm. 1")
-    plt.plot(timestamp, thermistor_temperatures[:, 2], c='orange', label="Therm. 2")
-    plt.plot(timestamp, thermistor_temperatures[:, 3], c='b', label="Therm. 3")
+    plt.title("Plot of Thermistors 0-7")
+    plt.plot(timestamp, thermistor_temperatures[:, 0], c='red', label="Therm. 0")
+    plt.plot(timestamp, thermistor_temperatures[:, 1], c='blue', label="Therm. 1")
+    plt.plot(timestamp, thermistor_temperatures[:, 2], c='green', label="Therm. 2")
+    plt.plot(timestamp, thermistor_temperatures[:, 3], c='orange', label="Therm. 3")
     plt.plot(timestamp, thermistor_temperatures[:, 4], c='cyan', label="Therm. 4")
-    plt.plot(timestamp, thermistor_temperatures[:, 5], c='purple', label="Therm. 4")
+    plt.plot(timestamp, thermistor_temperatures[:, 5], c='purple', label="Therm. 5")
+    plt.plot(timestamp, thermistor_temperatures[:, 6], c='gold', label="Therm. 6")
+    plt.plot(timestamp, thermistor_temperatures[:, 7], c='lime', label="Therm. 7")
     plt.legend()
     plt.show()
 
@@ -47,8 +50,14 @@ def send_data_thermal(data_name):
     df_5 = pd.DataFrame({
         't': timestamp,
         'T': thermistor_temperatures[:, 5]})
+    df_6 = pd.DataFrame({
+        't': timestamp,
+        'T': thermistor_temperatures[:, 6]})
+    df_7 = pd.DataFrame({
+        't': timestamp,
+        'T': thermistor_temperatures[:, 7]})
 
-    return df_0, df_1, df_2, df_3, df_4, df_5
+    return df_0, df_1, df_2, df_3, df_4, df_5, df_6, df_7
 
 def send_data_electrical(data_name):
     data_path = Path(__file__).resolve().parent.parent / "Electrical_Waves_Sine_Data" / data_name
