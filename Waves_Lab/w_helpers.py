@@ -77,7 +77,8 @@ def run_thermal_plots(packages, periods):
     popts_p = []
     pcovs_p = []
     d = 0.005
-    spacing = [0*d, 1*d, 2*d, 3*d, 4*d, 5*d, 6*d, 7*d]
+    spacing = np.array([0*d, 1*d, 2*d, 3*d, 4*d, 5*d, 6*d, 7*d])
+    spacing = spacing + 0.003
 
     for period in periods:
         package = packages[f"package_{period}"]

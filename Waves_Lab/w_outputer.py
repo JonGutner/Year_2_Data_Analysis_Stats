@@ -146,7 +146,8 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, periods, sa
 
 def find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages, periods):
     d = 0.005
-    spacing = np.array([0*d, 1*d, 2*d, 3*d, 4*d, 5*d, 6*d, 7*d])  # distances (m)
+    spacing = np.array([0*d, 1*d, 2*d, 3*d, 4*d, 5*d, 6*d, 7*d])
+    spacing = spacing + 0.003
 
     for i in range(len(periods)):
         # Unpack fit parameters and covariance matrices
