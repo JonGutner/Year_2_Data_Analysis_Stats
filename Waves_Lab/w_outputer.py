@@ -87,17 +87,17 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
         y_m_a_new_i = np.ravel(y_m_a_new[i])
 
         ax.errorbar(spacing, amplitude, yerr=err_a, c=colors[i], linestyle='None',
-                    fmt='none', capsize=4)
+                    fmt='none', capsize=4, label=f"Periods {periods[i]}s")
 
         # Plot fitted models
-        ax.plot(spacing, y_m_a_old_i, c=colors[i], label=f"Periods {periods[i]}s - No Heat Loss Model")
-        ax.plot(spacing, y_m_a_new_i, c=colors[i], linestyle='--', label=f"Periods {periods[i]}s - Newton's Law of Cooling Model")
+        ax.plot(spacing, y_m_a_old_i, c=colors[i])
+        ax.plot(spacing, y_m_a_new_i, c=colors[i], linestyle='--')
 
     ax.set_yscale('log')
     ax.set_title(title)
     ax.set_xlabel("Spacing of Thermistors (m)")
     ax.set_ylabel("Amplitude Ratio (log)")
-    ax.legend(fontsize=6)
+    ax.legend(fontsize=8)
 
     # Save plot
     if save:
@@ -125,16 +125,16 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
         y_m_p_new_i = np.ravel(y_m_p_new[i])
 
         ax.errorbar(spacing, phase, yerr=err_p, c=colors[i], linestyle='None',
-                    fmt='none', capsize=4)
+                    fmt='none', capsize=4, label=f"Periods {periods[i]}s")
 
         # Plot fitted models
-        ax.plot(spacing, y_m_p_old_i, c=colors[i], label=f"Periods {periods[i]}s - No Heat Loss Model")
-        ax.plot(spacing, y_m_p_new_i, c=colors[i], linestyle='--', label=f"Periods {periods[i]}s - Newton's Law of Cooling Model")
+        ax.plot(spacing, y_m_p_old_i, c=colors[i])
+        ax.plot(spacing, y_m_p_new_i, c=colors[i], linestyle='--')
 
     ax.set_title(title)
     ax.set_xlabel("Spacing of Thermistors (m)")
     ax.set_ylabel("Phase Difference (rad)")
-    ax.legend(fontsize=6)
+    ax.legend(fontsize=8)
 
     # Save plot
     if save:
@@ -167,7 +167,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
     ax.set_title(title)
     ax.set_xlabel("Spacing of Thermistors (m)")
     ax.set_ylabel("Residual: Amplitude Ratio - Model Fit")
-    ax.legend(fontsize=6)
+    ax.legend(fontsize=8)
 
     # Save plot
     if save:
@@ -199,7 +199,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
     ax.set_title(title)
     ax.set_xlabel("Spacing of Thermistors (m)")
     ax.set_ylabel("Residual: Amplitude Ratio - Model Fit")
-    ax.legend(fontsize=6)
+    ax.legend(fontsize=8)
 
     # Save plot
     if save:
