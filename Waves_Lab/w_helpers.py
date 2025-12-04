@@ -89,9 +89,39 @@ def run_thermal_plots(packages, periods):
         popt_a_old, pcov_a_old = w_estimators.amplitude_fit(spacing, amplitude, params_a_old)
         y_model_a_old = np.ravel(w_pdfs.amplitude_waves(spacing, *popt_a_old))
 
+        sigma_old = np.asarray(package[2], dtype=float)  # same length as amplitude
+        gof_old = w_estimators.goodness_of_fit_regression(
+            spacing,
+            np.asarray(amplitude, dtype=float),
+            w_pdfs.amplitude_waves,
+            popt_a_old,
+            sigma=sigma_old
+        )
+        print("=========OLD=MODEl=START==========")
+        print(f"[Period {period}s] Old amplitude model: "
+              f"χ² = {gof_old['chi2']:.2f}, dof = {gof_old['dof']}, "
+              f"χ²/dof = {gof_old['chi2'] / gof_old['dof']:.2f}, "
+              f"p = {gof_old['p_value']:.3f}")
+        print("=========OLD=MODEl=END==========")
+
         params_p_old = [0.3, 0]
         popt_p_old, pcov_p_old = w_estimators.phase_fit(spacing, phase, params_p_old)
         y_model_p_old = np.ravel(w_pdfs.phase_waves(spacing, *popt_p_old))
+        #
+        # sigma_phase = np.asarray(package[3], dtype=float)  # same length as phase
+        # gof_old = w_estimators.goodness_of_fit_regression(
+        #     spacing,
+        #     np.asarray(phase, dtype=float),
+        #     w_pdfs.phase_waves,
+        #     popt_p_old,
+        #     sigma=sigma_phase
+        # )
+        # print("===================")
+        # print(f"[Period {period}s] Old phase model: "
+        #       f"χ² = {gof_old['chi2']:.2f}, dof = {gof_old['dof']}, "
+        #       f"χ²/dof = {gof_old['chi2'] / gof_old['dof']:.2f}, "
+        #       f"p = {gof_old['p_value']:.3f}")
+        # print("===================")
 
         # -------------------------
         # New Robin-boundary model
@@ -99,20 +129,43 @@ def run_thermal_plots(packages, periods):
         omega = 2 * np.pi / period
         L = 0.043  # cylinder length in meters
 
-        # amplitude + phase model wrappers
+        def robin_amp_phase_model(x, Cpr, Cpi, D, h_over_k):
+            """
+            Return complex amplitude, amplitude, and raw phase (wrapped).
+            """
+            X = w_pdfs.X_model(x, Cpr, Cpi, D, h_over_k, omega, L)
+            amp = np.abs(X)
+            phi = np.angle(X)  # in (-π, π]
+            return amp, phi
+
         def robin_amp_model(x, Cpr, Cpi, D, h_over_k):
-            X = w_pdfs.X_model(x, Cpr, Cpi, D, h_over_k, omega, L)
-            return np.abs(X)
+            omega = 2 * np.pi / period
+            L = 0.043
+            amp, _ = robin_amp_phase_model(x, Cpr, Cpi, D, h_over_k)
+            return amp
 
-        def robin_phase_model(x, Cpr, Cpi, D, h_over_k):
-            X = w_pdfs.X_model(x, Cpr, Cpi, D, h_over_k, omega, L)
-            return np.angle(X)
+        def robin_phase_model_unwrapped(x, Cpr, Cpi, D, h_over_k):
+            """
+            Phase model processed exactly like the data:
+            relative to thermistor 0 + np.unwrap + optional positive shift.
+            """
+            # compute at all sensor positions (spacing)
+            _, phi_raw = robin_amp_phase_model(spacing, Cpr, Cpi, D, h_over_k)
 
-        def robin_phase_model_wrapped(x, Cpr, Cpi, D, h_over_k):
-            X = w_pdfs.X_model(x, Cpr, Cpi, D, h_over_k, omega, L)
-            phi_raw = np.angle(X)
-            phi_wrapped = wrap_like_data(phi_raw, unwrap_positive, fold_above_pi)
-            return phi_wrapped
+            # relative to thermistor 0
+            phi_rel = phi_raw - phi_raw[0]
+
+            # unwrap
+            phi_unw = np.unwrap(phi_rel)
+
+            # OPTIONAL: same positive shift convention as data
+            if phi_unw[1] < 0:
+                phi_unw += 2 * np.pi
+
+            # Now select the values corresponding to x that curve_fit passes.
+            # In your usage, x is exactly 'spacing', so we can just return phi_unw.
+            # To be safe (if order always matches):
+            return phi_unw
 
         # initial guesses and bounds
         p0 = [amplitude[0], 0.0, 1e-6, 20.0]  # Cpr, Cpi, D, h_over_k
@@ -122,11 +175,32 @@ def run_thermal_plots(packages, periods):
         popt_a_new, pcov_a_new = curve_fit(robin_amp_model, spacing, amplitude, p0=p0, bounds=bounds)
         y_model_a_new = np.ravel(robin_amp_model(spacing, *popt_a_new))
 
+        sigma_new = np.asarray(package[2], dtype=float)  # same length as amplitude
+        gof_new = w_estimators.goodness_of_fit_regression(
+            spacing,
+            np.asarray(amplitude, dtype=float),
+            robin_amp_model,
+            popt_a_new,
+            sigma=sigma_new
+        )
+        print("=========NEW=MODEl=START==========")
+        print(f"[Period {period}s] New amplitude model: "
+              f"χ² = {gof_new['chi2']:.2f}, dof = {gof_new['dof']}, "
+              f"χ²/dof = {gof_new['chi2'] / gof_new['dof']:.2f}, "
+              f"p = {gof_new['p_value']:.3f}")
+        print("=========NEW=MODEl=END==========")
+
         # fit phase
         popt_p_new, pcov_p_new = curve_fit(
-            robin_phase_model_wrapped, spacing, phase, p0=p0, bounds=bounds
+            robin_phase_model_unwrapped,
+            spacing,
+            phase,  # 'phase' is already unwrapped from the package
+            p0=p0,
+            bounds=bounds
         )
-        y_model_p_new = np.ravel(robin_phase_model_wrapped(spacing, *popt_p_new))
+
+        # evaluate model phase for plotting (already unwrapped and shifted)
+        y_model_p_new = np.ravel(robin_phase_model_unwrapped(spacing, *popt_p_new))
 
         # -------------------------
         # Store results
@@ -229,13 +303,19 @@ def load_run_thermal_vs_electrical(param_names, periods, is_thermal=False):
                 df_0, df_1, df_2, df_3, df_4, df_5, df_6, df_7,
                 func_pdf, param_names, i, periods)
 
-            phase_diff = phases - phases[0]  # φ_i - φ_0
+            phases = np.asarray(phases, dtype=float)
 
+            # Phase difference relative to thermistor 0
+            phase_diff = phases - phases[0]
+
+            # SIMPLE spatial unwrapping: remove only ±2π jumps
             phase_diff_unwrapped = np.unwrap(phase_diff)
-            phase_diff_positive = unwrap_positive(phase_diff_unwrapped)
-            phase_diff_folded = fold_above_pi(phase_diff_positive)
 
-            package = [amplitudes, phase_diff_folded, err_a, err_p]
+            # OPTIONAL: shift the whole curve to be mostly positive
+            if phase_diff_unwrapped[1] < 0:
+                phase_diff_unwrapped += 2 * np.pi
+
+            package = [amplitudes, phase_diff_unwrapped, err_a, err_p]
             packages[f"package_{periods[i]}"] = package
 
         run_thermal_plots(packages, periods)
@@ -295,72 +375,6 @@ def load_run_thermal_vs_electrical(param_names, periods, is_thermal=False):
         # 2.7(c) & (d): velocities and cutoff (now built from 2.7a k, ω)
         results = run_all(in_phase_results, out_phase_results,
                           k_w_data, do_plots=True)
-
-def unwrap_positive(diff_phases, min_step=-np.pi, max_step=np.pi):
-    """
-    Make phase differences smooth and (for i>0) positive,
-    by adding/subtracting 2π as needed.
-
-    diff_phases: array-like of initial phase differences φ_i - φ_0 (rad)
-                 in thermistor order (x increasing).
-    """
-    diff_phases = np.asarray(diff_phases, dtype=float)
-    out = np.zeros_like(diff_phases)
-    out[0] = 0.0  # reference thermistor
-
-    for i in range(1, len(diff_phases)):
-        p = diff_phases[i]
-
-        # try shifting by k*2π and pick the one closest to previous out[i-1]
-        candidates = [p + 2*np.pi*k for k in range(-2, 3)]
-        # keep only positive candidates
-        candidates = [c for c in candidates if c >= 0.0]
-        if not candidates:
-            # if all candidates would be negative, just fall back to standard unwrap
-            c = p
-            while c - out[i-1] > max_step:
-                c -= 2*np.pi
-            while c - out[i-1] < min_step:
-                c += 2*np.pi
-            out[i] = c
-        else:
-            # choose candidate closest to previous
-            c = min(candidates, key=lambda x: abs(x - out[i-1]))
-            out[i] = c
-
-    return out
-
-def fold_above_pi(phases):
-    """
-    For each phase value > π, subtract π.
-
-    Parameters
-    ----------
-    phases : array-like
-        Phase differences in radians.
-
-    Returns
-    -------
-    folded : ndarray
-        Phase differences with values > π folded by subtracting π.
-    """
-    phases = np.asarray(phases, dtype=float)
-    folded = phases.copy()
-    mask = folded > np.pi
-    folded[mask] -= np.pi
-    return folded
-
-def wrap_like_data(phases, unwrap_positive, fold_above_pi):
-    """
-    phases: array φ_i from thermistor fit (raw, in (-π, π])
-    Returns: φ_i processed exactly as done for the data.
-    """
-    phases = np.asarray(phases, dtype=float)
-    phase_diff = phases - phases[0]          # φ_i − φ_0
-    phase_diff_unwrapped = np.unwrap(phase_diff)
-    phase_diff_positive = unwrap_positive(phase_diff_unwrapped)
-    phase_diff_folded = fold_above_pi(phase_diff_positive)
-    return phase_diff_folded
 
 # ======================================================================
 #  ELECTRICAL: DISPERSION (2.7a)  — UNCHANGED, BUT RETURNS k & ω
