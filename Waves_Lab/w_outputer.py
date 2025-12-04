@@ -70,29 +70,34 @@ def show_fit(data, pdf, params, t=None, bins=50, title="MLE Fit", save=True):
 
     return fig
 #spacing, packages, y_models_a, y_models_p
-def show_thermistor_param(spacing, packages, y_models_a, y_models_p, periods, save=True, show=False):
-    #Amplitude
-    fig, ax = plt.subplots()
+def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_m_p_new, periods, save=True, show=False):
     colors = ["red", "blue", "green", "orange", "cyan", "purple", "gold", "teal", "olive", "lime", "crimson"]
+
+    # -----------------------------
+    # Amplitude plot
+    # -----------------------------
+    fig, ax = plt.subplots()
     title = "Amplitude Graphs for Thermistors 0-7"
 
     for i in range(len(periods)):
         package = packages[f"package_{periods[i]}"]
-        amplitude = package[0]
-        err_a = package[2]
-        y_model_a = y_models_a[i]
+        amplitude = np.ravel(package[0])
+        err_a = np.ravel(package[2])
+        y_m_a_old_i = np.ravel(y_m_a_old[i])
+        y_m_a_new_i = np.ravel(y_m_a_new[i])
 
         ax.errorbar(spacing, amplitude, yerr=err_a, c=colors[i], linestyle='None',
-                    fmt='none', capsize=4, label=f"Periods {periods[i]}s")
+                    fmt='none', capsize=4)
 
-        # Plot fitted model
-        ax.plot(spacing, y_model_a, c=colors[i])
+        # Plot fitted models
+        ax.plot(spacing, y_m_a_old_i, c=colors[i], label=f"Periods {periods[i]}s - No Heat Loss Model")
+        ax.plot(spacing, y_m_a_new_i, c=colors[i], linestyle='--', label=f"Periods {periods[i]}s - Newton's Law of Cooling Model")
 
-        ax.set_yscale('log')
-        ax.set_title(title)
-        ax.set_xlabel("Spacing of Thermistors (m)")
-        ax.set_ylabel("Amplitude Ratio (log)")
-        ax.legend()
+    ax.set_yscale('log')
+    ax.set_title(title)
+    ax.set_xlabel("Spacing of Thermistors (m)")
+    ax.set_ylabel("Amplitude Ratio (log)")
+    ax.legend(fontsize=8)
 
     # Save plot
     if save:
@@ -109,25 +114,27 @@ def show_thermistor_param(spacing, packages, y_models_a, y_models_p, periods, sa
 
     plt.close(fig)
 
-    title = "Phase Graphs for Thermistors 0-7"
     fig, ax = plt.subplots()
+    title = "Phase Graphs for Thermistors 0-7"
 
     for i in range(len(periods)):
         package = packages[f"package_{periods[i]}"]
-        phase = package[1]
-        err_p = package[3]
-        y_model_p = y_models_p[i]
+        phase = np.ravel(package[1])
+        err_p = np.ravel(package[3])
+        y_m_p_old_i = np.ravel(y_m_p_old[i])
+        y_m_p_new_i = np.ravel(y_m_p_new[i])
 
         ax.errorbar(spacing, phase, yerr=err_p, c=colors[i], linestyle='None',
-                    fmt='none', capsize=4, label=f"Periods {periods[i]}s")
+                    fmt='none', capsize=4)
 
-        # Plot fitted model
-        ax.plot(spacing, y_model_p, c=colors[i])
+        # Plot fitted models
+        ax.plot(spacing, y_m_p_old_i, c=colors[i], label=f"Periods {periods[i]}s - No Heat Loss Model")
+        ax.plot(spacing, y_m_p_new_i, c=colors[i], linestyle='--', label=f"Periods {periods[i]}s - Newton's Law of Cooling Model")
 
-        ax.set_title(title)
-        ax.set_xlabel("Spacing of Thermistors (m)")
-        ax.set_ylabel("Phase Difference (rad)")
-        ax.legend()
+    ax.set_title(title)
+    ax.set_xlabel("Spacing of Thermistors (m)")
+    ax.set_ylabel("Phase Difference (rad)")
+    ax.legend(fontsize=8)
 
     # Save plot
     if save:

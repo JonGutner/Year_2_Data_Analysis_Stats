@@ -29,6 +29,26 @@ def amplitude_waves(x, a, m):
         return np.inf * np.ones_like(x)
     return a*np.exp(m*x)
 
+def beta_from_D(D, omega):
+    # complex wavevector
+    return np.sqrt(omega / (2*D)) * (1j - 1)
+
+def X_model(x, Cpr, Cpi, D, h_over_k, omega, L):
+    x = np.asarray(x, dtype=float)  # <-- ensure array
+    C_plus = Cpr + 1j*Cpi
+    beta = np.sqrt(omega / (2*D)) * (1j - 1)
+    R = (beta + h_over_k) / (-beta + h_over_k)
+    term = np.exp(beta*x) - np.exp(2*beta*L) * R * np.exp(-beta*x)
+    return C_plus * term  # returns array of same shape as x
+
+def amplitude_model(x, Cpr, Cpi, D, h_over_k, omega, L):
+    X = X_model(x, Cpr, Cpi, D, h_over_k, omega, L)
+    return np.abs(X)
+
+def phase_model(x, Cpr, Cpi, D, h_over_k, omega, L):
+    X = X_model(x, Cpr, Cpi, D, h_over_k, omega, L)
+    return np.angle(X)
+
 # ==Electrical Waves Experiment==
 def sine_with_phase_elec_20(t, amplitude, phase, c):
     return amplitude * np.sin(2*np.pi * 20 * t - phase) + c

@@ -4,11 +4,6 @@ from scipy.optimize import curve_fit
 from matplotlib import pyplot as plt
 from Waves_Lab import w_estimators, w_outputer, w_pdfs, data_management
 
-
-# ======================================================================
-#  GENERIC FITTING HELPERS (unchanged)
-# ======================================================================
-
 def run_tests(df, i, chosen_pdf, param_names, j, init_params,
               periods = None, close_fig=False, thermal=True):
     """
@@ -70,35 +65,85 @@ def run_tests(df, i, chosen_pdf, param_names, j, init_params,
 # ======================================================================
 
 def run_thermal_plots(packages, periods):
-    y_models_a = []
-    y_models_p = []
+    y_models_a_old = []
+    y_models_a_new = []
+    y_models_p_old = []
+    y_models_p_new = []
     popts_a = []
     pcovs_a = []
     popts_p = []
     pcovs_p = []
+
     d = 0.005
-    spacing = np.array([0*d, 1*d, 2*d, 3*d, 4*d, 5*d, 6*d, 7*d])
-    spacing = spacing + 0.003
+    spacing = np.array([0, 1, 2, 3, 4, 5, 6, 7]) * d + 0.003
 
     for period in periods:
         package = packages[f"package_{period}"]
-        amplitude = package[0]
-        phase = package[1]
+        amplitude = np.ravel(package[0])  # ensure 1D
+        phase = np.ravel(package[1])  # ensure 1D
 
-        params_a = [amplitude[0], -1]
-        popt_a, pcov_a = w_estimators.amplitude_fit(spacing, amplitude, params_a)
-        popts_a.append(popt_a)
-        pcovs_a.append(pcov_a)
-        y_models_a.append(w_pdfs.amplitude_waves(spacing, *popt_a))
+        # -------------------------
+        # Old models (keep as-is)
+        # -------------------------
+        params_a_old = [amplitude[0], -1]
+        popt_a_old, pcov_a_old = w_estimators.amplitude_fit(spacing, amplitude, params_a_old)
+        y_model_a_old = np.ravel(w_pdfs.amplitude_waves(spacing, *popt_a_old))
 
-        params_p = [0.3, 0]
-        popt_p, pcov_p = w_estimators.phase_fit(spacing, phase, params_p)
-        popts_p.append(popt_p)
-        pcovs_p.append(pcov_p)
-        y_models_p.append(w_pdfs.phase_waves(spacing, *popt_p))
+        params_p_old = [0.3, 0]
+        popt_p_old, pcov_p_old = w_estimators.phase_fit(spacing, phase, params_p_old)
+        y_model_p_old = np.ravel(w_pdfs.phase_waves(spacing, *popt_p_old))
 
-    w_outputer.show_thermistor_param(spacing, packages, y_models_a, y_models_p, periods)
-    w_outputer.find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages, periods)
+        # -------------------------
+        # New Robin-boundary model
+        # -------------------------
+        omega = 2 * np.pi / period
+        L = 0.043  # cylinder length in meters
+
+        # amplitude + phase model wrappers
+        def robin_amp_model(x, Cpr, Cpi, D, h_over_k):
+            X = w_pdfs.X_model(x, Cpr, Cpi, D, h_over_k, omega, L)
+            return np.abs(X)
+
+        def robin_phase_model(x, Cpr, Cpi, D, h_over_k):
+            X = w_pdfs.X_model(x, Cpr, Cpi, D, h_over_k, omega, L)
+            return np.angle(X)
+
+        def robin_phase_model_wrapped(x, Cpr, Cpi, D, h_over_k):
+            X = w_pdfs.X_model(x, Cpr, Cpi, D, h_over_k, omega, L)
+            phi_raw = np.angle(X)
+            phi_wrapped = wrap_like_data(phi_raw, unwrap_positive, fold_above_pi)
+            return phi_wrapped
+
+        # initial guesses and bounds
+        p0 = [amplitude[0], 0.0, 1e-6, 20.0]  # Cpr, Cpi, D, h_over_k
+        bounds = ([-np.inf, -np.inf, 1e-8, 0.0], [np.inf, np.inf, 1e-3, 1e4])
+
+        # fit amplitude
+        popt_a_new, pcov_a_new = curve_fit(robin_amp_model, spacing, amplitude, p0=p0, bounds=bounds)
+        y_model_a_new = np.ravel(robin_amp_model(spacing, *popt_a_new))
+
+        # fit phase
+        popt_p_new, pcov_p_new = curve_fit(
+            robin_phase_model_wrapped, spacing, phase, p0=p0, bounds=bounds
+        )
+        y_model_p_new = np.ravel(robin_phase_model_wrapped(spacing, *popt_p_new))
+
+        # -------------------------
+        # Store results
+        # -------------------------
+        popts_a.append(popt_a_old)
+        pcovs_a.append(pcov_a_old)
+        popts_p.append(popt_p_old)
+        pcovs_p.append(pcov_p_old)
+
+        y_models_a_old.append(y_model_a_old)
+        y_models_a_new.append(y_model_a_new)
+        y_models_p_old.append(y_model_p_old)
+        y_models_p_new.append(y_model_p_new)
+
+    w_outputer.show_thermistor_param(spacing, packages, y_models_a_old, y_models_p_old,
+                                     y_models_a_new, y_models_p_new, periods)
+    w_outputer.find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages, periods) #TODO: HERE
 
 def get_ampli_phase_err_thermal(df_0, df_1, df_2, df_3, df_4, df_5, df_6, df_7,
                                 chosen_pdf, param_names, j, periods):
@@ -304,6 +349,18 @@ def fold_above_pi(phases):
     mask = folded > np.pi
     folded[mask] -= np.pi
     return folded
+
+def wrap_like_data(phases, unwrap_positive, fold_above_pi):
+    """
+    phases: array φ_i from thermistor fit (raw, in (-π, π])
+    Returns: φ_i processed exactly as done for the data.
+    """
+    phases = np.asarray(phases, dtype=float)
+    phase_diff = phases - phases[0]          # φ_i − φ_0
+    phase_diff_unwrapped = np.unwrap(phase_diff)
+    phase_diff_positive = unwrap_positive(phase_diff_unwrapped)
+    phase_diff_folded = fold_above_pi(phase_diff_positive)
+    return phase_diff_folded
 
 # ======================================================================
 #  ELECTRICAL: DISPERSION (2.7a)  — UNCHANGED, BUT RETURNS k & ω
