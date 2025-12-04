@@ -97,7 +97,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
     ax.set_title(title)
     ax.set_xlabel("Spacing of Thermistors (m)")
     ax.set_ylabel("Amplitude Ratio (log)")
-    ax.legend(fontsize=8)
+    ax.legend(fontsize=6)
 
     # Save plot
     if save:
@@ -134,7 +134,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
     ax.set_title(title)
     ax.set_xlabel("Spacing of Thermistors (m)")
     ax.set_ylabel("Phase Difference (rad)")
-    ax.legend(fontsize=8)
+    ax.legend(fontsize=6)
 
     # Save plot
     if save:

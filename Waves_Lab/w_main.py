@@ -8,7 +8,7 @@ chosen_pdf = w_pdfs.sine_with_phase
 # For Waves Experiment
 param_names = ["amplitude", "phase", "c"]
 # Periods used for the experiment
-periods = np.array([15, 17, 20])
+periods = np.array([15, 17, 20, 30])
 
 # -----------------------------
 #Runs thermal waves analysis

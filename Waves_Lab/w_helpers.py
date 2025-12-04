@@ -97,12 +97,12 @@ def run_thermal_plots(packages, periods):
             popt_a_old,
             sigma=sigma_old
         )
-        print("=========OLD=MODEl=START==========")
+        print("=========OLD=MODEL=START==========")
         print(f"[Period {period}s] Old amplitude model: "
               f"χ² = {gof_old['chi2']:.2f}, dof = {gof_old['dof']}, "
               f"χ²/dof = {gof_old['chi2'] / gof_old['dof']:.2f}, "
               f"p = {gof_old['p_value']:.3f}")
-        print("=========OLD=MODEl=END==========")
+        print("=========OLD=MODEL=END==========")
 
         params_p_old = [0.3, 0]
         popt_p_old, pcov_p_old = w_estimators.phase_fit(spacing, phase, params_p_old)
@@ -183,12 +183,12 @@ def run_thermal_plots(packages, periods):
             popt_a_new,
             sigma=sigma_new
         )
-        print("=========NEW=MODEl=START==========")
+        print("=========NEW=MODEL=START==========")
         print(f"[Period {period}s] New amplitude model: "
               f"χ² = {gof_new['chi2']:.2f}, dof = {gof_new['dof']}, "
               f"χ²/dof = {gof_new['chi2'] / gof_new['dof']:.2f}, "
               f"p = {gof_new['p_value']:.3f}")
-        print("=========NEW=MODEl=END==========")
+        print("=========NEW=MODEL=END==========")
 
         # fit phase
         popt_p_new, pcov_p_new = curve_fit(
