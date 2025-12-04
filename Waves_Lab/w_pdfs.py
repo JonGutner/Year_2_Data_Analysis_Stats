@@ -19,6 +19,9 @@ def sine_with_phase_30(t, amplitude, phase, c):
 def sine_with_phase_60(t, amplitude, phase, c):
     return amplitude * np.sin(2*np.pi/60 * t - phase) + c
 
+def sine_with_phase_100(t, amplitude, phase, c):
+    return amplitude * np.sin(2*np.pi/100 * t - phase) + c
+
 def phase_waves(x, m ,c):
     x = np.array(x, dtype=float)
     return m*x + c

@@ -77,7 +77,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
     # Amplitude plot
     # -----------------------------
     fig, ax = plt.subplots()
-    title = "Amplitude Graphs for Thermistors 0-7"
+    title = "Amplitude Ratio Graph for Thermistors 0-7"
 
     for i in range(len(periods)):
         package = packages[f"package_{periods[i]}"]
@@ -115,7 +115,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
     plt.close(fig)
 
     fig, ax = plt.subplots()
-    title = "Phase Graphs for Thermistors 0-7"
+    title = "Phase Graph for Thermistors 0-7"
 
     for i in range(len(periods)):
         package = packages[f"package_{periods[i]}"]
@@ -151,31 +151,77 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
 
     plt.close(fig)
 
-def find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages, periods):
+    fig, ax = plt.subplots()
+    title = "Residual Amplitude Ratio Graph for Thermistors 0-7 of the No Heat Loss Model"
+    ax.plot(spacing, (y_m_a_new_i - y_m_a_new_i), c="grey")
+
+    for i in range(len(periods)):
+        package = packages[f"package_{periods[i]}"]
+        amplitude = np.ravel(package[0])
+        err_a = np.ravel(package[2])
+        y_m_a_old_i = np.ravel(y_m_a_old[i])
+
+        ax.errorbar(spacing+i*0.0003, amplitude-y_m_a_old_i, yerr=err_a, c=colors[i], linestyle='None',
+                    fmt='none', capsize=4, label=f"Periods {periods[i]}s")
+
+    ax.set_title(title)
+    ax.set_xlabel("Spacing of Thermistors (m)")
+    ax.set_ylabel("Residual: Amplitude Ratio - Model Fit")
+    ax.legend(fontsize=6)
+
+    # Save plot
+    if save:
+        desktop = os.path.join(os.path.expanduser("~"), "Desktop")
+        out_dir = os.path.join(desktop, "StatsPlots")
+        os.makedirs(out_dir, exist_ok=True)
+        safe_title = title.replace(" ", "_").replace("/", "_")
+        out_path = os.path.join(out_dir, f"{safe_title}.png")
+        fig.savefig(out_path, dpi=150, bbox_inches="tight")
+        print(f"[plot saved] {out_path}")
+
+    if show:
+        plt.show()
+
+    plt.close(fig)
+
+    fig, ax = plt.subplots()
+    title = "Residual Amplitude Ratio Graph for Thermistors 0-7 of the Newton's Law of Cooling Model"
+    ax.plot(spacing, (y_m_a_new_i - y_m_a_new_i), c="grey")
+
+    for i in range(len(periods)):
+        package = packages[f"package_{periods[i]}"]
+        amplitude = np.ravel(package[0])
+        err_a = np.ravel(package[2])
+        y_m_a_new_i = np.ravel(y_m_a_new[i])
+
+        ax.errorbar(spacing+i*0.0003, amplitude-y_m_a_new_i, yerr=err_a, c=colors[i], linestyle='None',
+                    fmt='none', capsize=4, label=f"Periods {periods[i]}s")
+    ax.set_title(title)
+    ax.set_xlabel("Spacing of Thermistors (m)")
+    ax.set_ylabel("Residual: Amplitude Ratio - Model Fit")
+    ax.legend(fontsize=6)
+
+    # Save plot
+    if save:
+        desktop = os.path.join(os.path.expanduser("~"), "Desktop")
+        out_dir = os.path.join(desktop, "StatsPlots")
+        os.makedirs(out_dir, exist_ok=True)
+        safe_title = title.replace(" ", "_").replace("/", "_")
+        out_path = os.path.join(out_dir, f"{safe_title}.png")
+        fig.savefig(out_path, dpi=150, bbox_inches="tight")
+        print(f"[plot saved] {out_path}")
+
+    if show:
+        plt.show()
+
+    plt.close(fig)
+
+def find_diffusivity(packages, periods):
     d = 0.005
     spacing = np.array([0*d, 1*d, 2*d, 3*d, 4*d, 5*d, 6*d, 7*d])
     spacing = spacing + 0.003
 
     for i in range(len(periods)):
-        # Unpack fit parameters and covariance matrices
-        popt_a = popts_a[i]
-        pcov_a = pcovs_a[i]
-        popt_p = popts_p[i]
-        pcov_p = pcovs_p[i]
-
-        perr_a = np.sqrt(np.diag(pcov_a))
-        perr_p = np.sqrt(np.diag(pcov_p))
-
-        a, m_a = popt_a
-        a_err, m_err_a = perr_a
-        m_p, c_p = popt_p
-        m_err_p, c_err_p = perr_p
-
-        # Print fits
-        print(f"\nFor thermistors of period {periods[i]} s, the fits are:")
-        print(f"Amplitude: ({a:.3f} ± {a_err:.3f}) * exp(({m_a:.3f} ± {m_err_a:.3f}) * x)")
-        print(f"Phase: ({m_p:.3f} ± {m_err_p:.3f}) * x + ({c_p:.3f} ± {c_err_p:.3f})")
-
         package = packages[f"package_{periods[i]}"]
         amplitude = package[0]
         phase = package[1]
@@ -195,12 +241,12 @@ def find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages, periods):
         diffusivity_p = np.array(diffusivity_p)
 
         # Print diffusivity results
-        print("\nCalculated diffusivity values:")
+        print(f"\nCalculated diffusivity values OLD MODEL at period {periods[i]}:")
         print(f"From amplitude fits: {diffusivity_a}")
         print(f"From phase fits: {diffusivity_p}")
         print("----------------------")
 
-        find_diffusivity_pairwise(amplitude, phase, periods, spacing)
+        # find_diffusivity_pairwise(amplitude, phase, periods, spacing)
 
 def find_diffusivity_pairwise(amplitudes_list, phases_list, periods, spacing):
     """

@@ -69,10 +69,6 @@ def run_thermal_plots(packages, periods):
     y_models_a_new = []
     y_models_p_old = []
     y_models_p_new = []
-    popts_a = []
-    pcovs_a = []
-    popts_p = []
-    pcovs_p = []
 
     d = 0.005
     spacing = np.array([0, 1, 2, 3, 4, 5, 6, 7]) * d + 0.003
@@ -205,19 +201,22 @@ def run_thermal_plots(packages, periods):
         # -------------------------
         # Store results
         # -------------------------
-        popts_a.append(popt_a_old)
-        pcovs_a.append(pcov_a_old)
-        popts_p.append(popt_p_old)
-        pcovs_p.append(pcov_p_old)
 
         y_models_a_old.append(y_model_a_old)
         y_models_a_new.append(y_model_a_new)
         y_models_p_old.append(y_model_p_old)
         y_models_p_new.append(y_model_p_new)
 
+        perr_a = np.sqrt(np.diag(pcov_a_new))
+        perr_p = np.sqrt(np.diag(pcov_p_new))
+        print(f"\nCalculated diffusivity values NEW MODEL for period {period}s:")
+        print(f"From amplitude fits: {popt_a_new[2]} ± {perr_a[2]}")
+        print(f"From phase fits: {popt_p_new[2]} ± {perr_p[2]}")
+        print("----------------------")
+
     w_outputer.show_thermistor_param(spacing, packages, y_models_a_old, y_models_p_old,
                                      y_models_a_new, y_models_p_new, periods)
-    w_outputer.find_diffusivity(popts_a, pcovs_a, popts_p, pcovs_p, packages, periods) #TODO: HERE
+    w_outputer.find_diffusivity(packages, periods)
 
 def get_ampli_phase_err_thermal(df_0, df_1, df_2, df_3, df_4, df_5, df_6, df_7,
                                 chosen_pdf, param_names, j, periods):
