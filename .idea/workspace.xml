@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Task 2.7 b-d) finished. Gives decent results of analysis.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Minor plotting modification.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_Lab/w_estimators.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_estimators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Waves_Lab/w_helpers.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_helpers.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,48 +52,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests for test_MLE.TestMLE.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.test_binomial.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.test_exponential.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.test_gaussian.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.test_lorentzian.executor": "Run",
-    "Python tests.Python tests for test_stats.TestMLE.test_poisson.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.test_binomial.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.test_exponential.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.test_gaussian.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.test_lorentzian.executor": "Run",
-    "Python tests.Python tests for tests.TestMLE.test_poisson.executor": "Run",
-    "Python tests.Python tests in tests.py.executor": "Run",
-    "Python.data_management.executor": "Debug",
-    "Python.estimators.executor": "Run",
-    "Python.fourier_transform.executor": "Run",
-    "Python.helpers.executor": "Debug",
-    "Python.lab_stats.executor": "Run",
-    "Python.load_dataset.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.outputer.executor": "Run",
-    "Python.pdfs.executor": "Run",
-    "Python.plot_vals.executor": "Run",
-    "Python.w_helpers.executor": "Run",
-    "Python.w_main.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests for test_MLE.TestMLE.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.test_binomial.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.test_exponential.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.test_gaussian.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.test_lorentzian.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_stats.TestMLE.test_poisson.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.test_binomial.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.test_exponential.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.test_gaussian.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.test_lorentzian.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for tests.TestMLE.test_poisson.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests in tests.py.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_management.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.estimators.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fourier_transform.executor&quot;: &quot;Run&quot;,
+    &quot;Python.helpers.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.lab_stats.executor&quot;: &quot;Run&quot;,
+    &quot;Python.load_dataset.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.outputer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.pdfs.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plot_vals.executor&quot;: &quot;Run&quot;,
+    &quot;Python.w_helpers.executor&quot;: &quot;Run&quot;,
+    &quot;Python.w_main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Waves_Stat_Folder" />
+      <recent name="$PROJECT_DIR$/Waves_Stat_Folder/Old_data" />
       <recent name="$PROJECT_DIR$/frequency_dependence_test" />
       <recent name="$PROJECT_DIR$/Electrical_Waves_Sine_Data/Out_of_Phase" />
       <recent name="$PROJECT_DIR$/Electrical_Waves_Sine_Data/In_Phase" />
-      <recent name="$PROJECT_DIR$/Electrical_Waves_Data/Closed" />
-      <recent name="$PROJECT_DIR$/Electrical_Waves_Data/Open" />
     </key>
   </component>
   <component name="RunManager">
@@ -194,86 +196,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1756929054046</updated>
-    </task>
-    <task id="LOCAL-00001" summary="ChatGPT version of the whole code.">
-      <option name="closed" value="true" />
-      <created>1757195863360</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1757195863360</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Fixed bugs. All unittests running.">
-      <option name="closed" value="true" />
-      <created>1757207146171</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1757207146171</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Unittests outputs added.">
-      <option name="closed" value="true" />
-      <created>1757262638979</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1757262638979</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Improvement of the saving figures in folders on the desktop.">
-      <option name="closed" value="true" />
-      <created>1757263036454</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1757263036454</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Improvement of the saving figures in folders on the desktop.">
-      <option name="closed" value="true" />
-      <created>1757264662713</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1757264662713</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Improvement of the saving figures in folders on the desktop.">
-      <option name="closed" value="true" />
-      <created>1757264688424</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1757264688424</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Fixing the plotting of PMFs (discrete functions)">
-      <option name="closed" value="true" />
-      <created>1757268473744</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1757268473744</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Goodness of fit is added.">
-      <option name="closed" value="true" />
-      <created>1757271377381</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1757271377382</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Goodness of fit is added.">
-      <option name="closed" value="true" />
-      <created>1757272699206</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1757272699206</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Init of waves lab class, downloaded py file, and workspace.">
-      <option name="closed" value="true" />
-      <created>1762773348097</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1762773348097</updated>
     </task>
     <task id="LOCAL-00011" summary="Modification of load_dataset.py and addition of plot_vals.py, which graphs thermistors 0 &amp; 3.">
       <option name="closed" value="true" />
@@ -579,7 +501,95 @@
       <option name="project" value="LOCAL" />
       <updated>1764542507917</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="Generalisation of the thermal code to allow for n amount of data sets.">
+      <option name="closed" value="true" />
+      <created>1764696898597</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1764696898597</updated>
+    </task>
+    <task id="LOCAL-00050" summary="Generalisation of the thermal code to allow for n amount of data sets.">
+      <option name="closed" value="true" />
+      <created>1764696995400</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1764696995401</updated>
+    </task>
+    <task id="LOCAL-00051" summary="The whole generalisation is completed.">
+      <option name="closed" value="true" />
+      <created>1764717092097</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1764717092098</updated>
+    </task>
+    <task id="LOCAL-00052" summary="The whole generalisation is completed.">
+      <option name="closed" value="true" />
+      <created>1764719235844</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1764719235844</updated>
+    </task>
+    <task id="LOCAL-00053" summary="Final change before new model introduction.">
+      <option name="closed" value="true" />
+      <created>1764720310516</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1764720310516</updated>
+    </task>
+    <task id="LOCAL-00054" summary="New model completed for amplitude. Phase and diffusivity values still need to be found.">
+      <option name="closed" value="true" />
+      <created>1764838855213</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1764838855213</updated>
+    </task>
+    <task id="LOCAL-00055" summary="New model completed for amplitude. Phase and diffusivity values still need to be found.">
+      <option name="closed" value="true" />
+      <created>1764838875500</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1764838875500</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Amplitude model completed fully, including Χ^2 fit.&#10;Added Period_15.csv">
+      <option name="closed" value="true" />
+      <created>1764844180564</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1764844180564</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Minor adjustments. No big changes.">
+      <option name="closed" value="true" />
+      <created>1764845321387</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1764845321387</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Residual Plots added.">
+      <option name="closed" value="true" />
+      <created>1764853769404</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1764853769404</updated>
+    </task>
+    <task id="LOCAL-00059" summary="Minor plotting modification.">
+      <option name="closed" value="true" />
+      <created>1764856309091</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1764856309091</updated>
+    </task>
+    <option name="localTasksCounter" value="60" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -594,14 +604,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added data analysis for first four thermistors." />
-    <MESSAGE value="Corrects saving mechanism for sine fits." />
-    <MESSAGE value="Updated Outputs for better readability." />
-    <MESSAGE value="Added plots of the amplitudes and phases per spacing." />
-    <MESSAGE value="Removed useless print statements.&#10;Made amplitude to always be positive.&#10;Changed positioning of data files." />
-    <MESSAGE value="Temporary progress in creating plots that contain phase and amplitude relations for different frequencies." />
-    <MESSAGE value="Temporary progress #2 in creating plots that contain phase and amplitude relations for different frequencies." />
-    <MESSAGE value="Temporary Save (BUGS present)" />
     <MESSAGE value="Added more readability in saving of the plots." />
     <MESSAGE value="Minor bux fixes." />
     <MESSAGE value="Fixed all bugs: Plots all 4 frequencies' phases and amplitudes together." />
@@ -619,6 +621,14 @@
     <MESSAGE value="Task 2.7 a) completed." />
     <MESSAGE value="Task 2.7 a) modified." />
     <MESSAGE value="Task 2.7 b-d) finished. Gives decent results of analysis." />
-    <option name="LAST_COMMIT_MESSAGE" value="Task 2.7 b-d) finished. Gives decent results of analysis." />
+    <MESSAGE value="Generalisation of the thermal code to allow for n amount of data sets." />
+    <MESSAGE value="The whole generalisation is completed." />
+    <MESSAGE value="Final change before new model introduction." />
+    <MESSAGE value="New model completed for amplitude. Phase and diffusivity values still need to be found." />
+    <MESSAGE value="Amplitude model completed fully, including Χ^2 fit.&#10;Added Period_15.csv" />
+    <MESSAGE value="Minor adjustments. No big changes." />
+    <MESSAGE value="Residual Plots added." />
+    <MESSAGE value="Minor plotting modification." />
+    <option name="LAST_COMMIT_MESSAGE" value="Minor plotting modification." />
   </component>
 </project>

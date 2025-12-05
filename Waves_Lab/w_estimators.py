@@ -63,6 +63,16 @@ def mle_fit(data, nll_func, init_params=None, method="TNC", is_pdf=True):
         "profile_intervals": profile_errors
     }
 
+def model_comparison(chi2_old, dof_old, chi2_new, dof_new):
+    delta_chi2 = chi2_old - chi2_new
+    delta_dof = dof_old - dof_new
+
+    p_value = 1 - chi2.cdf(delta_chi2, delta_dof)
+
+    print("Δχ² =", delta_chi2)
+    print("ΔDoF =", delta_dof)
+    print("p-value =", p_value)
+
 def goodness_of_fit_regression(x, y, model, params, sigma=None):
     y_pred = model(x, *params)
     residuals = y - y_pred

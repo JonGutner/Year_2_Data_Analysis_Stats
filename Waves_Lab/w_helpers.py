@@ -186,6 +186,8 @@ def run_thermal_plots(packages, periods):
               f"p = {gof_new['p_value']:.3f}")
         print("=========NEW=MODEL=END==========")
 
+        w_estimators.model_comparison(gof_old['chi2'], gof_old['dof'], gof_new['chi2'], gof_new['dof'])
+
         # fit phase
         popt_p_new, pcov_p_new = curve_fit(
             robin_phase_model_unwrapped,
@@ -207,16 +209,16 @@ def run_thermal_plots(packages, periods):
         y_models_p_old.append(y_model_p_old)
         y_models_p_new.append(y_model_p_new)
 
-        perr_a = np.sqrt(np.diag(pcov_a_new))
-        perr_p = np.sqrt(np.diag(pcov_p_new))
-        print(f"\nCalculated diffusivity values NEW MODEL for period {period}s:")
-        print(f"From amplitude fits: {popt_a_new[2]} ± {perr_a[2]}")
-        print(f"From phase fits: {popt_p_new[2]} ± {perr_p[2]}")
-        print("----------------------")
+        # perr_a = np.sqrt(np.diag(pcov_a_new))
+        # perr_p = np.sqrt(np.diag(pcov_p_new))
+        # print(f"\nCalculated diffusivity values NEW MODEL for period {period}s:")
+        # print(f"From amplitude fits: {popt_a_new[2]} ± {perr_a[2]}")
+        # print(f"From phase fits: {popt_p_new[2]} ± {perr_p[2]}")
+        # print("----------------------")
 
     w_outputer.show_thermistor_param(spacing, packages, y_models_a_old, y_models_p_old,
                                      y_models_a_new, y_models_p_new, periods)
-    w_outputer.find_diffusivity(packages, periods)
+    # w_outputer.find_diffusivity(packages, periods)
 
 def get_ampli_phase_err_thermal(df_0, df_1, df_2, df_3, df_4, df_5, df_6, df_7,
                                 chosen_pdf, param_names, j, periods):
