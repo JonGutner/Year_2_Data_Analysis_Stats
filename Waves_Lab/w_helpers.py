@@ -42,7 +42,7 @@ def run_tests(df, i, chosen_pdf, param_names, j, init_params,
 
         fig = w_outputer.show_fit(
             y, plot_pdf, result["params"], t=t,
-            title=f"Therm_{i}_period_{periods[j]}"
+            title=f"Thermistor {i} at Period {periods[j]}s"
         )
     else:
         # Electrical: use provided init_params

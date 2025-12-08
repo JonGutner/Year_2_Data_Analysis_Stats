@@ -54,6 +54,8 @@ def show_fit(data, pdf, params, t=None, bins=50, title="MLE Fit", save=True):
 
     # Plot fitted model
     ax.plot(x, y_model, "r-", label="Fitted Model")
+    ax.set_xlabel("Time (s)")
+    ax.set_ylabel("Temperature (°C)")
 
     ax.set_title(title)
     ax.legend()
@@ -93,7 +95,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
         ax.plot(spacing, y_m_a_old_i, c=colors[i])
         ax.plot(spacing, y_m_a_new_i, c=colors[i], linestyle='--')
 
-    ax.set_yscale('log')
+    # ax.set_yscale('log')
     ax.set_title(title)
     ax.set_xlabel("Spacing of Thermistors (m)")
     ax.set_ylabel("Amplitude Ratio (log)")
