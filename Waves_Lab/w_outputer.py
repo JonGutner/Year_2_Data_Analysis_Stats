@@ -79,7 +79,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
     # Amplitude plot
     # -----------------------------
     fig, ax = plt.subplots()
-    title = "Amplitude Ratio Graph for Thermistors 0-7"
+    title = "Amplitude Graph for Thermistors 0-7"
 
     for i in range(len(periods)):
         package = packages[f"package_{periods[i]}"]
@@ -95,10 +95,10 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
         ax.plot(spacing, y_m_a_old_i, c=colors[i])
         ax.plot(spacing, y_m_a_new_i, c=colors[i], linestyle='--')
 
-    # ax.set_yscale('log')
+    ax.set_yscale('log')
     ax.set_title(title)
     ax.set_xlabel("Spacing of Thermistors (m)")
-    ax.set_ylabel("Amplitude Ratio (log)")
+    ax.set_ylabel("Amplitude (log) (°C)")
     ax.legend(fontsize=8)
 
     # Save plot
@@ -154,7 +154,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
     plt.close(fig)
 
     fig, ax = plt.subplots()
-    title = "Residual Amplitude Ratio Graph for Thermistors 0-7 of the No Heat Loss Model"
+    title = "Residual Amplitude Graph for Thermistors 0-7 of the No Heat Loss Model"
     ax.plot(spacing, (y_m_a_new_i - y_m_a_new_i), c="grey")
 
     for i in range(len(periods)):
@@ -168,7 +168,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
 
     ax.set_title(title)
     ax.set_xlabel("Spacing of Thermistors (m)")
-    ax.set_ylabel("Residual: Amplitude Ratio - Model Fit")
+    ax.set_ylabel("Residual: Amplitude - Model Fit (°C)")
     ax.legend(fontsize=8)
 
     # Save plot
@@ -187,7 +187,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
     plt.close(fig)
 
     fig, ax = plt.subplots()
-    title = "Residual Amplitude Ratio Graph for Thermistors 0-7 of the Newton's Law of Cooling Model"
+    title = "Residual Amplitude Graph for Thermistors 0-7 of the Newton's Law of Cooling Model"
     ax.plot(spacing, (y_m_a_new_i - y_m_a_new_i), c="grey")
 
     for i in range(len(periods)):
@@ -200,7 +200,7 @@ def show_thermistor_param(spacing, packages, y_m_a_old, y_m_p_old, y_m_a_new, y_
                     fmt='none', capsize=4, label=f"Periods {periods[i]}s")
     ax.set_title(title)
     ax.set_xlabel("Spacing of Thermistors (m)")
-    ax.set_ylabel("Residual: Amplitude Ratio - Model Fit")
+    ax.set_ylabel("Residual: Amplitude - Model Fit (°C)")
     ax.legend(fontsize=8)
 
     # Save plot
