@@ -14,18 +14,31 @@
 ## Year 2 Lab
 ### Waves Lab (use of PDFs after this)
 
-What it does
+What it does (Thermal Waves)
 * Reads .csv files containing the data.
-* Graphs (currently for the 0-3) thermistors together on one plot.
+* Graphs thermistors 0-7 together on one plot.
 * Uses MLE & analyses goodness of fit (in regression) of the steady state.
 * Prints out the fitted parameter's values, uncertainties, goodness of fit and chi-squared information.
 * Saves the fitted graphs on the desktop (saving of the plot of all thermistors plot hasn't been added yet).
+* Produces plots for how the phase and amplitude changes for each thermistor. Includes fits for the old and new models.
 
 Usage
-1. Load the .csv file you wish to analyse in 'Waves_Stat_Folder' folder or any folder name if you change 'data_folder' variable to hold a different string in main.py
-   (one .csv file at a time in that folder for waves). You can keep the rest of the .csv files in 'General_Waves_Data' or any other folder you so choose.
-2. Run by pressing green run button (control F5) while having open the 'w_main.py' class (found inside the 'Waves_Lab' package).
-3. Graphs will be saved on the desktop, and any numerical fits will be in the console.
+1. Modify w_main.py to run thermal waves by uncommenting line 15, and commenting line 18.
+2. Add data to a data folder. Make sure to modify w_main.py's data_folder name to the folder with the data. 
+3. For fitting of data, make sure to modify periods in w_main.py to the periods used, AND make sure w_pdfs.py contains the function for that period.
+4. To run the code, press the green run button in w_main.py. DON'T use the console, it won't work due to properties of relative imports.
+
+What it does (Electrical Waves)
+* NOTE: Thermal waves part is better written for generalisation and correctness, due to lack of focus on this part. 
+* Reads .csv files containing the data.
+* Does the code for the tasks related to electrical waves (apologies for low detail explanation) including plots and value fitting.
+
+Usage
+1. Modify w_main.py to run electrical waves by uncommenting line 18, and commenting line 15.
+2. Similar to thermal waves, make sure you use the appropriate variable definition for the data_folder in w_main.py.
+3. Make sure w_pdfs.py contains the function with the used frequency.
+4. THIS SECTION MAY REQUIRE CODE MODIFICATIONS DUE TO LACK OF GENERALISATION.
+5. Run the code by pressing the green run button.
 
 ## Statistics
 ### PDFs

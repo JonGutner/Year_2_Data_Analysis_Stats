@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Minor plotting modification.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Final adjustments for waves.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Waves_Lab/w_outputer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Waves_Lab/w_outputer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +95,7 @@
       <recent name="$PROJECT_DIR$/Electrical_Waves_Sine_Data/In_Phase" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python tests.Python tests for tests.TestMLE.test_binomial">
     <configuration name="Python tests for tests.TestMLE.test_binomial" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="StatsToolBox" />
       <option name="ENV_FILES" value="" />
@@ -195,14 +195,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1756929054046</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Bug fixed and improved usability.">
-      <option name="closed" value="true" />
-      <created>1762794671165</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1762794671165</updated>
     </task>
     <task id="LOCAL-00014" summary="Delete unnecessary class.">
       <option name="closed" value="true" />
@@ -588,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1765201232254</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="Final adjustments for waves.">
+      <option name="closed" value="true" />
+      <created>1766880949035</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1766880949035</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -603,7 +603,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added more readability in saving of the plots." />
     <MESSAGE value="Minor bux fixes." />
     <MESSAGE value="Fixed all bugs: Plots all 4 frequencies' phases and amplitudes together." />
     <MESSAGE value="Better information provided on prints in console and saved plots." />
@@ -628,6 +627,7 @@
     <MESSAGE value="Minor adjustments. No big changes." />
     <MESSAGE value="Residual Plots added." />
     <MESSAGE value="Minor plotting modification." />
-    <option name="LAST_COMMIT_MESSAGE" value="Minor plotting modification." />
+    <MESSAGE value="Final adjustments for waves." />
+    <option name="LAST_COMMIT_MESSAGE" value="Final adjustments for waves." />
   </component>
 </project>
