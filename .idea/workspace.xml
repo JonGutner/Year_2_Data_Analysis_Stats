@@ -4,9 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Final adjustments for waves.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="README.md modified to fit.">
+      <change afterPath="$PROJECT_DIR$/Radiation_Lab/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Radiation_Lab/r_helper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Radiation_Lab/r_main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Radiation_Lab/r_plotter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/radiation_data_folder/2MeV.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/radiation_data_folder/2MeV_gamma.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/radiation_data_folder/300KeV.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/radiation_data_folder/60keV_gamma.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,51 +58,52 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python tests.Python tests for test_MLE.TestMLE.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_stats.TestMLE.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_stats.TestMLE.test_binomial.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_stats.TestMLE.test_exponential.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_stats.TestMLE.test_gaussian.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_stats.TestMLE.test_lorentzian.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_stats.TestMLE.test_poisson.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.TestMLE.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.TestMLE.test_binomial.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.TestMLE.test_exponential.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.TestMLE.test_gaussian.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.TestMLE.test_lorentzian.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for tests.TestMLE.test_poisson.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests in tests.py.executor&quot;: &quot;Run&quot;,
-    &quot;Python.data_management.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.estimators.executor&quot;: &quot;Run&quot;,
-    &quot;Python.fourier_transform.executor&quot;: &quot;Run&quot;,
-    &quot;Python.helpers.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.lab_stats.executor&quot;: &quot;Run&quot;,
-    &quot;Python.load_dataset.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.outputer.executor&quot;: &quot;Run&quot;,
-    &quot;Python.pdfs.executor&quot;: &quot;Run&quot;,
-    &quot;Python.plot_vals.executor&quot;: &quot;Run&quot;,
-    &quot;Python.w_helpers.executor&quot;: &quot;Run&quot;,
-    &quot;Python.w_main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for test_MLE.TestMLE.executor": "Run",
+    "Python tests.Python tests for test_stats.TestMLE.executor": "Run",
+    "Python tests.Python tests for test_stats.TestMLE.test_binomial.executor": "Run",
+    "Python tests.Python tests for test_stats.TestMLE.test_exponential.executor": "Run",
+    "Python tests.Python tests for test_stats.TestMLE.test_gaussian.executor": "Run",
+    "Python tests.Python tests for test_stats.TestMLE.test_lorentzian.executor": "Run",
+    "Python tests.Python tests for test_stats.TestMLE.test_poisson.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.test_binomial.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.test_exponential.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.test_gaussian.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.test_lorentzian.executor": "Run",
+    "Python tests.Python tests for tests.TestMLE.test_poisson.executor": "Run",
+    "Python tests.Python tests in tests.py.executor": "Run",
+    "Python.data_management.executor": "Debug",
+    "Python.estimators.executor": "Run",
+    "Python.fourier_transform.executor": "Run",
+    "Python.helpers.executor": "Debug",
+    "Python.lab_stats.executor": "Run",
+    "Python.load_dataset.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.outputer.executor": "Run",
+    "Python.pdfs.executor": "Run",
+    "Python.plot_vals.executor": "Run",
+    "Python.r_main.executor": "Run",
+    "Python.w_helpers.executor": "Run",
+    "Python.w_main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/radiation_data_folder" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/Waves_Stat_Folder" />
       <recent name="$PROJECT_DIR$/Waves_Stat_Folder/Old_data" />
       <recent name="$PROJECT_DIR$/frequency_dependence_test" />
-      <recent name="$PROJECT_DIR$/Electrical_Waves_Sine_Data/Out_of_Phase" />
-      <recent name="$PROJECT_DIR$/Electrical_Waves_Sine_Data/In_Phase" />
     </key>
   </component>
-  <component name="RunManager" selected="Python tests.Python tests for tests.TestMLE.test_binomial">
+  <component name="RunManager">
     <configuration name="Python tests for tests.TestMLE.test_binomial" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="StatsToolBox" />
       <option name="ENV_FILES" value="" />
@@ -195,14 +203,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1756929054046</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Delete unnecessary class.">
-      <option name="closed" value="true" />
-      <created>1762794694940</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1762794694940</updated>
     </task>
     <task id="LOCAL-00015" summary="Bux fixes and transportation of the data analysis to Year_2_stats runner.">
       <option name="closed" value="true" />
@@ -588,7 +588,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766880949035</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL-00063" summary="README.md modified to fit.">
+      <option name="closed" value="true" />
+      <created>1766882053559</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1766882053560</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -603,7 +611,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Minor bux fixes." />
     <MESSAGE value="Fixed all bugs: Plots all 4 frequencies' phases and amplitudes together." />
     <MESSAGE value="Better information provided on prints in console and saved plots." />
     <MESSAGE value="Small adjustment (mostly a test)." />
@@ -628,6 +635,7 @@
     <MESSAGE value="Residual Plots added." />
     <MESSAGE value="Minor plotting modification." />
     <MESSAGE value="Final adjustments for waves." />
-    <option name="LAST_COMMIT_MESSAGE" value="Final adjustments for waves." />
+    <MESSAGE value="README.md modified to fit." />
+    <option name="LAST_COMMIT_MESSAGE" value="README.md modified to fit." />
   </component>
 </project>
