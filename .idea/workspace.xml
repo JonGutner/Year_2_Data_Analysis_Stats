@@ -4,15 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="README.md modified to fit.">
-      <change afterPath="$PROJECT_DIR$/Radiation_Lab/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Radiation_Lab/r_helper.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Radiation_Lab/r_main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Radiation_Lab/r_plotter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/radiation_data_folder/2MeV.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/radiation_data_folder/2MeV_gamma.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/radiation_data_folder/300KeV.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/radiation_data_folder/60keV_gamma.txt" afterDir="false" />
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Introduction of the radiation experiment.&#10;Addition of plotting of histograms of simulated data.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -203,14 +195,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1756929054046</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Bux fixes and transportation of the data analysis to Year_2_stats runner.">
-      <option name="closed" value="true" />
-      <created>1762812598570</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1762812598570</updated>
     </task>
     <task id="LOCAL-00016" summary="Bux fixes and transportation of the data analysis to Year_2_stats runner.">
       <option name="closed" value="true" />
@@ -596,7 +580,15 @@
       <option name="project" value="LOCAL" />
       <updated>1766882053560</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="Introduction of the radiation experiment.&#10;Addition of plotting of histograms of simulated data.">
+      <option name="closed" value="true" />
+      <created>1767873212616</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1767873212616</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -611,7 +603,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed all bugs: Plots all 4 frequencies' phases and amplitudes together." />
     <MESSAGE value="Better information provided on prints in console and saved plots." />
     <MESSAGE value="Small adjustment (mostly a test)." />
     <MESSAGE value="Addition of more thermistors.&#10;Correction of phase graph, including normalisation.&#10;Correcting of frequency-&gt;period." />
@@ -636,6 +627,7 @@
     <MESSAGE value="Minor plotting modification." />
     <MESSAGE value="Final adjustments for waves." />
     <MESSAGE value="README.md modified to fit." />
-    <option name="LAST_COMMIT_MESSAGE" value="README.md modified to fit." />
+    <MESSAGE value="Introduction of the radiation experiment.&#10;Addition of plotting of histograms of simulated data." />
+    <option name="LAST_COMMIT_MESSAGE" value="Introduction of the radiation experiment.&#10;Addition of plotting of histograms of simulated data." />
   </component>
 </project>
