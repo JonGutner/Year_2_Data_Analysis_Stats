@@ -19,9 +19,6 @@ param_names = ["mu", "sigma"]
 # For Binomial (note: n must usually be fixed, not fitted)
 # param_names = ["p"]
 
-# For Lorentzian
-# param_names = ["x0", "gamma"]
-
 # For Uniform
 # param_names = ["a", "b"]
 

@@ -70,9 +70,6 @@ def guess_initial_params(data, pdf):
         return [1/mean] if mean > 0 else [1.0]
     elif pdf == pdfs.poisson_pmf:
         return [mean]
-    elif pdf == pdfs.lorentzian:
-        q25, q75 = np.percentile(data, [25, 75])
-        return [np.median(data), q75 - q25]
     elif pdf == pdfs.uniform_pdf:
         return [np.min(data), np.max(data)]
     else:

@@ -15,10 +15,6 @@ def exponential(x, lamb):
 def uniform_pdf(x, a, b):
     return uniform.pdf(x, loc=a, scale=(b - a))
 
-# Lorentzian (Cauchy, resonance lines)
-def lorentzian(x, x0, gamma):
-    return (1/np.pi) * (0.5*gamma) / ((x - x0)**2 + (0.5*gamma)**2)
-
 # =======Discrete PMFs=======
 # Poisson (counts, radioactive events)
 def poisson_pmf(k, mu):
