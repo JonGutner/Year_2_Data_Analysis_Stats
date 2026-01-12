@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Modify to correctly state the correct energy unit.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Modified the graphs to show fraction of X instead of count.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Radiation_Lab/r_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Radiation_Lab/r_helper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Radiation_Lab/r_plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Radiation_Lab/r_plotter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -196,14 +197,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1756929054046</updated>
-    </task>
-    <task id="LOCAL-00017" summary="Added data analysis for first four thermistors.">
-      <option name="closed" value="true" />
-      <created>1762813714923</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1762813714923</updated>
     </task>
     <task id="LOCAL-00018" summary="Corrects saving mechanism for sine fits.">
       <option name="closed" value="true" />
@@ -589,7 +582,15 @@
       <option name="project" value="LOCAL" />
       <updated>1767996829338</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="Modified the graphs to show fraction of X instead of count.">
+      <option name="closed" value="true" />
+      <created>1768209660440</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1768209660441</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -604,7 +605,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Small adjustment (mostly a test)." />
     <MESSAGE value="Addition of more thermistors.&#10;Correction of phase graph, including normalisation.&#10;Correcting of frequency-&gt;period." />
     <MESSAGE value="Log plot of the amplitudes." />
     <MESSAGE value="Added temporary file with directory to add data from saved folder" />
@@ -629,6 +629,7 @@
     <MESSAGE value="README.md modified to fit." />
     <MESSAGE value="Introduction of the radiation experiment.&#10;Addition of plotting of histograms of simulated data." />
     <MESSAGE value="Modify to correctly state the correct energy unit." />
-    <option name="LAST_COMMIT_MESSAGE" value="Modify to correctly state the correct energy unit." />
+    <MESSAGE value="Modified the graphs to show fraction of X instead of count." />
+    <option name="LAST_COMMIT_MESSAGE" value="Modified the graphs to show fraction of X instead of count." />
   </component>
 </project>

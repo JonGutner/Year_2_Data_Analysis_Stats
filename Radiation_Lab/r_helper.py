@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from pathlib import Path
 
 from Radiation_Lab import r_plotter
@@ -21,9 +22,33 @@ def data_loader(data_names):
 
     return energy_files
 
+def remove_txt(data_name):
+    new_data_name = data_name.replace(".txt", "")
+    return new_data_name
+
 def run_histogram(energy_files, data_names):
     for i in range(len(energy_files)):
-        if "gamma" in data_names[i]:
-            r_plotter.plot_histogram(energy_files[i], data_names[i], False)
+        data_name = remove_txt(data_names[i])
+        if "gamma" in data_name:
+            fig = r_plotter.plot_histogram(energy_files[i], data_name, False)
+            save_plot(fig, f"{data_name}.png", "Task_8_Plots")
         else:
-            r_plotter.plot_histogram(energy_files[i], data_names[i], True)
+            fig = r_plotter.plot_histogram(energy_files[i], data_name, True)
+            save_plot(fig, f"{data_name}.png", "Task_7_Plots")
+
+def save_plot(fig, file_name, folder_name, dpi=300):
+    desktop_dir = Path.home() / "Desktop"
+    output_dir = desktop_dir / folder_name
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    filepath = output_dir / file_name
+
+    fig.savefig(
+        filepath,
+        dpi=dpi,
+        bbox_inches="tight"
+    )
+
+    plt.show()
+    plt.close(fig)
