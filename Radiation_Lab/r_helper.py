@@ -112,6 +112,13 @@ def run_histogram(energy_files, data_names, fit_poisson = True):
                 "ndof" : ndof,
                 "chi2_red" : chi2_red
             })
+
+            print("------------------")
+            print(data_names[i])
+            print("Chi2:",chi2, "DoF:", ndof, "chi2_red:", chi2_red)
+            print("mu:",mu_hat, "sigma:",sigma_hat)
+            print("------------------")
+
     else:
         for i in range(len(energy_files)):
             data_name = remove_txt(data_names[i])
