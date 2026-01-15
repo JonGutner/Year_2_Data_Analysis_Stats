@@ -49,7 +49,7 @@ def plot_exponential_fits(df, bin_widths, save=True, plot=True):
     )
     ax.plot(x_fit, r_pdfs.exponential_decay(x_fit, *popt), 'r-',
             label=f'Exponential fit\nA={a_fit:.2f}, tau={tau_fit:.2f},c={c_fit:.2f}')
-    ax.set_xlabel('Counts per cycle')
+    ax.set_xlabel('Interval between Events (μs)')
     ax.set_ylabel('Number of cycles')
     ax.legend()
     fig.tight_layout()
