@@ -94,30 +94,37 @@ def run_histogram(energy_files, data_names, fit_poisson = True):
         fit_results = []
 
         for i, df in enumerate(energy_files):
-            x = df.iloc[:, 0].to_numpy(dtype=float)
-            bin_widths = compute_bin_widths(x)
-            mu_hat, sigma_hat, chi2, ndof, chi2_red = poisson_fit_histogram(
-                df, file_name=f"{data_names[i]}.png",
-                bin_widths=bin_widths,
-                plot=True,
-                save=True,
-                folder_name=f"Histogram")
+            if data_names[i] != "Histogram5.csv":
+                x = df.iloc[:, 0].to_numpy(dtype=float)
+                bin_widths = compute_bin_widths(x)
+                mu_hat, sigma_hat, chi2, ndof, chi2_red = poisson_fit_histogram(
+                    df, file_name=f"{data_names[i]}.png",
+                    bin_widths=bin_widths,
+                    plot=True,
+                    save=True,
+                    folder_name=f"Histogram")
 
-            fit_results.append({
-                "dataset": df,
-                "name": data_names[i],
-                "mu_hat": mu_hat,
-                "sigma_hat" : sigma_hat,
-                "chi2" : chi2,
-                "ndof" : ndof,
-                "chi2_red" : chi2_red
-            })
+                fit_results.append({
+                    "dataset": df,
+                    "name": data_names[i],
+                    "mu_hat": mu_hat,
+                    "sigma_hat" : sigma_hat,
+                    "chi2" : chi2,
+                    "ndof" : ndof,
+                    "chi2_red" : chi2_red
+                })
 
-            print("------------------")
-            print(data_names[i])
-            print("Chi2:",chi2, "DoF:", ndof, "chi2_red:", chi2_red)
-            print("mu:",mu_hat, "sigma:",sigma_hat)
-            print("------------------")
+                print("------------------")
+                print(data_names[i])
+                print("Chi2:",chi2, "DoF:", ndof, "chi2_red:", chi2_red)
+                print("mu:",mu_hat, "sigma:",sigma_hat)
+                print("------------------")
+
+            else:
+                x = df.iloc[:, 0].to_numpy(dtype=float)
+                bin_widths = compute_bin_widths(x)
+
+                r_plotter.plot_exponential_fits(df, bin_widths)
 
     else:
         for i in range(len(energy_files)):
@@ -143,23 +150,6 @@ def compute_bin_widths(x):
     edges[-1] = x[-1] + (x[-1] - edges[-2])
 
     return np.diff(edges)
-
-def unpack_histogram_data(data, names):
-    data_frames = []
-
-    for dataset, name in zip(data, names):
-        x = dataset["Counts per cycle - histogram count"]
-        n = dataset["Number of cycles - histogram count"]
-
-        # Expand histogram into raw data
-        values = np.repeat(x.values, n.astype(int).values)
-
-        # Each dataset is its own DataFrame, with a clear column name
-        df = pd.DataFrame({name: values})
-
-        data_frames.append(df)
-
-    return data_frames
 
 def save_plot(fig, file_name, folder_name, dpi=300):
     desktop_dir = Path.home() / "Desktop"
