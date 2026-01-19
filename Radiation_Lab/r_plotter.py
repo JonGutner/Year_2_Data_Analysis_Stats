@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from scipy.optimize import curve_fit
+from scipy.optimize import curve_fit, minimize
 
 from Radiation_Lab import r_helper, r_pdfs
 
@@ -104,3 +104,63 @@ def plot_poisson_fits(x, n_obs, bin_widths, n_exp, mu_hat, sigma_hat, chi2_red, 
         plt.show()
 
     plt.close(fig)
+
+def plot_nd_dt(df, folder_name, file_name, save=False, plot=True):
+    x = df.iloc[:, 0].to_numpy(dtype=float)
+    y = df.iloc[:, 1].to_numpy(dtype=float)
+    yerr = df.iloc[:, 2].to_numpy(dtype=float)
+    xerr = 0.001
+
+    popt, pcov = curve_fit(r_pdfs.linear_flat, x, y, p0=[0, (max(y) + min(y)) / 2], sigma=yerr, absolute_sigma=True,
+                           maxfev=10000)
+    m_fit, c_fit = popt
+
+    y_fit = r_pdfs.linear_flat(x, *popt)
+
+    # Chi-squared
+    chi2 = np.sum(((y - y_fit) / yerr) ** 2)
+
+    # Degrees of freedom
+    ndof = len(y) - len(popt)
+
+    # Reduced chi-squared
+    chi2_red = chi2 / ndof
+
+    print(f"Chi-squared = {chi2:.2f}")
+    print(f"Reduced chi-squared = {chi2_red:.2f}")
+    print(f"Degrees of freedom = {ndof}")
+
+    fig, ax = plt.subplots()
+
+    ax.errorbar(
+        x,
+        y,
+        yerr=yerr,
+        xerr=xerr,
+        fmt='o',
+        label='Data'
+    )
+
+    ax.plot(
+        x,
+        y_fit,
+        'r-',
+        label=(
+            f'Linear fit\n'
+            f'm = {m_fit:.2f}, c = {c_fit:.2f}\n'
+            f'χ²ᵣ = {chi2_red:.2f}'
+        )
+    )
+
+    ax.set_xlabel('Distance (m)')
+    ax.set_ylabel('nd^2/Δt')
+    ax.set_title("Task 16 plot")
+    ax.legend()
+
+    if save:
+        r_helper.save_plot(fig, file_name, folder_name)
+    if plot:
+        plt.show()
+
+    plt.close(fig)
+

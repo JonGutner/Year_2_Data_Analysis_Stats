@@ -4,8 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Poisson fitting of the histogram data is completed.">
+    <list default="true" id="e9179520-82f7-4194-a470-67d3be4c5bba" name="Changes" comment="Adjusted the x-axis of exponential curve.">
+      <change afterPath="$PROJECT_DIR$/radiation_data_folder/All_Data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/radiation_data_folder/No_Bump_Data.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/radiation_data_folder/Task_16.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Radiation_Lab/r_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/Radiation_Lab/r_helper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Radiation_Lab/r_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Radiation_Lab/r_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Radiation_Lab/r_pdfs.py" beforeDir="false" afterPath="$PROJECT_DIR$/Radiation_Lab/r_pdfs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Radiation_Lab/r_plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/Radiation_Lab/r_plotter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,12 +43,12 @@
     &quot;assignee&quot;: &quot;JonGutner&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "git@github.com:JonGutner/Year_2_Data_Analysis_Stats.git",
-    "accountId": "218c656b-0500-4d28-a794-1a5eb8300276"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:JonGutner/Year_2_Data_Analysis_Stats.git&quot;,
+    &quot;accountId&quot;: &quot;218c656b-0500-4d28-a794-1a5eb8300276&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -196,30 +203,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1756929054046</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Updated Outputs for better readability.">
-      <option name="closed" value="true" />
-      <created>1763026534977</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1763026534977</updated>
-    </task>
-    <task id="LOCAL-00021" summary="Added plots of the amplitudes and phases per spacing.">
-      <option name="closed" value="true" />
-      <created>1763031142590</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1763031142590</updated>
-    </task>
-    <task id="LOCAL-00022" summary="Removed useless print statements.&#10;Made amplitude to always be positive.&#10;Changed positioning of data files.">
-      <option name="closed" value="true" />
-      <created>1763032277459</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1763032277459</updated>
     </task>
     <task id="LOCAL-00023" summary="Temporary progress in creating plots that contain phase and amplitude relations for different frequencies.">
       <option name="closed" value="true" />
@@ -589,7 +572,31 @@
       <option name="project" value="LOCAL" />
       <updated>1768462005522</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="Printing statements of fitting added.">
+      <option name="closed" value="true" />
+      <created>1768468991335</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1768468991335</updated>
+    </task>
+    <task id="LOCAL-00070" summary="Addition of exponential fit for task 14.">
+      <option name="closed" value="true" />
+      <created>1768474868495</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1768474868496</updated>
+    </task>
+    <task id="LOCAL-00071" summary="Adjusted the x-axis of exponential curve.">
+      <option name="closed" value="true" />
+      <created>1768475400834</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1768475400834</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -604,9 +611,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added temporary file with directory to add data from saved folder" />
-    <MESSAGE value="Updated directory." />
-    <MESSAGE value="Separation of waves and pdf functionality into separate directories for generalisation and easier readability." />
     <MESSAGE value="Updated README.md." />
     <MESSAGE value="Modified data_management.py to read the electrical wave data." />
     <MESSAGE value="Plot the in phase and out of phase plots for all saved data." />
@@ -629,15 +633,18 @@
     <MESSAGE value="Modified the graphs to show fraction of X instead of count." />
     <MESSAGE value="Added a way to save the plots onto a file on the desktop." />
     <MESSAGE value="Poisson fitting of the histogram data is completed." />
-    <option name="LAST_COMMIT_MESSAGE" value="Poisson fitting of the histogram data is completed." />
+    <MESSAGE value="Printing statements of fitting added." />
+    <MESSAGE value="Addition of exponential fit for task 14." />
+    <MESSAGE value="Adjusted the x-axis of exponential curve." />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjusted the x-axis of exponential curve." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Radiation_Lab/r_main.py</url>
-          <line>6</line>
-          <option name="timeStamp" value="21" />
+          <line>13</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

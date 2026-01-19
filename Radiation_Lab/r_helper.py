@@ -28,6 +28,29 @@ def data_loader(data_names, all_data=True):
 
     return energy_files
 
+def nd_dt_data_loader(data_name, skiprows=1):
+    data_path = Path(__file__).resolve().parent.parent / "radiation_data_folder" / data_name
+
+    if not data_path.exists():
+        raise RuntimeError(f"Directory does not exist: {data_path}")
+
+    df = pd.read_csv(
+        data_path,
+        delimiter=",",
+        skiprows=skiprows,
+        usecols=[0, 2, 3]
+    )
+
+    df.columns = ["distance", "nd_dt", "error"]
+
+    return df
+
+def run_nd_dt(nd_dt_files, file_names):
+    folder_name = "nd_dt"
+
+    for i, df in enumerate(nd_dt_files):
+        r_plotter.plot_nd_dt(df, folder_name, file_names[i])
+
 def remove_txt(data_name):
     new_data_name = data_name.replace(".txt", "")
     return new_data_name
