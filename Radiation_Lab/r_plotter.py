@@ -20,7 +20,76 @@ def plot_histogram(energy_file, data_name, electron_data = True):
 
         return fig
 
-def plot_exponential_fits(df, bin_widths, save=True, plot=True):
+def plot_exponential(df, data_name, save=False, plot=True):
+    folder_name = "Exponential"
+
+    x = df.iloc[:, 1].to_numpy(dtype=float)
+    y = df.iloc[:, 2].to_numpy(dtype=float)
+    yerr = df.iloc[:, 4].to_numpy(dtype=float)
+    xerr = 0.01
+
+    popt, pcov = curve_fit(
+        r_pdfs.exponential_decay,
+        x, y,
+        p0=[max(y), 100, min(y)],
+        sigma=yerr,
+        absolute_sigma=True,
+        maxfev=10000
+    )
+
+    a_fit, tau_fit, c_fit = popt
+    y_fit = r_pdfs.exponential_decay(x, *popt)
+
+    # Normalised residuals
+    residuals = (y - y_fit) / yerr
+
+    # --- Figure with residuals ---
+    fig, (ax, ax_res) = plt.subplots(
+        2, 1,
+        sharex=True,
+        gridspec_kw={"height_ratios": [3, 1]}
+    )
+
+    # Main plot
+    ax.errorbar(
+        x, y,
+        yerr=yerr,
+        xerr=xerr,
+        linestyle='None',
+        label='Observed'
+    )
+
+    ax.plot(
+        x, y_fit,
+        label=f'Exponential fit\nA={a_fit:.2f}, τ={tau_fit:.2f}, c={c_fit:.2f}'
+    )
+
+    ax.set_ylabel('Number of cycles')
+    ax.set_yscale('log')
+    ax.legend()
+
+    # Residual plot
+    ax_res.errorbar(
+        x, residuals,
+        yerr=np.ones_like(residuals),
+        xerr=xerr,
+        linestyle='None'
+    )
+
+    ax_res.axhline(0)
+    ax_res.set_xlabel('Copper Thickness (mm)')
+    ax_res.set_ylabel('Residuals\n$(y - y_{fit})/\\sigma$')
+
+    fig.tight_layout()
+
+    if save:
+        r_helper.save_plot(fig, data_name, folder_name)
+    if plot:
+        plt.show()
+
+    plt.close(fig)
+
+def plot_exponential_binned(df, bin_widths, save=True, plot=True):
     file_name = "Histogram5.png"
     folder_name = "Histogram"
 

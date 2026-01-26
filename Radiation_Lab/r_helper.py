@@ -8,7 +8,7 @@ from scipy.optimize import minimize
 from Radiation_Lab import r_plotter
 from Year_2_Stats import helpers, pdfs
 
-def data_loader(data_names, all_data=True):
+def data_loader(data_names, all_data_but_1=True, all_data=False):
     energy_files = []
     for data_name in data_names:
         data_path = Path(__file__).resolve().parent.parent / "radiation_data_folder" / data_name
@@ -16,8 +16,10 @@ def data_loader(data_names, all_data=True):
         if not data_path.exists():
             raise RuntimeError(f"Directory does not exist: {data_path}")
 
-        if all_data:
+        if all_data_but_1:
             txt_file = pd.read_csv(data_path, delimiter=",", skiprows=1)
+        elif all_data:
+            txt_file = pd.read_csv(data_path, delimiter=",")
         else:
             txt_file = pd.read_csv(data_path, delimiter=",", skiprows=1, usecols=[0])
 
@@ -110,6 +112,10 @@ def poisson_fit_histogram(
 
     return mu_hat, sigma_hat, chi2, ndof, chi2_red
 
+def run_al_decay(data_file, data_name):
+    r_plotter.plot_exponential(data_file, data_name)
+
+
 def run_histogram(energy_files, data_names, fit_poisson = True):
     folder_name = "Radiation_Lab_Plots"
 
@@ -147,7 +153,7 @@ def run_histogram(energy_files, data_names, fit_poisson = True):
                 x = df.iloc[:, 0].to_numpy(dtype=float)
                 bin_widths = compute_bin_widths(x)
 
-                r_plotter.plot_exponential_fits(df, bin_widths)
+                r_plotter.plot_exponential_binned(df, bin_widths)
 
     else:
         for i in range(len(energy_files)):
